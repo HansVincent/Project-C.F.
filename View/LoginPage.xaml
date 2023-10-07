@@ -22,20 +22,16 @@
             <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
     </ContentPage.Resources>
-    
-    <Grid ColumnDefinitions="*,*"  Margin="20,20,20,20" ColumnSpacing="15" RowSpacing="15">
-        
+
+    <Grid ColumnDefinitions="*,*" Margin="250">
+
         <!--Image-->
-        <HorizontalStackLayout Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center">
-            <VerticalStackLayout>
-                <Image Source="login_image.png" Aspect ="Fill" WidthRequest="900" HeightRequest="900" Margin="25"/>
-            </VerticalStackLayout>
-        </HorizontalStackLayout>
+        <Image Source="login_image.png" Aspect ="Fill" WidthRequest="900" HeightRequest="900" Margin="25" Grid.Column="0"/>
         <!--Login Entries-->
-        <HorizontalStackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand">
-            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+        <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Center">
+            <VerticalStackLayout VerticalOptions="Center">
                 <ImageButton Source="login_arrow_icon.png" VerticalOptions="End" HorizontalOptions="End" Command="{Binding BackImageCommand}"/>
-                <Image Source ="login_logo.png" WidthRequest="200" HeightRequest="200"/>
+                <Image Source ="login_logo.png"/>
                 <Label Text="Welcome! Please fill in the details to sign-in to your account" FontAttributes="Bold" WidthRequest="250"/>
                 <Border Style="{StaticResource BorderStyle}">
                     <Entry Placeholder="ID" Style="{StaticResource EntryStyle}"/>
