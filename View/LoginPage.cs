@@ -1,4 +1,6 @@
-namespace Project_C.F
+﻿using Project_C.F_.ViewModel;
+
+namespace Project_C.F_
 {
     public partial class MainPage : ContentPage
     {
