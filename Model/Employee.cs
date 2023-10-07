@@ -59,5 +59,40 @@ namespace Project_C.F_.Model
             get { return hoursWorked; }
             set { hoursWorked = value; OnPropertyChanged(); OnPropertyChanged(nameof(hoursWorked)); }
         }
+        public int ActivtiyStatus
+        {
+            get { return activtiyStatus; }
+            set { activtiyStatus = value; OnPropertyChanged(); OnPropertyChanged(nameof(activtiyStatus)); }
+        }
+        private string JobPosition
+        {
+            get { return jobPosition; }
+            set { jobPosition = value; OnPropertyChanged(); OnPropertyChanged(nameof(jobPosition)); }
+        }
+        private DateTime DateJoined
+        {
+            get { return dateJoined; }
+            set { dateJoined = value; OnPropertyChanged(); OnPropertyChanged(nameof(dateJoined)); }
+        }
+        private DateTime BirthDate
+        {
+            get { return birthDate; }
+            set { birthDate = value; OnPropertyChanged(); OnPropertyChanged(nameof(birthDate)); }
+        }
+        private string Country
+        {
+            get { return country; }
+            set { country = value; OnPropertyChanged(); OnPropertyChanged(nameof(country)); }
+        }
+        public string HomeAddress
+        {
+            get { return homeAddress; }
+            set { homeAddress = value; OnPropertyChanged(); OnPropertyChanged(nameof(homeAddress)); }
+        }
+        public string ProvincialAddress
+        {
+            get { return provincialAddress; }
+            set { provincialAddress = value; OnPropertyChanged(); OnPropertyChanged(nameof(provincialAddress)); }
+        }
     }
 }
