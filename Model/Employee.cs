@@ -37,7 +37,7 @@ namespace Project_C.F_.Model
         public string Email
         {
             get { return email; }
-            set { email = value; OnPropertyChanged(); OnPropertyChanged(nameof(email); }
+            set { email = value; OnPropertyChanged(); OnPropertyChanged(nameof(email)); }
         }
         public string Password
         {

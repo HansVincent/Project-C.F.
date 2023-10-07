@@ -1,41 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Project_C.F_.MainPage">
+             x:Class="Project_C.F_.MainPage"
+             xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
+             x:DataType="viewmodel:MainPage_ViewModel"
+             xmlns:model="clr-namespace:Project_C.F_.Model">
 
+
+    <ContentPage.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Margin" Value="25,0"/>
+        </Style>
+        <Style x:Key="ImageLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="BenefitsImageBorderTemplate" TargetType="Border">
+            <Setter Property="WidthRequest" Value="650"/>
+            <Setter Property="Stroke" Value="White"/>
+        </Style>
+        <Style x:Key="BenefitsStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="Body"/>
+            <Setter Property="LineHeight" Value="1.5"/>
+            <Setter Property="LineBreakMode" Value="WordWrap"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
+        <Grid RowDefinitions="*,*,*,*,*,*,*,*,*">
+            <HorizontalStackLayout BackgroundColor="LightGrey" Grid.Row="0">
+                <Image Source="MainPage_Logo.png" Margin="55,0,25,0"/>
+                <Label Text="ABOUT US" Style="{StaticResource LabelStyle}"/>
+                <Label Text="BENEFITS" Style="{StaticResource LabelStyle}"/>
+                <Image Source="MainPage_AccountCircle.png" Margin="1225,0,0,0"/>
+            </HorizontalStackLayout>
+            <Grid Grid.Row="1">
+                <Image Source="MainPage_Carosel1.png"/>
+                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="PROJECT C.F." Style="{StaticResource ImageLabelStyle}" FontAttributes="Bold" Margin="20" FontSize="60"/>
+                    <Label Text="Welcome to our Human Resources website, where we connect talented" Style="{StaticResource ImageLabelStyle}" />
+                    <Label Text="individuals with their dream careers and assist companies in finding the" Style="{StaticResource ImageLabelStyle}" />
+                    <Label Text="perfect fit for their teams. Discover a seamless hiring experience and a" Style="{StaticResource ImageLabelStyle}" />
+                    <Label Text="plethora of resources to foster a thriving work environment." Style="{StaticResource ImageLabelStyle}" />
+                </VerticalStackLayout>
+            </Grid>
+            <BoxView HeightRequest="1" Color="Black" Margin="25" Grid.Row="2"/>
+            <Label Text="EMPLOYEE BENEFITS" HorizontalOptions="Center" FontAttributes="Bold" FontSize="60" Grid.Row="3"/>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Grid.Row="4">
+                <VerticalStackLayout Margin="20,0" BackgroundColor="Beige" VerticalOptions="Center" WidthRequest="650">
+                    <Label Text="Life Insurance Policy" FontSize="30" FontAttributes="Bold"/>
+                    <Label Style="{StaticResource BenefitsStyle}"
+                        Text="Employees working under the company enjoy life insurance for as long as they are employed in the company.  Such coverages from the life insurance are paid for and shouldered by the company to ensure employee’s safety and well-being." />
+                </VerticalStackLayout>
+                <Border Style="{StaticResource BenefitsImageBorderTemplate}">
+                    <Image Source="mainpage_lifeinsurance.png" />
+                </Border>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Grid.Row="5">
+                <Border Style="{StaticResource BenefitsImageBorderTemplate}">
+                    <Image Source="mainpage_paidleave.png" />
+                </Border>
+                <VerticalStackLayout Margin="20,0" BackgroundColor="Beige" VerticalOptions="Center" WidthRequest="650">
+                    <Label Text="Paid Leave" FontSize="30" FontAttributes="Bold"/>
+                    <Label Style="{StaticResource BenefitsStyle}"
+                        Text="Employees working under the company are provided sufficient amount of paid leaves. This is because the company believes that employees deserves time to rest and recuperate as well as have time to deal with other important matters if the need arises." />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </Grid>
     </ScrollView>
 
 </ContentPage>
