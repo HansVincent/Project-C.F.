@@ -50,6 +50,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\mainpage_lifeinsurance.png" />
 	  <None Remove="Resources\Images\mainpage_paidleave.png" />
+	  <None Remove="Resources\Images\mainpage_paidtraining.png" />
 	</ItemGroup>
 
 	<ItemGroup>
