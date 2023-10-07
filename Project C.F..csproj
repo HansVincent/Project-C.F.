@@ -48,6 +48,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\login_arrow_icon.png" />
+	  <None Remove="Resources\Images\login_image.png" />
+	  <None Remove="Resources\Images\login_logo.png" />
 	  <None Remove="Resources\Images\mainpage_lifeinsurance.png" />
 	  <None Remove="Resources\Images\mainpage_paidleave.png" />
 	  <None Remove="Resources\Images\mainpage_paidtraining.png" />
@@ -55,6 +58,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="View\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

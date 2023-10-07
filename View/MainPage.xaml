@@ -42,7 +42,7 @@
                 <Image Source="MainPage_Logo.png" Margin="55,0,25,0"/>
                 <Label Text="ABOUT US" Style="{StaticResource LabelStyle}"/>
                 <Label Text="BENEFITS" Style="{StaticResource LabelStyle}"/>
-                <Image Source="MainPage_AccountCircle.png" Margin="1225,0,0,0"/>
+                <ImageButton Source="MainPage_AccountCircle.png" Margin="1225,0,0,0" Command="{Binding LoginImageCommand}" BackgroundColor="LightGrey"/>
             </HorizontalStackLayout>
             
             <Grid Grid.Row="1">
@@ -101,6 +101,7 @@
                 <Label Style="{StaticResource BenefitsStyle}" TextColor="LightGrey" Margin="0,30"
                     Text="The Human Resources Department's goal is to develop, implement, and support programs and procedures that benefit Project C.F and its employees, resulting in improved employee welfare, empowerment, growth, and retention. This is done while remaining committed to Project C.F's key business drivers, its management, and prosperity for its clients, staff, and shareholders."/>
             </VerticalStackLayout>
+            
         </Grid>
     </ScrollView>
 
