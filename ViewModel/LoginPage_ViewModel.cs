@@ -42,9 +42,11 @@ namespace Project_C.F_.ViewModel
             string EmployeeID = string.Empty;
             if(EmployeeIDEntry == "00000" && EmployeePassword == "admin101")
             {
+                Shell.Current.DisplayAlert("Login Sucess", "Logging into your account...", "Okay");
                 EmployeeID = "00000";
                 Shell.Current.GoToAsync($"{nameof(Dashboard)}?id={EmployeeID}");
             }
         }
+        public ICommand SignInCommand => new Command(SignIn);
     }
 }

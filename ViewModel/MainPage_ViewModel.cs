@@ -23,7 +23,7 @@ namespace Project_C.F_.ViewModel
 
         private void LoginImage()
         {
-            Shell.Current.GoToAsync(nameof(Dashboard));
+            Shell.Current.GoToAsync(nameof(LoginPage));
         }
         public ICommand LoginImageCommand => new Command(LoginImage);
     }

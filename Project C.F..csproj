@@ -67,9 +67,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\AddEmployee.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="View\Dashboard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -39,7 +39,7 @@
                 <Border Style="{StaticResource BorderStyle}">
                     <Entry Text="{Binding EmployeePassword}" IsPassword="True" Placeholder="Password" Style="{StaticResource EntryStyle}"/>
                 </Border>
-                <Button Text="Sign In" Margin="0,20,0,0"  TextColor="Black" BackgroundColor="LightGray" WidthRequest="100" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Button Command="{Binding SignInCommand}" Text="Sign In" Margin="0,20,0,0"  TextColor="Black" BackgroundColor="LightGray" WidthRequest="100" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
             </VerticalStackLayout>
         </HorizontalStackLayout>
 

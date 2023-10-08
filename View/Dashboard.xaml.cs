@@ -7,6 +7,6 @@ public partial class Dashboard : TabbedPage
 	public Dashboard()
 	{
 		InitializeComponent();
-		BindingContext = new AddEmployee_ViewModel();
+        BindingContext = new Dashboard_ViewModel();
 	}
 }

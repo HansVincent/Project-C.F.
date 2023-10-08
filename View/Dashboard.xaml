@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project_C.F_.View.Dashboard"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
-             x:DataType="viewmodel:AddEmployee_ViewModel"
+            x:DataType="viewmodel:Dashboard_ViewModel"
             BackgroundColor="LightGray">
 
     <ContentPage Title="Add Employee" IconImageSource="addemployee_addemployeeimage.png">
@@ -61,28 +61,30 @@
                     <Border Stroke="black" BackgroundColor="White" Padding="30">
                         <HorizontalStackLayout Spacing="100">
                             <VerticalStackLayout Spacing="5">
+                                <Label Text="Employee ID:" Style="{StaticResource EntryLabel}"/>
+                                <Entry Text="{Binding EmployeeIDEntry}" Placeholder="Enter Details..." Style="{StaticResource Entry}" MaxLength="5"/>
                                 <Label Text="Full Name:" Style="{StaticResource EntryLabel}"/>
-                                <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                                <Entry Text="{Binding NewEmployee.FullName}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
                                 <Label Text="Email:" Style="{StaticResource EntryLabel}"/>
-                                <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                                <Entry Text="{Binding NewEmployee.Email}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
                                 <Label Text="Contact Number:" Style="{StaticResource EntryLabel}"/>
-                                <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}" MaxLength="11"/>
+                                <Entry Text="{Binding EmployeeMobileNOEntry}" Placeholder="Enter Details..." Style="{StaticResource Entry}" MaxLength="11"/>
                                 <Label Text="Gender:" Style="{StaticResource EntryLabel}"/>
                                 <Picker ItemsSource="{Binding Genders}" Style="{StaticResource Picker}"/>
                                 <Label Text="Job Position:" Style="{StaticResource EntryLabel}"/>
-                                <Picker ItemsSource="{Binding JobPositions}" Style="{StaticResource Picker}"/>
-                                <Label Text="Date Joined:" Style="{StaticResource EntryLabel}"/>
-                                <DatePicker Style="{StaticResource DatePicker}"/>
+                                <Picker SelectedItem="{Binding NewEmployee.JobPosition}" ItemsSource="{Binding JobPositions}" Style="{StaticResource Picker}"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Spacing="5">
                                 <Label Text="Birthdate:" Style="{StaticResource EntryLabel}"/>
-                                <DatePicker Style="{StaticResource DatePicker}"/>
+                                <DatePicker Date="{Binding NewEmployee.BirthDate}" MaximumDate="{Binding DateToday}" Style="{StaticResource DatePicker}"/>
+                                <Label Text="Date Joined:" Style="{StaticResource EntryLabel}"/>
+                                <DatePicker Date="{Binding NewEmployee.DateJoined}" Style="{StaticResource DatePicker}"/>
                                 <Label Text="Country:" Style="{StaticResource EntryLabel}"/>
-                                <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                                <Entry Text="{Binding NewEmployee.Country}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
                                 <Label Text="Home Address:" Style="{StaticResource EntryLabel}"/>
-                                <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                                <Entry Text="{Binding NewEmployee.HomeAddress}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
                                 <Label Text="Provincial Address:" Style="{StaticResource EntryLabel}"/>
-                                <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                                <Entry Text="{Binding NewEmployee.ProvincialAddress}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
                                 <HorizontalStackLayout Margin="0,20">
                                     <Button ImageSource="addemployee_checkboxicon.png" Text="Save Details" Style="{StaticResource Button}"/>
                                     <Button ImageSource="addemployee_cancelicon.png" Text="Cancel Edit" Style="{StaticResource Button}"/>
