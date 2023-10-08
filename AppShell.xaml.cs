@@ -9,6 +9,8 @@ namespace Project_C.F_
             InitializeComponent();
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(Dashboard), typeof(Dashboard));
+            Routing.RegisterRoute(nameof(AddEmployee), typeof(AddEmployee));
         }
     }
 }

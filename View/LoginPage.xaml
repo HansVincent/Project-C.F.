@@ -34,10 +34,10 @@
                 <Image Source ="login_logo.png"/>
                 <Label Text="Welcome! Please fill in the details to sign-in to your account" FontAttributes="Bold" WidthRequest="250"/>
                 <Border Style="{StaticResource BorderStyle}">
-                    <Entry Placeholder="ID" Style="{StaticResource EntryStyle}"/>
+                    <Entry Text="{Binding EmployeeIDEntry}" Placeholder="ID" Style="{StaticResource EntryStyle}"/>
                 </Border>
                 <Border Style="{StaticResource BorderStyle}">
-                    <Entry IsPassword="True" Placeholder="Password" Style="{StaticResource EntryStyle}"/>
+                    <Entry Text="{Binding EmployeePassword}" IsPassword="True" Placeholder="Password" Style="{StaticResource EntryStyle}"/>
                 </Border>
                 <Button Text="Sign In" Margin="0,20,0,0"  TextColor="Black" BackgroundColor="LightGray" WidthRequest="100" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
             </VerticalStackLayout>

@@ -4,7 +4,8 @@
              x:Class="Project_C.F_.MainPage"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
              x:DataType="viewmodel:MainPage_ViewModel"
-             xmlns:model="clr-namespace:Project_C.F_.Model">
+             xmlns:model="clr-namespace:Project_C.F_.Model"
+             Shell.NavBarIsVisible="False">
 
 
     <ContentPage.Resources>
@@ -50,7 +51,7 @@
                     <CarouselView.ItemTemplate>
                         <DataTemplate x:DataType="model:CarouselContent">
                             <VerticalStackLayout>
-                                <Image Source="{Binding ImagePath}"/>
+                                <Image Source="{Binding ImagePath}" HeightRequest="600" WidthRequest="1080"/>
                             </VerticalStackLayout>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>

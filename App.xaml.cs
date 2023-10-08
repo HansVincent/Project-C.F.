@@ -1,4 +1,5 @@
-﻿namespace Project_C.F_
+﻿
+namespace Project_C.F_
 {
     public partial class App : Application
     {

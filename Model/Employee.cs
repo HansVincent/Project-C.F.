@@ -64,22 +64,22 @@ namespace Project_C.F_.Model
             get { return activtiyStatus; }
             set { activtiyStatus = value; OnPropertyChanged(); OnPropertyChanged(nameof(activtiyStatus)); }
         }
-        private string JobPosition
+        public string JobPosition
         {
             get { return jobPosition; }
             set { jobPosition = value; OnPropertyChanged(); OnPropertyChanged(nameof(jobPosition)); }
         }
-        private DateTime DateJoined
+        public DateTime DateJoined
         {
             get { return dateJoined; }
             set { dateJoined = value; OnPropertyChanged(); OnPropertyChanged(nameof(dateJoined)); }
         }
-        private DateTime BirthDate
+        public DateTime BirthDate
         {
             get { return birthDate; }
             set { birthDate = value; OnPropertyChanged(); OnPropertyChanged(nameof(birthDate)); }
         }
-        private string Country
+        public string Country
         {
             get { return country; }
             set { country = value; OnPropertyChanged(); OnPropertyChanged(nameof(country)); }
@@ -94,5 +94,7 @@ namespace Project_C.F_.Model
             get { return provincialAddress; }
             set { provincialAddress = value; OnPropertyChanged(); OnPropertyChanged(nameof(provincialAddress)); }
         }
+
+
     }
 }

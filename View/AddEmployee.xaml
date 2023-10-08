@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project_C.F_.View.AddEmployee"
+             xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
+             x:DataType="viewmodel:AddEmployee_ViewModel">
+
+    <ContentPage.Resources>
+        <Style x:Key="Header" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Header"/>
+        </Style>
+        <Style x:Key="Subtitle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Subtitle"/>
+        </Style>
+        <Style x:Key="EntryLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Default"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="Entry" TargetType="Entry">
+            <Setter Property="WidthRequest" Value="300"/>
+            <Setter Property="PlaceholderColor" Value="DarkSlateGray"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Picker" TargetType="Picker">
+            <Setter Property="WidthRequest" Value="300"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="DatePicker" TargetType="DatePicker">
+            <Setter Property="WidthRequest" Value="300"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="WidthRequest" Value="150"/>
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="BackgroundColor" Value="DarkGray"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Add Employee Sheet." Style="{StaticResource Header}"/>
+        <Label Text="Fill up the following details to add employee to the system." Style="{StaticResource Subtitle}"/>
+        <BoxView HeightRequest="1" Color="Black"/>
+        <HorizontalStackLayout BackgroundColor="LightGrey" Spacing="15">
+            <VerticalStackLayout WidthRequest="125" Margin="15">
+                <Grid>
+                    <Image Source="addemployee_imagebackground.png" />
+                    <Image Source="addemployee_addimage.png" WidthRequest="30"/>
+                </Grid>
+                <Label Text="Attach Photo for profile" Style="{StaticResource Subtitle}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Border Stroke="black" BackgroundColor="White" Padding="30">
+                    <HorizontalStackLayout Spacing="100">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Full Name:" Style="{StaticResource EntryLabel}"/>
+                            <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                            <Label Text="Email:" Style="{StaticResource EntryLabel}"/>
+                            <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                            <Label Text="Contact Number:" Style="{StaticResource EntryLabel}"/>
+                            <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}" MaxLength="11"/>
+                            <Label Text="Gender:" Style="{StaticResource EntryLabel}"/>
+                            <Picker ItemsSource="{Binding Genders}" Style="{StaticResource Picker}"/>
+                            <Label Text="Job Position:" Style="{StaticResource EntryLabel}"/>
+                            <Picker ItemsSource="{Binding JobPositions}" Style="{StaticResource Picker}"/>
+                            <Label Text="Date Joined:" Style="{StaticResource EntryLabel}"/>
+                            <DatePicker Style="{StaticResource DatePicker}"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Birthdate:" Style="{StaticResource EntryLabel}"/>
+                            <DatePicker Style="{StaticResource DatePicker}"/>
+                            <Label Text="Country:" Style="{StaticResource EntryLabel}"/>
+                            <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                            <Label Text="Home Address:" Style="{StaticResource EntryLabel}"/>
+                            <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                            <Label Text="Provincial Address:" Style="{StaticResource EntryLabel}"/>
+                            <Entry Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                            <HorizontalStackLayout Margin="0,20">
+                                <Button ImageSource="addemployee_checkboxicon.png" Text="Save Details" Style="{StaticResource Button}"/>
+                                <Button ImageSource="addemployee_cancelicon.png" Text="Cancel Edit" Style="{StaticResource Button}"/>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
