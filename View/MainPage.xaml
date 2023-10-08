@@ -46,7 +46,15 @@
             </HorizontalStackLayout>
             
             <Grid Grid.Row="1">
-                <Image Source="MainPage_Carosel1.png"/>
+                <CarouselView ItemsSource="{Binding CarouselView}">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="model:CarouselContent">
+                            <VerticalStackLayout>
+                                <Image Source="{Binding ImagePath}"/>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
                 <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="PROJECT C.F." Style="{StaticResource ImageLabelStyle}" FontAttributes="Bold" Margin="20" FontSize="60"/>
                     <Label Text="Welcome to our Human Resources website, where we connect talented" Style="{StaticResource ImageLabelStyle}" />

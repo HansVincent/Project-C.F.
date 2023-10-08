@@ -15,5 +15,9 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync("..");
         }
         public ICommand BackImageCommand => new Command(BackImage);
+        public LoginPage_ViewModel()
+        {
+
+        }
     }
 }
