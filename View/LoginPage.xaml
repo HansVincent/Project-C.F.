@@ -34,7 +34,7 @@
                 <Image Source ="login_logo.png"/>
                 <Label Text="Welcome! Please fill in the details to sign-in to your account" FontAttributes="Bold" WidthRequest="250"/>
                 <Border Style="{StaticResource BorderStyle}">
-                    <Entry Text="{Binding EmployeeIDEntry}" Placeholder="ID" Style="{StaticResource EntryStyle}"/>
+                    <Entry Text="{Binding EmployeeIDEntry}" Placeholder="ID" Style="{StaticResource EntryStyle}" MaxLength="5"/>
                 </Border>
                 <Border Style="{StaticResource BorderStyle}">
                     <Entry Text="{Binding EmployeePassword}" IsPassword="True" Placeholder="Password" Style="{StaticResource EntryStyle}"/>

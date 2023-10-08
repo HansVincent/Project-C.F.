@@ -48,9 +48,9 @@
         <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
             <Label Text="Add Employee Sheet." Style="{StaticResource Header}"/>
             <Label Text="Fill up the following details to add employee to the system." Style="{StaticResource Subtitle}"/>
-            <BoxView HeightRequest="1" Color="Black"/>
+            <BoxView HeightRequest="1" Color="Black" Margin="25"/>
             <HorizontalStackLayout BackgroundColor="LightGrey" Spacing="15">
-                <VerticalStackLayout WidthRequest="125" Margin="15">
+                <VerticalStackLayout WidthRequest="125" Margin="15" HorizontalOptions="Center">
                     <Grid>
                         <Image Source="addemployee_imagebackground.png" />
                         <Image Source="addemployee_addimage.png" WidthRequest="30"/>
@@ -73,6 +73,8 @@
                                 <Picker ItemsSource="{Binding Genders}" Style="{StaticResource Picker}"/>
                                 <Label Text="Job Position:" Style="{StaticResource EntryLabel}"/>
                                 <Picker SelectedItem="{Binding NewEmployee.JobPosition}" ItemsSource="{Binding JobPositions}" Style="{StaticResource Picker}"/>
+                                <Label Text="Password:" Style="{StaticResource EntryLabel}"/>
+                                <Entry Text="{Binding NewEmployee.Password}" Placeholder="Enter Details..." Style="{StaticResource Entry}" IsPassword="True"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Spacing="5">
                                 <Label Text="Birthdate:" Style="{StaticResource EntryLabel}"/>

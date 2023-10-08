@@ -18,8 +18,8 @@ namespace Project_C.F_.Model
         private DateTime hoursWorked;
         private int activtiyStatus;
         private string jobPosition;
-        private DateTime dateJoined;
-        private DateTime birthDate;
+        private DateTime dateJoined = DateTime.Today;
+        private DateTime birthDate = DateTime.Today;
         private string country;
         private string homeAddress;
         private string provincialAddress;
