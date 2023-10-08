@@ -1,9 +1,11 @@
 ﻿using Project_C.F_.Model;
+using Project_C.F_.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Project_C.F_.ViewModel
 {
@@ -17,9 +19,11 @@ namespace Project_C.F_.ViewModel
             get { return _EmployeeID; }
             set { _EmployeeID = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeID)); }
         }
+        private readonly Employee_Services employee_Services;
         public Dashboard_ViewModel()
         {
             NewEmployee = new Employee();
+            employee_Services = new Employee_Services();
         }
 
         //Add Employee
@@ -57,6 +61,18 @@ namespace Project_C.F_.ViewModel
                 }
             }
         }
+        private bool ExistingID()
+        {
+            foreach(var employee in employee_Services.GetEmployees())
+            {
+                if(NewEmployee.EmployeeID == employee.EmployeeID) 
+                {
+                    Shell.Current.DisplayAlert("Employee ID", "Employee ID has been found in the database. Register new ID", "Okay");
+                    return true;
+                }
+            }
+            return false;
+        }
         private string _EmployeeMobileNOEntry;
         public string EmployeeMobileNOEntry
         {
@@ -80,5 +96,48 @@ namespace Project_C.F_.ViewModel
             get { return _DateToday; }
             set { _DateToday = value; }
         }
+
+        private bool ValidateEntries()
+        {
+            if(string.IsNullOrEmpty(NewEmployee.EmployeeID) || string.IsNullOrEmpty(NewEmployee.Password) || string.IsNullOrEmpty(NewEmployee.FullName) || string.IsNullOrEmpty(NewEmployee.ContactNumber) || string.IsNullOrEmpty(NewEmployee.Gender)  || string.IsNullOrEmpty(NewEmployee.JobPosition) || string.IsNullOrEmpty(NewEmployee.Country) || string.IsNullOrEmpty(NewEmployee.HomeAddress) || string.IsNullOrEmpty(NewEmployee.ProvincialAddress) || (NewEmployee.BirthDate == DateToday))
+            {
+                return false;
+            }
+            if(ExistingID())
+            {
+                return false;
+            }
+            return true;
+        }
+        private void AddEmployee()
+        {
+            if(ValidateEntries())
+            {
+                employee_Services.AddEmployee(NewEmployee);
+                Shell.Current.DisplayAlert("Adding Employee Sucess", "The Employee has been added to the database", "Okay");
+                ClearEntries();
+            }
+            else
+            {
+                Shell.Current.DisplayAlert("Entries not filled", "Fill in all entries to add employee", "Okay");
+            }
+        }
+        public ICommand AddEmployeeCommand => new Command(AddEmployee);
+
+        private void ClearEntries()
+        {
+            EmployeeIDEntry = string.Empty;
+            NewEmployee.FullName = string.Empty;
+            NewEmployee.Email = string.Empty;
+            NewEmployee.Password = string.Empty;
+            EmployeeMobileNOEntry = string.Empty;
+            NewEmployee.Gender = string.Empty;
+            NewEmployee.JobPosition = string.Empty;
+            NewEmployee.Country = string.Empty;
+            NewEmployee.HomeAddress = string.Empty;
+            NewEmployee.ProvincialAddress = string.Empty;
+            NewEmployee.BirthDate = DateToday;
+        }
+        public ICommand ClearEntriesCommand => new Command(ClearEntries);
     }
 }

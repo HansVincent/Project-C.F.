@@ -70,7 +70,7 @@
                                 <Label Text="Contact Number:" Style="{StaticResource EntryLabel}"/>
                                 <Entry Text="{Binding EmployeeMobileNOEntry}" Placeholder="Enter Details..." Style="{StaticResource Entry}" MaxLength="11"/>
                                 <Label Text="Gender:" Style="{StaticResource EntryLabel}"/>
-                                <Picker ItemsSource="{Binding Genders}" Style="{StaticResource Picker}"/>
+                                <Picker SelectedItem="{Binding NewEmployee.Gender}" ItemsSource="{Binding Genders}" Style="{StaticResource Picker}"/>
                                 <Label Text="Job Position:" Style="{StaticResource EntryLabel}"/>
                                 <Picker SelectedItem="{Binding NewEmployee.JobPosition}" ItemsSource="{Binding JobPositions}" Style="{StaticResource Picker}"/>
                                 <Label Text="Password:" Style="{StaticResource EntryLabel}"/>
@@ -88,8 +88,8 @@
                                 <Label Text="Provincial Address:" Style="{StaticResource EntryLabel}"/>
                                 <Entry Text="{Binding NewEmployee.ProvincialAddress}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
                                 <HorizontalStackLayout Margin="0,20">
-                                    <Button ImageSource="addemployee_checkboxicon.png" Text="Save Details" Style="{StaticResource Button}"/>
-                                    <Button ImageSource="addemployee_cancelicon.png" Text="Cancel Edit" Style="{StaticResource Button}"/>
+                                    <Button Command="{Binding AddEmployeeCommand}" ImageSource="addemployee_checkboxicon.png" Text="Save Details" Style="{StaticResource Button}"/>
+                                    <Button Command="{Binding ClearEntriesCommand}" ImageSource="addemployee_cancelicon.png" Text="Cancel Edit" Style="{StaticResource Button}"/>
                                 </HorizontalStackLayout>
                             </VerticalStackLayout>
                         </HorizontalStackLayout>

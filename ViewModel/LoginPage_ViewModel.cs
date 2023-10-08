@@ -12,7 +12,11 @@ namespace Project_C.F_.ViewModel
 {
     public partial class LoginPage_ViewModel : MainViewModel
     {
-        private readonly Employee_Services Employee_Services;
+        public LoginPage_ViewModel() 
+        {
+            employee_Services = new Employee_Services();
+        }
+        private readonly Employee_Services employee_Services;
         private void BackImage()
         {
             Shell.Current.GoToAsync("..");
@@ -36,7 +40,18 @@ namespace Project_C.F_.ViewModel
                 _EmployeePassword = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeePassword));
             }
         }
-
+        private bool IDExisting()
+        {
+            bool existing = false;
+            foreach(var employee in employee_Services.GetEmployees())
+            {
+                if (EmployeeIDEntry == employee.EmployeeID && EmployeePassword == employee.Password)
+                {
+                    existing = true;
+                }
+            }
+            return existing;
+        }
         private void SignIn()
         {
             string EmployeeID = string.Empty;
@@ -45,6 +60,15 @@ namespace Project_C.F_.ViewModel
                 Shell.Current.DisplayAlert("Login Sucess", "Logging into your account...", "Okay");
                 EmployeeID = "00000";
                 Shell.Current.GoToAsync($"{nameof(Dashboard)}?id={EmployeeID}");
+            }
+            else if(IDExisting())
+            {
+                Shell.Current.DisplayAlert("Login Sucess", "Logging into your account...", "Okay");
+                Shell.Current.GoToAsync($"{nameof(Dashboard)}?id={EmployeeIDEntry}");
+            }
+            else
+            {
+                Shell.Current.DisplayAlert("Account Not Found", "Your Account was not found in the database", "Okay");
             }
         }
         public ICommand SignInCommand => new Command(SignIn);
