@@ -73,7 +73,7 @@
         <VerticalStackLayout Style="{StaticResource DashboardStyle}">
             <Image Source="dashboard_logo.png" WidthRequest="100" HeightRequest="100"/>
             <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="25"/>
-            <Button ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
+            <Button Command="{Binding AddEmployeePageCommand}" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
         </VerticalStackLayout>
 
         <VerticalStackLayout Style="{StaticResource DashboardContentPage}">

@@ -33,7 +33,7 @@
             <Setter Property="Padding" Value="1350,0,0,0"/>
         </Style>
     </ContentPage.Resources>
-    
+
     <HorizontalStackLayout>
         <!--DASHBOARD-->
         <VerticalStackLayout Style="{StaticResource DashboardStyle}">
@@ -73,9 +73,5 @@
                 </VerticalStackLayout >
             </VerticalStackLayout >
         </VerticalStackLayout>
-        
     </HorizontalStackLayout>
-    
-    
-    
 </ContentPage>
