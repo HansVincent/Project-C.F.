@@ -22,6 +22,7 @@
             <Setter Property="BackgroundColor" Value="LightGrey"/>
             <Setter Property="HorizontalOptions" Value="Start"/>
             <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="Padding" Value="0,30"/>
         </Style>
         <Style x:Key="DashboardContentPage" TargetType="VerticalStackLayout">
             <Setter Property="WidthRequest" Value="1670"/>
@@ -56,21 +57,19 @@
                     <Label Text = "WELCOME BACK TO PROJECT CF" FontSize="48" TextColor="White" FontAttributes="Bold" VerticalOptions="End"/>
                 </Grid>
                 <Label Text = "Hello! Welcome back! We're thrilled to have you onboard. Together let's embark on a journey of growth, collaboration, and success." />
-                <BoxView HeightRequest="1" Color="Black" Margin="0,10,0,25"/>
-                <Grid >
-                    <Label Text="ANNOUNCEMENTS" FontSize="48" TextColor="Black" FontAttributes="Bold" />
-                    <Border Stroke = "Black" WidthRequest="150" HeightRequest="100" HorizontalOptions="End">
-                        <Border Stroke = "LightGray" BackgroundColor="LightGray" WidthRequest="150" HeightRequest="20" VerticalOptions="Start">
-                            <Label Text = "Upcoming Events:" HorizontalTextAlignment="Center"/>
-                        </Border>
-                    </Border>
-                </Grid>
-                <VerticalStackLayout>
-                    <Label Text = "What's New?" />
-                    <Border Stroke="Black" WidthRequest="300">
-                        <Label Text = "Attention all HR Employees! We are excited to announce a valuable workshop on 'Effective Employee Engagement Strategies' this Thursday at 3 PM in the conference room. Join us to explore innovative ways to foster a positive and motivated work culture. See you there!" />
-                    </Border >
-                </VerticalStackLayout >
+                <BoxView HeightRequest="1" Color="Black" Margin="0,10,0,15"/>
+                <Label Text="ANNOUNCEMENTS" FontSize="48" TextColor="Black" FontAttributes="Bold" />
+                <HorizontalStackLayout>
+                    <VerticalStackLayout Margin="45,0">
+                        <Label Text = "What's New?" />
+                        <Border Stroke="Black" WidthRequest="600" Padding="30">
+                            <VerticalStackLayout>
+                                <Label Text="Human Resources - 8:30 AM" Margin="0,0,0,15"/>
+                                <Label Text = "Attention all HR Employees! We are excited to announce a valuable workshop on 'Effective Employee Engagement Strategies' this Thursday at 3 PM in the conference room. Join us to explore innovative ways to foster a positive and motivated work culture. See you there!" />
+                            </VerticalStackLayout>
+                        </Border >
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
             </VerticalStackLayout >
         </VerticalStackLayout>
     </HorizontalStackLayout>

@@ -65,7 +65,7 @@ namespace Project_C.F_.ViewModel
         public ICommand LogoutIconCommand => new Command(LogoutIcon);
         private void AddEmployeePage()
         {
-            Shell.Current.GoToAsync($"{nameof(Dashboard_AddEmployee)}?id={EmployeeID}", false);
+            Shell.Current.GoToAsync($"{nameof(Dashboard_AddEmployee)}?id={EmployeeID}");
         }
         public ICommand AddEmployeePageCommand => new Command(AddEmployeePage);
     }
