@@ -1,143 +1,72 @@
-﻿using Project_C.F_.Model;
-using Project_C.F_.Services;
+﻿using Microsoft.Maui.Controls.Internals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Project_C.F_.View;
 using System.Windows.Input;
+using Project_C.F_.Model;
+using Project_C.F_.Services;
 
 namespace Project_C.F_.ViewModel
 {
     [QueryProperty(nameof(EmployeeID), "id")]
     public partial class Dashboard_ViewModel: MainViewModel
     {
-        //Entry From Login
+
         private string _EmployeeID;
         public string EmployeeID
         {
             get { return _EmployeeID; }
-            set { _EmployeeID = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeID)); }
+            set { _EmployeeID = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeID)); InitializeCurrentEmployee();
+            }
         }
-        private readonly Employee_Services employee_Services;
         public Dashboard_ViewModel()
         {
-            NewEmployee = new Employee();
             employee_Services = new Employee_Services();
         }
-
-        //Add Employee
-        private Employee _NewEmployee;
-        public Employee NewEmployee
+        private readonly Employee_Services employee_Services;
+        private void InitializeCurrentEmployee()
         {
-            get { return _NewEmployee; }
-            set { _NewEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(_NewEmployee)); }
-        }
-
-        public List<string> JobPositions { get; } = new()
-        {
-            "Employee",
-            "Human Resource"
-        };
-        public List<string> Genders { get; } = new()
-        {
-            "Male",
-            "Female"
-        };
-        private string _EmployeeIDEntry;
-        public string EmployeeIDEntry
-        {
-            get { return _EmployeeID; }
-            set
+            if(EmployeeID == "00000")
             {
-                _EmployeeID = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeIDEntry));
-                if(EmployeeIDEntry.All(char.IsDigit) || string.IsNullOrEmpty(EmployeeIDEntry))
+                CurrentEmployee = new Employee()
                 {
-                    NewEmployee.EmployeeID = EmployeeIDEntry;
-                }
-                else
-                {
-                    Shell.Current.DisplayAlert("Employee ID", "Required. Numeric values only", "okay");
-                }
-            }
-        }
-        private bool ExistingID()
-        {
-            foreach(var employee in employee_Services.GetEmployees())
-            {
-                if(NewEmployee.EmployeeID == employee.EmployeeID) 
-                {
-                    Shell.Current.DisplayAlert("Employee ID", "Employee ID has been found in the database. Register new ID", "Okay");
-                    return true;
-                }
-            }
-            return false;
-        }
-        private string _EmployeeMobileNOEntry;
-        public string EmployeeMobileNOEntry
-        {
-            get { return _EmployeeMobileNOEntry; }
-            set
-            {
-                _EmployeeMobileNOEntry = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeMobileNOEntry));
-                if (EmployeeMobileNOEntry.All(char.IsDigit) || string.IsNullOrEmpty(EmployeeMobileNOEntry))
-                {
-                    NewEmployee.ContactNumber = EmployeeMobileNOEntry;
-                }
-                else
-                {
-                    Shell.Current.DisplayAlert("Employee ID", "Required. Numeric values only", "okay");
-                }
-            }
-        }
-        private DateTime _DateToday = DateTime.Today;
-        public DateTime DateToday
-        {
-            get { return _DateToday; }
-            set { _DateToday = value; }
-        }
-
-        private bool ValidateEntries()
-        {
-            if(string.IsNullOrEmpty(NewEmployee.EmployeeID) || string.IsNullOrEmpty(NewEmployee.Password) || string.IsNullOrEmpty(NewEmployee.FullName) || string.IsNullOrEmpty(NewEmployee.ContactNumber) || string.IsNullOrEmpty(NewEmployee.Gender)  || string.IsNullOrEmpty(NewEmployee.JobPosition) || string.IsNullOrEmpty(NewEmployee.Country) || string.IsNullOrEmpty(NewEmployee.HomeAddress) || string.IsNullOrEmpty(NewEmployee.ProvincialAddress) || (NewEmployee.BirthDate == DateToday))
-            {
-                return false;
-            }
-            if(ExistingID())
-            {
-                return false;
-            }
-            return true;
-        }
-        private void AddEmployee()
-        {
-            if(ValidateEntries())
-            {
-                employee_Services.AddEmployee(NewEmployee);
-                Shell.Current.DisplayAlert("Adding Employee Sucess", "The Employee has been added to the database", "Okay");
-                ClearEntries();
+                    FullName = "Administrator"
+                };
             }
             else
             {
-                Shell.Current.DisplayAlert("Entries not filled", "Fill in all entries to add employee", "Okay");
+                foreach (var employee in employee_Services.GetEmployees())
+                {
+                    if (EmployeeID == employee.EmployeeID)
+                    {
+                        CurrentEmployee = employee;
+                    }
+                }
             }
         }
-        public ICommand AddEmployeeCommand => new Command(AddEmployee);
-
-        private void ClearEntries()
+        private Employee _CurrentEmployee;
+        public Employee CurrentEmployee
         {
-            EmployeeIDEntry = string.Empty;
-            NewEmployee.FullName = string.Empty;
-            NewEmployee.Email = string.Empty;
-            NewEmployee.Password = string.Empty;
-            EmployeeMobileNOEntry = string.Empty;
-            NewEmployee.Gender = string.Empty;
-            NewEmployee.JobPosition = string.Empty;
-            NewEmployee.Country = string.Empty;
-            NewEmployee.HomeAddress = string.Empty;
-            NewEmployee.ProvincialAddress = string.Empty;
-            NewEmployee.BirthDate = DateToday;
+            get { return _CurrentEmployee; }
+            set { _CurrentEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(_CurrentEmployee)); } 
         }
-        public ICommand ClearEntriesCommand => new Command(ClearEntries);
+        private void HomeIcon()
+        {
+            Shell.Current.GoToAsync($"{nameof(Dashboard_Home)}?id={EmployeeID}");
+        }
+        public ICommand HomeIconCommand => new Command(HomeIcon);
+        private void LogoutIcon()
+        {
+            Shell.Current.Navigation.PopToRootAsync();
+        }
+        public ICommand LogoutIconCommand => new Command(LogoutIcon);
+        private void AddEmployeePage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Dashboard_AddEmployee)}?id={EmployeeID}", false);
+        }
+        public ICommand AddEmployeePageCommand => new Command(AddEmployeePage);
     }
 }

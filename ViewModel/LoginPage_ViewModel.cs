@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Maui.Controls.Internals;
 using Project_C.F_.Model;
 using Project_C.F_.Services;
 using Project_C.F_.View;
@@ -19,7 +20,7 @@ namespace Project_C.F_.ViewModel
         private readonly Employee_Services employee_Services;
         private void BackImage()
         {
-            Shell.Current.GoToAsync("..");
+            Shell.Current.Navigation.PopToRootAsync();
         }
         public ICommand BackImageCommand => new Command(BackImage);
         private string _EmployeeIDEntry;
@@ -59,18 +60,19 @@ namespace Project_C.F_.ViewModel
             {
                 Shell.Current.DisplayAlert("Login Sucess", "Logging into your account...", "Okay");
                 EmployeeID = "00000";
-                Shell.Current.GoToAsync($"{nameof(Dashboard)}?id={EmployeeID}");
+                Shell.Current.GoToAsync($"{nameof(Dashboard_Home)}?id={EmployeeID}");
             }
             else if(IDExisting())
             {
                 Shell.Current.DisplayAlert("Login Sucess", "Logging into your account...", "Okay");
-                Shell.Current.GoToAsync($"{nameof(Dashboard)}?id={EmployeeIDEntry}");
+                EmployeeID = EmployeeIDEntry;
+                Shell.Current.GoToAsync($"{nameof(Dashboard_Home)}?id={EmployeeID}");
             }
             else
             {
                 Shell.Current.DisplayAlert("Account Not Found", "Your Account was not found in the database", "Okay");
             }
-        }
+         }
         public ICommand SignInCommand => new Command(SignIn);
     }
 }
