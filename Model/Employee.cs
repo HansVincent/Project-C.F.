@@ -15,6 +15,7 @@ namespace Project_C.F_.Model
         private string password;
         private string contactNumber;
         private string gender;
+        private Byte[] image;
         private DateTime hoursWorked;
         private int activtiyStatus;
         private string jobPosition;
@@ -53,6 +54,11 @@ namespace Project_C.F_.Model
         {
             get { return gender; }
             set { gender = value; OnPropertyChanged(); OnPropertyChanged(nameof(gender)); }
+        }
+        public Byte[] Image
+        {
+            get { return image; }
+            set { image = value; OnPropertyChanged(); OnPropertyChanged(nameof(image)); }
         }
         public DateTime HoursWorked
         {

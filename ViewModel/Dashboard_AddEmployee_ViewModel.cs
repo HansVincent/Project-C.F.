@@ -18,6 +18,7 @@ namespace Project_C.F_.ViewModel
         {
             NewEmployee = new Employee();
             employee_Services = new Employee_Services();
+            AddEmployeeImage = "addemployee_addimage.png";
         }
 
         //Add Employee
@@ -133,5 +134,43 @@ namespace Project_C.F_.ViewModel
             NewEmployee.BirthDate = DateToday;
         }
         public ICommand ClearEntriesCommand => new Command(ClearEntries);
+
+        private string addEmployeeImage;
+        public string AddEmployeeImage
+        {
+            get { return addEmployeeImage; }
+            set
+            {
+                addEmployeeImage = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(addEmployeeImage));
+            }
+        }
+
+        private async void UploadImage()
+        {
+            var employeeImage = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Please pick image",
+                FileTypes = FilePickerFileType.Images
+            });
+
+            if(employeeImage != null)
+            {
+                var bytestream = await employeeImage.OpenReadAsync();
+                var employeeImageByte = ConvertFileToByteArray(employeeImage);
+
+                NewEmployee.Image = employeeImageByte;
+                AddEmployeeImage = employeeImage.FullPath;
+            }
+        }
+        private Byte[] ConvertFileToByteArray(FileResult bytestrean)
+        {
+            using var stream = bytestrean.OpenReadAsync().Result;
+            using var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            return memoryStream.ToArray();
+        }
+        public ICommand UploadImageCommand => new Command(UploadImage);
     }
 }

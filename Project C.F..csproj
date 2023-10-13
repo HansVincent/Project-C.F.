@@ -52,7 +52,6 @@
 	  <None Remove="Resources\Images\addemployee_addimage.png" />
 	  <None Remove="Resources\Images\addemployee_cancelicon.png" />
 	  <None Remove="Resources\Images\addemployee_checkboxicon.png" />
-	  <None Remove="Resources\Images\addemployee_imagebackground.png" />
 	  <None Remove="Resources\Images\dashboard_homeicon.png" />
 	  <None Remove="Resources\Images\dashboard_image.png" />
 	  <None Remove="Resources\Images\dashboard_logo.png" />
