@@ -91,9 +91,9 @@
                 <BoxView HeightRequest="1" Color="Black" Margin="25"/>
                 <HorizontalStackLayout BackgroundColor="LightGrey" Spacing="15">
                     <VerticalStackLayout WidthRequest="125" Margin="15" HorizontalOptions="Center">
-                        <Grid>
-                            <ImageButton Command="{Binding UploadImageCommand}" Source="{Binding AddEmployeeImage}" Aspect="AspectFit"   WidthRequest="125"  HeightRequest="117" BackgroundColor="LightGrey"/>
-                        </Grid>
+                        <Border>
+                            <ImageButton Command="{Binding UploadImageCommand}" Source="{Binding AddEmployeeImage}"  WidthRequest="150" HeightRequest="117" BackgroundColor="LightGrey" BorderColor="LightGrey"/>
+                        </Border>
                         <Label Text="Attach Photo for profile" Style="{StaticResource Subtitle}"/>
                     </VerticalStackLayout>
                     <VerticalStackLayout>
