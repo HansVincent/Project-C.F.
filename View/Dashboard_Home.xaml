@@ -3,20 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project_C.F_.View.Dashboard_Home"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
-             x:DataType="viewmodel:Dashboard_ViewModel">
+             x:DataType="viewmodel:Dashboard_ViewModel"
+             xmlns:converter="clr-namespace:Project_C.F_.Converter">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
     <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ByteToImageConverter x:Key="ByteToImageConverter"/>
+        </ResourceDictionary>
         <!--DashboardStyling-->
         <Style x:Key="DashboardButtonStyle" TargetType="Button">
             <Setter Property="TextColor" Value="Black"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="BackgroundColor" Value="LightGrey"/>
             <Setter Property="BorderColor" Value="LightGrey"/>
-            <Setter Property="Padding" Value="25"/>
+            <Setter Property="Margin" Value="25"/>
+            <Setter Property="WidthRequest" Value="200"/>
         </Style>
         <Style x:Key="DashboardStyle" TargetType="VerticalStackLayout">
             <Setter Property="BackgroundColor" Value="LightGrey"/>
@@ -28,10 +33,8 @@
             <Setter Property="WidthRequest" Value="1670"/>
         </Style>
         <Style x:Key="DashboardTabStyle" TargetType="HorizontalStackLayout">
-            <Setter Property="WidthRequest" Value="1670"/>
-            <Setter Property="BackgroundColor" Value="LightGrey"/>
             <Setter Property="HeightRequest" Value="50"/>
-            <Setter Property="Padding" Value="1350,0,0,0"/>
+            <Setter Property="HorizontalOptions" Value="End"/>
         </Style>
     </ContentPage.Resources>
 
@@ -45,11 +48,15 @@
 
         <VerticalStackLayout Style="{StaticResource DashboardContentPage}">
             <!--Tab-->
-            <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
-                <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold" WidthRequest="175"/>
-                <ImageButton Command="{Binding HomeIconCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
-                <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
-            </HorizontalStackLayout>
+            <Grid WidthRequest="1670" BackgroundColor="LightGrey" HeightRequest="50">
+                <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
+                    <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}"/>
+                    <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold" WidthRequest="175"/>
+                    <ImageButton Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                    <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                </HorizontalStackLayout>
+            </Grid>
+
             <!--Content Page-->
             <VerticalStackLayout Padding="30">
                 <Grid Padding="15">

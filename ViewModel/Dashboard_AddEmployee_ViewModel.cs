@@ -1,10 +1,5 @@
 ﻿using Project_C.F_.Model;
 using Project_C.F_.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Project_C.F_.ViewModel
@@ -92,6 +87,42 @@ namespace Project_C.F_.ViewModel
             set { _DateToday = value; }
         }
 
+        private string addEmployeeImage;
+        public string AddEmployeeImage
+        {
+            get { return addEmployeeImage; }
+            set
+            {
+                addEmployeeImage = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(addEmployeeImage));
+            }
+        }
+
+        private async void UploadImage()
+        {
+            var employeeImage = await FilePicker.PickAsync(new PickOptions
+            {
+                PickerTitle = "Please pick image",
+                FileTypes = FilePickerFileType.Images
+            });
+
+            if (employeeImage != null)
+            {
+                var employeeImageByte = ConvertFileToByteArray(employeeImage);
+                NewEmployee.Image = employeeImageByte;
+                AddEmployeeImage = employeeImage.FullPath;
+            }
+        }
+        private Byte[] ConvertFileToByteArray(FileResult bytestrean)
+        {
+            using var stream = bytestrean.OpenReadAsync().Result;
+            using var memoryStream = new MemoryStream();
+            stream.CopyTo(memoryStream);
+            return memoryStream.ToArray();
+        }
+        public ICommand UploadImageCommand => new Command(UploadImage);
+
         private bool ValidateEntries()
         {
             if (string.IsNullOrEmpty(NewEmployee.EmployeeID) || string.IsNullOrEmpty(NewEmployee.Password) || string.IsNullOrEmpty(NewEmployee.FullName) || string.IsNullOrEmpty(NewEmployee.ContactNumber) || string.IsNullOrEmpty(NewEmployee.Gender)  || string.IsNullOrEmpty(NewEmployee.JobPosition) || string.IsNullOrEmpty(NewEmployee.Country) || string.IsNullOrEmpty(NewEmployee.HomeAddress) || string.IsNullOrEmpty(NewEmployee.ProvincialAddress) || (NewEmployee.BirthDate == DateToday))
@@ -132,45 +163,8 @@ namespace Project_C.F_.ViewModel
             NewEmployee.HomeAddress = string.Empty;
             NewEmployee.ProvincialAddress = string.Empty;
             NewEmployee.BirthDate = DateToday;
+            AddEmployeeImage = "addemployee_addimage.png";
         }
         public ICommand ClearEntriesCommand => new Command(ClearEntries);
-
-        private string addEmployeeImage;
-        public string AddEmployeeImage
-        {
-            get { return addEmployeeImage; }
-            set
-            {
-                addEmployeeImage = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(addEmployeeImage));
-            }
-        }
-
-        private async void UploadImage()
-        {
-            var employeeImage = await FilePicker.PickAsync(new PickOptions
-            {
-                PickerTitle = "Please pick image",
-                FileTypes = FilePickerFileType.Images
-            });
-
-            if(employeeImage != null)
-            {
-                var bytestream = await employeeImage.OpenReadAsync();
-                var employeeImageByte = ConvertFileToByteArray(employeeImage);
-
-                NewEmployee.Image = employeeImageByte;
-                AddEmployeeImage = employeeImage.FullPath;
-            }
-        }
-        private Byte[] ConvertFileToByteArray(FileResult bytestrean)
-        {
-            using var stream = bytestrean.OpenReadAsync().Result;
-            using var memoryStream = new MemoryStream();
-            stream.CopyTo(memoryStream);
-            return memoryStream.ToArray();
-        }
-        public ICommand UploadImageCommand => new Command(UploadImage);
     }
 }
