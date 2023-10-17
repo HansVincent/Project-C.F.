@@ -11,6 +11,7 @@ namespace Project_C.F_
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(Dashboard_Home), typeof(Dashboard_Home));
             Routing.RegisterRoute(nameof(Dashboard_AddEmployee), typeof(Dashboard_AddEmployee));
+            Routing.RegisterRoute(nameof(Dashboard_EmployeeDetails), typeof(Dashboard_EmployeeDetails));
         }
     }
 }

@@ -72,6 +72,9 @@
 	  <MauiXaml Update="View\Dashboard_AddEmployee.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Dashboard_EmployeeDetails.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Dashboard_Home.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

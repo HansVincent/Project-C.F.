@@ -4,7 +4,6 @@ using System.Windows.Input;
 
 namespace Project_C.F_.ViewModel
 {
-    [QueryProperty(nameof(EmployeeID), "id")]
     public partial class Dashboard_AddEmployee_ViewModel : Dashboard_ViewModel
     {
         //Entry From Login

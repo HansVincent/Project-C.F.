@@ -54,7 +54,8 @@
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="BackgroundColor" Value="LightGrey"/>
             <Setter Property="BorderColor" Value="LightGrey"/>
-            <Setter Property="HeightRequest" Value="10"/>
+            <Setter Property="HeightRequest" Value="15"/>
+            <Setter Property="Padding" Value="5"/>
         </Style>
         <Style x:Key="DashboardStyle" TargetType="VerticalStackLayout">
             <Setter Property="BackgroundColor" Value="LightGrey"/>
@@ -71,7 +72,10 @@
         <VerticalStackLayout Style="{StaticResource DashboardStyle}" Grid.Column="0">
             <Image Source="dashboard_logo.png" Aspect="Center"/>
             <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
-            <Button Command="{Binding AddEmployeePageCommand}" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
+            <VerticalStackLayout HorizontalOptions="Start">
+                <Button Command="{Binding EmployeeDetailsPageCommand}" ImageSource="addemployee_addemployeeimage.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button BackgroundColor="Grey" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
+            </VerticalStackLayout>
         </VerticalStackLayout>
 
         <Grid RowDefinitions="50,*" Grid.Column="1">
