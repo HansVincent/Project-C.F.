@@ -4,7 +4,8 @@
              x:Class="Project_C.F_.View.Dashboard_EmployeeDetails"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
              x:DataType="viewmodel:Dashboard_EmployeeDetails_ViewModel"
-             xmlns:converter="clr-namespace:Project_C.F_.Converter">
+             xmlns:converter="clr-namespace:Project_C.F_.Converter"
+             xmlns:model="clr-namespace:Project_C.F_.Model">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
@@ -94,11 +95,21 @@
                 <Label Text="Human Resource | Project C.F" Style="{StaticResource Subtitle}"/>
                 <BoxView HeightRequest="1" Color="Black" Margin="25"/>
                 <Grid ColumnDefinitions="Auto">
-                    <ScrollView Grid.Column="0">
-                        
-                    </ScrollView>
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="Employee List:" FontAttributes="Bold"/>
+                        <ScrollView>
+                            <CollectionView ItemsSource="{Binding EmployeeList}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Employee">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding FullName}"/>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </ScrollView>
+                    </VerticalStackLayout>
                 </Grid>
-                
             </VerticalStackLayout>
         </Grid>
     </Grid>
