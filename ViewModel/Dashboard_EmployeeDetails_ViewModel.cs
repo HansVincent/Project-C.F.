@@ -14,6 +14,7 @@ namespace Project_C.F_.ViewModel
         public Dashboard_EmployeeDetails_ViewModel() 
         {
             employee_Services = new Employee_Services();
+            EmployeeList = new ObservableCollection<Employee>();
             GetEmployee();
         }
         private readonly Employee_Services employee_Services;
@@ -30,7 +31,7 @@ namespace Project_C.F_.ViewModel
             {
                 if(person.JobPosition == "Employee")
                 {
-                    employeeList.Add(person);
+                    EmployeeList.Add(person);
                 }
             }
         }

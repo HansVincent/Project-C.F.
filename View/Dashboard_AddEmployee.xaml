@@ -97,7 +97,7 @@
                 <Grid ColumnDefinitions="Auto,Auto" BackgroundColor="LightGrey" HorizontalOptions="Center">
                     <VerticalStackLayout Spacing="5" Grid.Column="0" Padding="10,15">
                         <Border WidthRequest="125" HeightRequest="125">
-                            <Image Source="{Binding AddEmployeeImage}" Aspect="AspectFit"/>
+                            <Image Source="{Binding AddEmployeeImage}" Aspect="Center"/>
                         </Border>
                         <Button Text="Attach Photo for Profile" Command="{Binding UploadImageCommand}" BackgroundColor="Grey" TextColor="Black" FontAttributes="Bold"/>
                     </VerticalStackLayout>
