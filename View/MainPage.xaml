@@ -38,14 +38,14 @@
     </ContentPage.Resources>
     
     <ScrollView>
-        <Grid RowDefinitions="*,*,*,*,*,*,*,*,*">
+        <Grid RowDefinitions="Auto,Auto,*,*,*,*,*,*,*">
             <Grid ColumnDefinitions="*,*" Grid.Row="0" BackgroundColor="LightGrey">
                 <HorizontalStackLayout  Grid.Column="0">
-                    <Image Source="MainPage_Logo.png" Margin="25"/>
+                    <Image Source="MainPage_Logo.png" Margin="25,10" Aspect="Center"/>
                     <Label Text="ABOUT US" Style="{StaticResource LabelStyle}"/>
                     <Label Text="BENEFITS" Style="{StaticResource LabelStyle}"/>
                 </HorizontalStackLayout>
-                <ImageButton Source="MainPage_AccountCircle.png" HorizontalOptions="End" Command="{Binding LoginImageCommand}" BackgroundColor="LightGrey" Grid.Column="1" Aspect="Center" Margin="50"/>
+                <ImageButton Source="MainPage_AccountCircle.png" HorizontalOptions="End" Command="{Binding LoginImageCommand}" BackgroundColor="LightGrey" Grid.Column="1" Aspect="Center" Margin="50,0"/>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -53,7 +53,7 @@
                     <CarouselView.ItemTemplate>
                         <DataTemplate x:DataType="model:CarouselContent">
                             <VerticalStackLayout>
-                                <Image Source="{Binding ImagePath}" HeightRequest="600" WidthRequest="1080"/>
+                                <Image Source="{Binding ImagePath}"/>
                             </VerticalStackLayout>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
