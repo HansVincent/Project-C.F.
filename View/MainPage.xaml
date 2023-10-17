@@ -12,7 +12,7 @@
         <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="25,0"/>
         </Style>
         <Style x:Key="ImageLabelStyle" TargetType="Label">
@@ -39,13 +39,15 @@
     
     <ScrollView>
         <Grid RowDefinitions="*,*,*,*,*,*,*,*,*">
-            <HorizontalStackLayout BackgroundColor="LightGrey" Grid.Row="0">
-                <Image Source="MainPage_Logo.png" Margin="55,0,25,0"/>
-                <Label Text="ABOUT US" Style="{StaticResource LabelStyle}"/>
-                <Label Text="BENEFITS" Style="{StaticResource LabelStyle}"/>
-                <ImageButton Source="MainPage_AccountCircle.png" Margin="1225,0,0,0" Command="{Binding LoginImageCommand}" BackgroundColor="LightGrey"/>
-            </HorizontalStackLayout>
-            
+            <Grid ColumnDefinitions="*,*" Grid.Row="0" BackgroundColor="LightGrey">
+                <HorizontalStackLayout  Grid.Column="0">
+                    <Image Source="MainPage_Logo.png" Margin="25"/>
+                    <Label Text="ABOUT US" Style="{StaticResource LabelStyle}"/>
+                    <Label Text="BENEFITS" Style="{StaticResource LabelStyle}"/>
+                </HorizontalStackLayout>
+                <ImageButton Source="MainPage_AccountCircle.png" HorizontalOptions="End" Command="{Binding LoginImageCommand}" BackgroundColor="LightGrey" Grid.Column="1" Aspect="Center" Margin="50"/>
+            </Grid>
+
             <Grid Grid.Row="1">
                 <CarouselView ItemsSource="{Binding CarouselView}">
                     <CarouselView.ItemTemplate>

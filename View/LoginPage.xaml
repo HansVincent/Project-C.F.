@@ -23,10 +23,10 @@
         </Style>
     </ContentPage.Resources>
 
-    <Grid ColumnDefinitions="*,*" Margin="250">
+    <Grid ColumnDefinitions="*,550" Padding="100,0">
 
         <!--Image-->
-        <Image Source="login_image.png" Aspect ="Fill" WidthRequest="900" HeightRequest="900" Margin="25" Grid.Column="0"/>
+        <Image Source="login_image.png" Aspect ="Fill" Margin="25" Grid.Column="0"/>
         <!--Login Entries-->
         <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Center">
             <VerticalStackLayout VerticalOptions="Center">
