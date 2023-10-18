@@ -35,5 +35,11 @@ namespace Project_C.F_.ViewModel
                 }
             }
         }
+        private Employee highlightedEmployeee;
+        public Employee HighlightedEmployeee
+        {
+            get { return highlightedEmployeee; }
+            set { highlightedEmployeee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployeee)); }
+        }
     }
 }
