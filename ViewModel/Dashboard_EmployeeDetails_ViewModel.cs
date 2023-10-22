@@ -39,7 +39,26 @@ namespace Project_C.F_.ViewModel
         public Employee HighlightedEmployeee
         {
             get { return highlightedEmployeee; }
-            set { highlightedEmployeee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployeee)); }
+            set { highlightedEmployeee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployeee)); SetDateDetails(); }
+        }
+
+        private void SetDateDetails()
+        {
+            HighlightEmployeeBirthday = HighlightedEmployeee.BirthDate.ToString("MM/dd/yyyy");
+            HighlightEmployeeDateJoined = HighlightedEmployeee.DateJoined.ToString("MM/dd/yyyy");
+        }
+
+        private string highlightEmployeeBirthday;
+        public string HighlightEmployeeBirthday
+        {
+            get { return highlightEmployeeBirthday; }
+            set { highlightEmployeeBirthday = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightEmployeeBirthday)); }
+        }
+        private string highlightEmployeeDateJoined;
+        public string HighlightEmployeeDateJoined
+        {
+            get { return highlightEmployeeDateJoined; }
+            set { highlightEmployeeDateJoined = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightEmployeeDateJoined)); }
         }
     }
 }

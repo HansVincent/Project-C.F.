@@ -42,7 +42,14 @@ namespace Project_C.F_.ViewModel
                 _EmployeeIDEntry = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeIDEntry));
                 if (EmployeeIDEntry.All(char.IsDigit) || string.IsNullOrEmpty(EmployeeIDEntry))
                 {
-                    NewEmployee.EmployeeID = EmployeeIDEntry;
+                    if(EmployeeIDEntry == "00000")
+                    {
+                        Shell.Current.DisplayAlert("Employee ID", "Invalid ID", "okay");
+                    }
+                    else
+                    {
+                        NewEmployee.EmployeeID = EmployeeIDEntry;
+                    }
                 }
                 else
                 {
@@ -139,7 +146,7 @@ namespace Project_C.F_.ViewModel
             if (ValidateEntries())
             {
                 employee_Services.AddEmployee(NewEmployee);
-                Shell.Current.DisplayAlert("Adding Employee Sucess", "The Employee has been added to the database", "Okay");
+                Shell.Current.DisplayAlert("Adding Employee Success", "The Employee has been added to the database", "Okay");
                 ClearEntries();
             }
             else
