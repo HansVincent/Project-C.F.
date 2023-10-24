@@ -1,4 +1,5 @@
 ﻿using Project_C.F_.View;
+using Project_C.F_.ViewModel;
 
 namespace Project_C.F_
 {
@@ -12,6 +13,7 @@ namespace Project_C.F_
             Routing.RegisterRoute(nameof(Dashboard_Home), typeof(Dashboard_Home));
             Routing.RegisterRoute(nameof(Dashboard_AddEmployee), typeof(Dashboard_AddEmployee));
             Routing.RegisterRoute(nameof(Dashboard_EmployeeDetails), typeof(Dashboard_EmployeeDetails));
+            Routing.RegisterRoute(nameof(Dashboard_UpdateEmployee), typeof(Dashboard_UpdateEmployee));
         }
     }
 }

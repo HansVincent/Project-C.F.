@@ -73,5 +73,10 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync(nameof(Dashboard_EmployeeDetails),false);
         }
         public ICommand EmployeeDetailsPageCommand => new Command(EmployeeDetailsPage);
+        private void UpdateEmployeePage()
+        {
+            Shell.Current.GoToAsync(nameof(Dashboard_UpdateEmployee), false);
+        }
+        public ICommand UpdateEmployeePagePageCommand => new Command(UpdateEmployeePage);
     }
 }
