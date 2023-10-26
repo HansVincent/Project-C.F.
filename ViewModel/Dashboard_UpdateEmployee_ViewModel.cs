@@ -62,5 +62,11 @@ namespace Project_C.F_.ViewModel
             set { highlightEmployeeDateJoined = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightEmployeeDateJoined)); }
         }
 
+
+        private void UpdateEmployee()
+        {
+            
+        }
+        public ICommand UpdateEmployeeCommand => new Command(UpdateEmployee);
     }
 }

@@ -118,10 +118,7 @@
                             <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Employee">
-                                        <HorizontalStackLayout>
-                                            <Label Text="-" Margin="30,0"/>
-                                            <Label Text="{Binding FullName}" FontAttributes="Bold"/>
-                                        </HorizontalStackLayout>
+                                        <Label Text="{Binding FullName, StringFormat='- {0}'}" FontAttributes="Bold"/>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>

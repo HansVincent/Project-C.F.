@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project_C.F_.View.Dashboard_UpdateEmployee"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
-             x:DataType="viewmodel:Dashboard_EmployeeDetails_ViewModel"
+             x:DataType="viewmodel:Dashboard_UpdateEmployee_ViewModel"
              xmlns:converter="clr-namespace:Project_C.F_.Converter"
              xmlns:model="clr-namespace:Project_C.F_.Model">
     <Shell.BackButtonBehavior>
@@ -119,10 +119,7 @@
                             <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Employee">
-                                        <HorizontalStackLayout>
-                                            <Label Text="-" Margin="30,0"/>
-                                            <Label Text="{Binding FullName}" FontAttributes="Bold"/>
-                                        </HorizontalStackLayout>
+                                        <Label Text="{Binding FullName, StringFormat='- {0}'}" FontAttributes="Bold"/>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
@@ -164,7 +161,7 @@
                                     <Label Text="Provincial Address:" Style="{StaticResource EntryLabel}"/>
                                     <Entry Text="{Binding HighlightedEmployeee.ProvincialAddress}" Style="{StaticResource Entry}" IsReadOnly="True"/>
                                 </VerticalStackLayout>
-                                <ImageButton Source="dashboard_update_edit.png" Grid.Column="2" VerticalOptions="Start"/>
+                                <ImageButton Command="{Binding UpdateEmployeeCommand}" Source="dashboard_update_edit.png" Grid.Column="2" VerticalOptions="Start"/>
                             </Grid>
                         </Border>
                     </VerticalStackLayout>
