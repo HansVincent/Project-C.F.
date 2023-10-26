@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Android.Views;
 using Project_C.F_.Model;
+using static Android.Net.Wifi.WifiEnterpriseConfig;
 
 namespace Project_C.F_.Services
 {
@@ -21,6 +23,21 @@ namespace Project_C.F_.Services
                 EmployeeCollection.Add(employee);
                 var EmployeeList = JsonSerializer.Serialize<ObservableCollection<Employee>>(EmployeeCollection);
                 File.WriteAllText(filePath, EmployeeList);
+            }
+        }
+
+        public void UpdateEmployeeCollection(Employee employee)
+        {
+            ObservableCollection<Employee> EmployeeCollection = GetEmployees();
+            for(int loop = 0; loop < EmployeeCollection.Count; loop++)
+            {
+                if (employee.EmployeeID == EmployeeCollection[loop].EmployeeID)
+                {
+                    EmployeeCollection[loop] = employee;
+                    var EmployeeList = JsonSerializer.Serialize<ObservableCollection<Employee>>(EmployeeCollection);
+                    File.WriteAllText(filePath, EmployeeList);
+                    return;
+                }
             }
         }
 
