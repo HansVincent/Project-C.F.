@@ -42,7 +42,7 @@
             <Setter Property="BackgroundColor" Value="LightGrey"/>
         </Style>
         <Style x:Key="Button" TargetType="Button">
-            <Setter Property="WidthRequest" Value="150"/>
+            <Setter Property="WidthRequest" Value="200"/>
             <Setter Property="HeightRequest" Value="20"/>
             <Setter Property="BackgroundColor" Value="DarkGray"/>
             <Setter Property="FontAttributes" Value="Bold"/>
@@ -73,9 +73,9 @@
             <Image Source="dashboard_logo.png" Aspect="Center"/>
             <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
             <VerticalStackLayout HorizontalOptions="Start">
-                <Button Command="{Binding EmployeeDetailsPageCommand}" ImageSource="addemployee_addemployeeimage.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
-                <Button BackgroundColor="Grey" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
-                <Button Command="{Binding UpdateEmployeePagePageCommand}" ImageSource="addemployee_addemployeeimage.png" Text="Update Employee" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding EmployeeDetailsPageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding UpdateEmployeePagePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Update Employee" Style="{StaticResource DashboardButtonStyle}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
 
@@ -105,7 +105,7 @@
                     
                     <VerticalStackLayout Grid.Column="1">
                         <Border Stroke="black" BackgroundColor="White" Padding="30">
-                            <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="50">
+                            <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="30">
                                 <VerticalStackLayout Spacing="5" Grid.Column="0">
                                     <Label Text="Employee ID:" Style="{StaticResource EntryLabel}"/>
                                     <Entry Text="{Binding EmployeeIDEntry}" Placeholder="Enter Details..." Style="{StaticResource Entry}" MaxLength="5"/>
@@ -124,18 +124,18 @@
                                 </VerticalStackLayout>
                                 <VerticalStackLayout Spacing="5" Grid.Column="1">
                                     <Label Text="Birthdate:" Style="{StaticResource EntryLabel}"/>
-                                    <DatePicker Date="{Binding NewEmployee.BirthDate}" MaximumDate="{Binding DateToday}" Style="{StaticResource DatePicker}"/>
+                                    <DatePicker HorizontalOptions="Start" Date="{Binding NewEmployee.BirthDate}" MaximumDate="{Binding DateToday}" Style="{StaticResource DatePicker}"/>
                                     <Label Text="Date Joined:" Style="{StaticResource EntryLabel}"/>
-                                    <DatePicker Date="{Binding NewEmployee.DateJoined}" Style="{StaticResource DatePicker}" MinimumDate="{Binding DateToday}" MaximumDate="{Binding DateToday}"/>
+                                    <DatePicker HorizontalOptions="Start" Date="{Binding NewEmployee.DateJoined}" Style="{StaticResource DatePicker}" MinimumDate="{Binding DateToday}" MaximumDate="{Binding DateToday}"/>
                                     <Label Text="Country:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding NewEmployee.Country}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                                    <Entry HorizontalOptions="Start" Text="{Binding NewEmployee.Country}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
                                     <Label Text="Home Address:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding NewEmployee.HomeAddress}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                                    <Entry HorizontalOptions="Start" Text="{Binding NewEmployee.HomeAddress}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
                                     <Label Text="Provincial Address:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding NewEmployee.ProvincialAddress}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
-                                    <HorizontalStackLayout Margin="0,20" HorizontalOptions="Center" Spacing="15">
-                                        <Button Command="{Binding AddEmployeeCommand}" ImageSource="addemployee_checkboxicon.png" Text="Save Details" Style="{StaticResource Button}"/>
-                                        <Button Command="{Binding ClearEntriesCommand}" ImageSource="addemployee_cancelicon.png" Text="Cancel Edit" Style="{StaticResource Button}"/>
+                                    <Entry HorizontalOptions="Start" Text="{Binding NewEmployee.ProvincialAddress}" Placeholder="Enter Details..." Style="{StaticResource Entry}"/>
+                                    <HorizontalStackLayout Margin="0,20" HorizontalOptions="Center" Spacing="10">
+                                        <Button Command="{Binding AddEmployeeCommand}" ImageSource="addemployee_checkboxicon.png" Text="Save Details" WidthRequest="150" Style="{StaticResource Button}"/>
+                                        <Button Command="{Binding ClearEntriesCommand}" ImageSource="addemployee_cancelicon.png" Text="Cancel Edit" WidthRequest="150" Style="{StaticResource Button}"/>
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
                             </Grid>
