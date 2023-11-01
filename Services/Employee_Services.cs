@@ -5,9 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Android.Views;
 using Project_C.F_.Model;
-using static Android.Net.Wifi.WifiEnterpriseConfig;
 
 namespace Project_C.F_.Services
 {

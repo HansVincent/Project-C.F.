@@ -55,7 +55,7 @@ namespace Project_C.F_.ViewModel
         }
         private void HomeIcon()
         {
-            Shell.Current.GoToAsync(nameof(Dashboard_Home));
+            Shell.Current.GoToAsync($"{nameof(Dashboard_Home)}?id={EmployeeID}");
         }
         public ICommand HomeIconCommand => new Command(HomeIcon);
         private void LogoutIcon()
@@ -65,17 +65,17 @@ namespace Project_C.F_.ViewModel
         public ICommand LogoutIconCommand => new Command(LogoutIcon);
         private void AddEmployeePage()
         {
-            Shell.Current.GoToAsync(nameof(Dashboard_AddEmployee),false);
+            Shell.Current.GoToAsync($"{nameof(Dashboard_AddEmployee)}?id={EmployeeID}",false);
         }
         public ICommand AddEmployeePageCommand => new Command(AddEmployeePage);
         private void EmployeeDetailsPage()
         {
-            Shell.Current.GoToAsync(nameof(Dashboard_EmployeeDetails),false);
+            Shell.Current.GoToAsync($"{nameof(Dashboard_EmployeeDetails)}?id={EmployeeID}",false);
         }
         public ICommand EmployeeDetailsPageCommand => new Command(EmployeeDetailsPage);
         private void UpdateEmployeePage()
         {
-            Shell.Current.GoToAsync(nameof(Dashboard_UpdateEmployee), false);
+            Shell.Current.GoToAsync($"{nameof(Dashboard_UpdateEmployee)}?id={EmployeeID}", false);
         }
         public ICommand UpdateEmployeePagePageCommand => new Command(UpdateEmployeePage);
     }
