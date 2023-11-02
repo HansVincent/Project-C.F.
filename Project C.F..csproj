@@ -63,6 +63,8 @@
 	  <None Remove="Resources\Images\mainpage_lifeinsurance.png" />
 	  <None Remove="Resources\Images\mainpage_paidleave.png" />
 	  <None Remove="Resources\Images\mainpage_paidtraining.png" />
+	  <None Remove="Resources\Images\updateemployee_visibilityoff.png" />
+	  <None Remove="Resources\Images\updateemployee_visibilityon.png" />
 	</ItemGroup>
 
 	<ItemGroup>

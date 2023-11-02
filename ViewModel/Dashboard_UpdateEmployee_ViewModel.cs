@@ -17,6 +17,9 @@ namespace Project_C.F_.ViewModel
             employee_Services = new Employee_Services();
             EmployeeList = new ObservableCollection<Employee>();
             GetEmployee();
+
+            ShowPassword = true;
+            PasswordIcon = "updateemployee_visibilityoff.png";
         }
         private readonly Employee_Services employee_Services;
 
@@ -62,6 +65,34 @@ namespace Project_C.F_.ViewModel
             set { highlightEmployeeDateJoined = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightEmployeeDateJoined)); }
         }
 
+        private bool showPassword;
+        public bool ShowPassword
+        {
+            get { return showPassword; }
+            set { showPassword = value; OnPropertyChanged(); OnPropertyChanged(nameof(showPassword)); }
+        }
+
+        private string passwordIcon;
+        public string PasswordIcon
+        {
+            get { return passwordIcon; }
+            set {  passwordIcon = value; OnPropertyChanged(); OnPropertyChanged(nameof(passwordIcon)); }
+        }
+
+        private void SetPassword()
+        {
+            if(ShowPassword == true)
+            {
+                PasswordIcon = "updateemployee_visibilityon.png";
+                ShowPassword = false;
+            }
+            else if (ShowPassword == false)
+            {
+                PasswordIcon = "updateemployee_visibilityoff.png";
+                ShowPassword = true;
+            }
+        }
+        public ICommand SetPasswordCommand => new Command(SetPassword);
 
         private void UpdateEmployee()
         {

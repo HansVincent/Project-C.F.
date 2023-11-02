@@ -136,8 +136,6 @@
                         <Border Stroke="black" BackgroundColor="White" Padding="30">
                             <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="30">
                                 <VerticalStackLayout Spacing="5" Grid.Column="0">
-                                    <Label Text="Employee ID:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.EmployeeID}" Style="{StaticResource Entry}" IsReadOnly="True"/>
                                     <Label Text="Full Name:" Style="{StaticResource EntryLabel}"/>
                                     <Entry Text="{Binding HighlightedEmployeee.FullName}" Style="{StaticResource Entry}" IsReadOnly="True"/>
                                     <Label Text="Email:" Style="{StaticResource EntryLabel}"/>
@@ -146,8 +144,11 @@
                                     <Entry Text="{Binding HighlightedEmployeee.ContactNumber}" Style="{StaticResource Entry}" MaxLength="11" IsReadOnly="True"/>
                                     <Label Text="Gender:" Style="{StaticResource EntryLabel}"/>
                                     <Entry Text="{Binding HighlightedEmployeee.Gender}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Job Position:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.JobPosition}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Password" Style="{StaticResource EntryLabel}"/>
+                                    <HorizontalStackLayout>
+                                        <Entry Text="{Binding HighlightedEmployeee.Password}" Style="{StaticResource Entry}" WidthRequest="300" IsReadOnly="True" IsPassword="{Binding ShowPassword}"/>
+                                        <ImageButton Source="{Binding PasswordIcon}" Command="{Binding SetPasswordCommand}"/>
+                                    </HorizontalStackLayout>
                                 </VerticalStackLayout>
                                 <VerticalStackLayout Spacing="5" Grid.Column="1">
                                     <Label Text="Birthdate:" Style="{StaticResource EntryLabel}"/>
