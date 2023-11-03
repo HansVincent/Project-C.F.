@@ -112,7 +112,7 @@
                 <BoxView HeightRequest="1" Color="Black" Margin="25"/>
                 <Grid ColumnDefinitions="Auto,Auto,Auto">
                     
-                    <VerticalStackLayout Grid.Column="0">
+                    <VerticalStackLayout Grid.Column="0" Margin="0,0,15,0">
                         <Label Text="Employee List:" FontAttributes="Bold" FontSize="35"/>
                         <ScrollView>
                             <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">

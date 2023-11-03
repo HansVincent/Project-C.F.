@@ -32,10 +32,12 @@
             <Setter Property="WidthRequest" Value="350"/>
             <Setter Property="PlaceholderColor" Value="DarkSlateGray"/>
             <Setter Property="BackgroundColor" Value="LightGrey"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
         </Style>
         <Style x:Key="Picker" TargetType="Picker">
             <Setter Property="WidthRequest" Value="350"/>
             <Setter Property="BackgroundColor" Value="LightGrey"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
         </Style>
         <Style x:Key="DatePicker" TargetType="DatePicker">
             <Setter Property="WidthRequest" Value="350"/>
@@ -113,7 +115,7 @@
                 
                 <Grid ColumnDefinitions="Auto,Auto,Auto">
 
-                    <VerticalStackLayout Grid.Column="0">
+                    <VerticalStackLayout Grid.Column="0" Margin="0,0,15,0">
                         <Label Text="Employee List:" FontAttributes="Bold" FontSize="35"/>
                         <ScrollView>
                             <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">
@@ -128,7 +130,7 @@
 
                     <VerticalStackLayout Spacing="5" Grid.Column="1" Padding="10,15" BackgroundColor="LightGrey">
                         <Border WidthRequest="125" HeightRequest="125">
-                            <Image Source="{Binding HighlightedEmployeee.Image, Converter={StaticResource ByteToImageConverter}}" Aspect="AspectFit"/>
+                            <Image Source="{Binding EditableEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Aspect="AspectFit"/>
                         </Border>
                     </VerticalStackLayout>
 
@@ -137,32 +139,30 @@
                             <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="30">
                                 <VerticalStackLayout Spacing="5" Grid.Column="0">
                                     <Label Text="Full Name:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.FullName}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Entry Text="{Binding EditableEmployee.FullName}" Style="{StaticResource Entry}" IsReadOnly="{Binding EnableUpdate}"/>
                                     <Label Text="Email:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.Email}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Entry Text="{Binding EditableEmployee.Email}" Style="{StaticResource Entry}" IsReadOnly="{Binding EnableUpdate}"/>
                                     <Label Text="Contact Number:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.ContactNumber}" Style="{StaticResource Entry}" MaxLength="11" IsReadOnly="True"/>
+                                    <Entry Text="{Binding EditableEmployee.ContactNumber}" Style="{StaticResource Entry}" MaxLength="11" IsReadOnly="{Binding EnableUpdate}"/>
                                     <Label Text="Gender:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.Gender}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Entry Text="{Binding EditableEmployee.Gender}" Style="{StaticResource Entry}" IsReadOnly="{Binding EnableUpdate}" IsVisible="{Binding EnableUpdate}"/>
+                                    <Picker SelectedItem="{Binding EditableEmployee.Gender}" Style="{StaticResource Picker}" ItemsSource="{Binding Genders}" IsVisible="{Binding GenderEditEnable}"/>
                                     <Label Text="Password" Style="{StaticResource EntryLabel}"/>
                                     <HorizontalStackLayout>
-                                        <Entry Text="{Binding HighlightedEmployeee.Password}" Style="{StaticResource Entry}" WidthRequest="300" IsReadOnly="True" IsPassword="{Binding ShowPassword}"/>
+                                        <Entry Text="{Binding EditableEmployee.Password}" Style="{StaticResource Entry}" IsReadOnly="{Binding EnableUpdate}" IsPassword="{Binding ShowPassword}"/>
                                         <ImageButton Source="{Binding PasswordIcon}" Command="{Binding SetPasswordCommand}"/>
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
                                 <VerticalStackLayout Spacing="5" Grid.Column="1">
-                                    <Label Text="Birthdate:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightEmployeeBirthday}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Date Joined:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightEmployeeDateJoined}" Style="{StaticResource Entry}" IsReadOnly="True"/>
                                     <Label Text="Country:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.Country}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Entry Text="{Binding EditableEmployee.Country}" Style="{StaticResource Entry}" IsReadOnly="{Binding EnableUpdate}"/>
                                     <Label Text="Home Address:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.HomeAddress}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Entry Text="{Binding EditableEmployee.HomeAddress}" Style="{StaticResource Entry}" IsReadOnly="{Binding EnableUpdate}"/>
                                     <Label Text="Provincial Address:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.ProvincialAddress}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Entry Text="{Binding EditableEmployee.ProvincialAddress}" Style="{StaticResource Entry}" IsReadOnly="{Binding EnableUpdate}"/>
+                                    <Button Command="{Binding UpdateEmployeeCommand}" ImageSource="addemployee_checkboxicon.png" Text="Save Details" WidthRequest="150" Style="{StaticResource Button}" Margin="0,20" IsEnabled="{Binding EnableEdit}"/>
                                 </VerticalStackLayout>
-                                <ImageButton Command="{Binding UpdateEmployeeCommand}" Source="dashboard_update_edit.png" Grid.Column="2" VerticalOptions="Start"/>
+                                <ImageButton Command="{Binding SetEnableCommand}" Source="{Binding WriteIcon}" Grid.Column="2" VerticalOptions="Start" IsEnabled="{Binding EnableEdit}"/>
                             </Grid>
                         </Border>
                     </VerticalStackLayout>

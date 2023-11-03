@@ -17,9 +17,7 @@ namespace Project_C.F_.ViewModel
             employee_Services = new Employee_Services();
             EmployeeList = new ObservableCollection<Employee>();
             GetEmployee();
-
-            ShowPassword = true;
-            PasswordIcon = "updateemployee_visibilityoff.png";
+            SetUpdates();
         }
         private readonly Employee_Services employee_Services;
 
@@ -31,40 +29,63 @@ namespace Project_C.F_.ViewModel
         }
         private void GetEmployee()
         {
-            foreach (var person in employee_Services.GetEmployees())
+            /*foreach (var person in employee_Services.GetEmployees())
             {
                 if (person.JobPosition == "Employee")
                 {
                     EmployeeList.Add(person);
                 }
-            }
+            }*/
+            EmployeeList = employee_Services.GetEmployees();
+            EnableEdit = false;
         }
         private Employee highlightedEmployeee;
         public Employee HighlightedEmployeee
         {
             get { return highlightedEmployeee; }
-            set { highlightedEmployeee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployeee)); SetDateDetails(); }
+            set { highlightedEmployeee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployeee)); SetEmployee();  }
         }
 
-        private void SetDateDetails()
+        private Employee editableEmployee;
+        public Employee EditableEmployee
         {
-            HighlightEmployeeBirthday = HighlightedEmployeee.BirthDate.ToString("MM/dd/yyyy");
-            HighlightEmployeeDateJoined = HighlightedEmployeee.DateJoined.ToString("MM/dd/yyyy");
+            get { return editableEmployee; }
+            set { editableEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(editableEmployee)); }
         }
-
-        private string highlightEmployeeBirthday;
-        public string HighlightEmployeeBirthday
+        private bool enableEdit;
+        public bool EnableEdit
         {
-            get { return highlightEmployeeBirthday; }
-            set { highlightEmployeeBirthday = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightEmployeeBirthday)); }
+            get { return enableEdit; }
+            set { enableEdit = value; OnPropertyChanged(); OnPropertyChanged(nameof(enableEdit)); }
         }
-        private string highlightEmployeeDateJoined;
-        public string HighlightEmployeeDateJoined
+        private void SetEmployee()
         {
-            get { return highlightEmployeeDateJoined; }
-            set { highlightEmployeeDateJoined = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightEmployeeDateJoined)); }
+            EditableEmployee = new Employee
+            {
+                EmployeeID = HighlightedEmployeee.EmployeeID,
+                FullName = HighlightedEmployeee.FullName,
+                Email = HighlightedEmployeee.Email,
+                Password = HighlightedEmployeee.Password,
+                ContactNumber = HighlightedEmployeee.ContactNumber,
+                Gender = HighlightedEmployeee.Gender,
+                Image = HighlightedEmployeee.Image,
+                HoursWorked = HighlightedEmployeee.HoursWorked,
+                ActivtiyStatus = HighlightedEmployeee.ActivtiyStatus,
+                JobPosition = HighlightedEmployeee.JobPosition,
+                DateJoined = HighlightedEmployeee.DateJoined,
+                BirthDate = HighlightedEmployeee.BirthDate,
+                Country = HighlightedEmployeee.Country,
+                HomeAddress = HighlightedEmployeee.HomeAddress,
+                ProvincialAddress = HighlightedEmployeee.ProvincialAddress
+            };
+            EnableEdit = true;
+            SetUpdates();
         }
-
+        public List<string> Genders { get; } = new()
+        {
+            "Male",
+            "Female"
+        };
         private bool showPassword;
         public bool ShowPassword
         {
@@ -93,10 +114,57 @@ namespace Project_C.F_.ViewModel
             }
         }
         public ICommand SetPasswordCommand => new Command(SetPassword);
+        private string writeIcon;
+        public string WriteIcon
+        {
+            get { return writeIcon; }
+            set { writeIcon = value; OnPropertyChanged(); OnPropertyChanged(nameof(writeIcon)); }
+        }
 
+        private bool enableUpdate;
+        public bool EnableUpdate
+        {
+            get { return enableUpdate; }
+            set { enableUpdate = value; OnPropertyChanged(); OnPropertyChanged(nameof(enableUpdate)); }
+        }
+        private bool genderEditEnable;
+        public bool GenderEditEnable
+        {
+            get { return genderEditEnable; }
+            set { genderEditEnable = value; OnPropertyChanged(); OnPropertyChanged(nameof(genderEditEnable)); }
+        }
+        private void SetUpdates()
+        {
+            ShowPassword = true;
+            PasswordIcon = "updateemployee_visibilityoff.png";
+
+            EnableUpdate = true;
+            WriteIcon = "updateemployee_editon.png";
+            GenderEditEnable = false;
+        }
+        private void SetEnable()
+        {
+            if (EnableUpdate == true)
+            {   WriteIcon = "updateemployee_editoff.png";
+                EnableUpdate = false;
+                GenderEditEnable = true;
+            }
+            else if (EnableUpdate == false)
+            {
+                SetEmployee();
+                WriteIcon = "updateemployee_editon.png";
+                EnableUpdate = true;
+                genderEditEnable = false;
+            }
+        }
+        public ICommand SetEnableCommand => new Command(SetEnable);
         private void UpdateEmployee()
         {
-            
+            employee_Services.UpdateEmployeeCollection(editableEmployee);
+            Shell.Current.DisplayAlert("Update Employee", "Employee Update Successful", "Okay");
+            HighlightedEmployeee = new Employee();
+            SetEmployee();
+            GetEmployee();
         }
         public ICommand UpdateEmployeeCommand => new Command(UpdateEmployee);
     }

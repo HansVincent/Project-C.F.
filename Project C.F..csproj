@@ -56,13 +56,14 @@
 	  <None Remove="Resources\Images\dashboard_image.png" />
 	  <None Remove="Resources\Images\dashboard_logo.png" />
 	  <None Remove="Resources\Images\dashboard_logouticon.png" />
-	  <None Remove="Resources\Images\dashboard_update_edit.png" />
 	  <None Remove="Resources\Images\login_arrow_icon.png" />
 	  <None Remove="Resources\Images\login_image.png" />
 	  <None Remove="Resources\Images\login_logo.png" />
 	  <None Remove="Resources\Images\mainpage_lifeinsurance.png" />
 	  <None Remove="Resources\Images\mainpage_paidleave.png" />
 	  <None Remove="Resources\Images\mainpage_paidtraining.png" />
+	  <None Remove="Resources\Images\updateemployee_editoff.png" />
+	  <None Remove="Resources\Images\updateemployee_editon.png" />
 	  <None Remove="Resources\Images\updateemployee_visibilityoff.png" />
 	  <None Remove="Resources\Images\updateemployee_visibilityon.png" />
 	</ItemGroup>
