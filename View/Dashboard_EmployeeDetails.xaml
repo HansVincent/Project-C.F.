@@ -88,7 +88,7 @@
             <Image Source="dashboard_logo.png" Aspect="Center"/>
             <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
             <VerticalStackLayout HorizontalOptions="Start">
-                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
                 <Button Command="{Binding AddEmployeePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
                 <Button Command="{Binding UpdateEmployeePagePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Update Employee" Style="{StaticResource DashboardButtonStyle}"/>
             </VerticalStackLayout>

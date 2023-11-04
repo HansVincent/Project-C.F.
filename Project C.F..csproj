@@ -52,6 +52,7 @@
 	  <None Remove="Resources\Images\addemployee_addimage.png" />
 	  <None Remove="Resources\Images\addemployee_cancelicon.png" />
 	  <None Remove="Resources\Images\addemployee_checkboxicon.png" />
+	  <None Remove="Resources\Images\dashboard_employeedetails.png" />
 	  <None Remove="Resources\Images\dashboard_homeicon.png" />
 	  <None Remove="Resources\Images\dashboard_image.png" />
 	  <None Remove="Resources\Images\dashboard_logo.png" />
@@ -83,6 +84,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Dashboard_UpdateEmployee.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Employee_Dashboard_EmployeeDetails.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Employee_Dashboard_Home.xaml">

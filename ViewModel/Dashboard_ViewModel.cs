@@ -75,6 +75,11 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Dashboard_AddEmployee)}?id={EmployeeID}",false);
         }
         public ICommand AddEmployeePageCommand => new Command(AddEmployeePage);
+        private void EmployeeOnlyDetailsPage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_EmployeeDetails)}?id={EmployeeID}", false);
+        }
+        public ICommand EmployeeOnlyDetailsPageCommand => new Command(EmployeeOnlyDetailsPage);
         private void EmployeeDetailsPage()
         {
             Shell.Current.GoToAsync($"{nameof(Dashboard_EmployeeDetails)}?id={EmployeeID}",false);
