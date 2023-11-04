@@ -57,6 +57,7 @@
 	  <None Remove="Resources\Images\dashboard_image.png" />
 	  <None Remove="Resources\Images\dashboard_logo.png" />
 	  <None Remove="Resources\Images\dashboard_logouticon.png" />
+	  <None Remove="Resources\Images\dashboard_updateicon.png" />
 	  <None Remove="Resources\Images\login_arrow_icon.png" />
 	  <None Remove="Resources\Images\login_image.png" />
 	  <None Remove="Resources\Images\login_logo.png" />
