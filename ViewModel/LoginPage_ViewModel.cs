@@ -55,6 +55,7 @@ namespace Project_C.F_.ViewModel
         }
         private void SignIn()
         {
+            bool IsEmployee = false;
             string EmployeeID = string.Empty;
             if(EmployeeIDEntry == "00000" && EmployeePassword == "admin101")
             {
@@ -66,7 +67,21 @@ namespace Project_C.F_.ViewModel
             {
                 Shell.Current.DisplayAlert("Login Sucess", "Logging into your account...", "Okay");
                 EmployeeID = EmployeeIDEntry;
-                Shell.Current.GoToAsync($"{nameof(Dashboard_Home)}?id={EmployeeID}");
+                foreach (var employee in employee_Services.GetEmployees())
+                {
+                    if (employee.JobPosition == "Human Resource" && employee.EmployeeID == EmployeeID)
+                    {
+                        IsEmployee = true;
+                    }
+                }
+                if(IsEmployee) 
+                {
+                    Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Home)}?id={EmployeeID}");
+                }
+                else
+                {
+                    Shell.Current.GoToAsync($"{nameof(Dashboard_Home)}?id={EmployeeID}");
+                }
             }
             else
             {
