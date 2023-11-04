@@ -29,13 +29,6 @@ namespace Project_C.F_.ViewModel
         }
         private void GetEmployee()
         {
-            /*foreach (var person in employee_Services.GetEmployees())
-            {
-                if (person.JobPosition == "Employee")
-                {
-                    EmployeeList.Add(person);
-                }
-            }*/
             EmployeeList = employee_Services.GetEmployees();
             EnableEdit = false;
         }
