@@ -14,7 +14,7 @@ namespace Project_C.F_.ViewModel
     [QueryProperty(nameof(EmployeeID), "id")]
     public partial class Dashboard_ViewModel: MainViewModel
     {
-
+        private bool IsAdmin = false;
         private string _EmployeeID;
         public string EmployeeID
         {
@@ -31,6 +31,7 @@ namespace Project_C.F_.ViewModel
         {
             if(EmployeeID == "00000")
             {
+                IsAdmin = true;
                 CurrentEmployee = new Employee()
                 {
                     FullName = "Administrator"
@@ -49,8 +50,11 @@ namespace Project_C.F_.ViewModel
         }
         private void GoOnline()
         {
-            CurrentEmployee.ActivtiyStatus = "Active";
-            employee_Services.UpdateEmployeeCollection(CurrentEmployee);
+            if(!IsAdmin) 
+            {
+                CurrentEmployee.ActivtiyStatus = "Active";
+                employee_Services.UpdateEmployeeCollection(CurrentEmployee);
+            }
         }
         private Employee _CurrentEmployee;
         public Employee CurrentEmployee
@@ -65,8 +69,11 @@ namespace Project_C.F_.ViewModel
         public ICommand HomeIconCommand => new Command(HomeIcon);
         private void LogoutIcon()
         {
-            CurrentEmployee.ActivtiyStatus = "Inactive";
-            employee_Services.UpdateEmployeeCollection(CurrentEmployee);
+            if(!IsAdmin)
+            {
+                CurrentEmployee.ActivtiyStatus = "Inactive";
+                employee_Services.UpdateEmployeeCollection(CurrentEmployee);
+            }
             Shell.Current.Navigation.PopToRootAsync();
         }
         public ICommand LogoutIconCommand => new Command(LogoutIcon);
