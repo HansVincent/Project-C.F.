@@ -5,10 +5,163 @@
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
              x:DataType="viewmodel:Employee_Dashboard_EmployeeDetails_ViewModel"
              xmlns:converter="clr-namespace:Project_C.F_.Converter">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ByteToImageConverter x:Key="ByteToImageConverter"/>
+        </ResourceDictionary>
+        <Style x:Key="Header" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Header"/>
+        </Style>
+        <Style x:Key="Subtitle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Subtitle"/>
+        </Style>
+        <Style x:Key="EntryLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Default"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="Entry" TargetType="Entry">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="PlaceholderColor" Value="DarkSlateGray"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Picker" TargetType="Picker">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="DatePicker" TargetType="DatePicker">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="BackgroundColor" Value="DarkGray"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <Style TargetType="ScrollView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <!--DashboardStyling-->
+        <Style x:Key="DashboardButtonStyle" TargetType="Button">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+            <Setter Property="BorderColor" Value="LightGrey"/>
+            <Setter Property="HeightRequest" Value="15"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style x:Key="DashboardStyle" TargetType="VerticalStackLayout">
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Padding" Value="15,30"/>
+        </Style>
+        <Style x:Key="DashboardTabStyle" TargetType="HorizontalStackLayout">
+            <Setter Property="HorizontalOptions" Value="End"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid ColumnDefinitions="Auto,*">
+        <!--DASHBOARD-->
+        <VerticalStackLayout Style="{StaticResource DashboardStyle}" Grid.Column="0">
+            <Image Source="dashboard_logo.png" Aspect="Center"/>
+            <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
+            <VerticalStackLayout HorizontalOptions="Start">
+                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+
+        <Grid RowDefinitions="50,*" Grid.Column="1">
+            <!--Tab-->
+            <Grid BackgroundColor="LightGrey" Grid.Row="0" Padding="25,0">
+                <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
+                    <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Margin="10,0"/>
+                    <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold"/>
+                    <ImageButton Command="{Binding HomeIconCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                    <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!--Content Page-->
+            <VerticalStackLayout Padding="30" Grid.Row="1">
+                <Label Text="Profile." Style="{StaticResource Header}"/>
+                <Label Text="Human Resource | Project C.F" Style="{StaticResource Subtitle}"/>
+                <BoxView HeightRequest="1" Color="Black" Margin="25"/>
+                <Grid ColumnDefinitions="Auto,Auto,Auto">
+
+                    <!--<VerticalStackLayout Grid.Column="0">
+                        <Label Text="Employee List:" FontAttributes="Bold" FontSize="35"/>
+                        <ScrollView>
+                            <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Employee">
+                                        <Label Text="{Binding FullName, StringFormat='- {0}'}" FontAttributes="Bold"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </ScrollView>
+                    </VerticalStackLayout>-->
+
+                    <VerticalStackLayout Spacing="5" Grid.Column="1" Padding="10,15" BackgroundColor="LightGrey">
+                        <Border WidthRequest="125" HeightRequest="125">
+                            <Image Source="{Binding HighlightedEmployeee.Image, Converter={StaticResource ByteToImageConverter}}" Aspect="AspectFit"/>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="2">
+                        <Border Stroke="black" BackgroundColor="White" Padding="30">
+                            <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="30">
+                                <VerticalStackLayout Spacing="5" Grid.Column="0">
+                                    <Label Text="Employee ID:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.EmployeeID}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Full Name:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.FullName}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Email:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.Email}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Contact Number:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.ContactNumber}" Style="{StaticResource Entry}" MaxLength="11" IsReadOnly="True"/>
+                                    <Label Text="Gender:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.Gender}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Job Position:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.JobPosition}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Spacing="5" Grid.Column="1">
+                                    <Label Text="Birthdate:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding HighlightEmployeeBirthday}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Date Joined:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding HighlightEmployeeDateJoined}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Country:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.Country}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Home Address:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.HomeAddress}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                    <Label Text="Provincial Address:" Style="{StaticResource EntryLabel}"/>
+                                    <Entry Text="{Binding CurrentEmployee.ProvincialAddress}" Style="{StaticResource Entry}" IsReadOnly="True"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
 </ContentPage>
