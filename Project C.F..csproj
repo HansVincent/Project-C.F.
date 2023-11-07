@@ -58,6 +58,7 @@
 	  <None Remove="Resources\Images\dashboard_logo.png" />
 	  <None Remove="Resources\Images\dashboard_logouticon.png" />
 	  <None Remove="Resources\Images\dashboard_updateicon.png" />
+	  <None Remove="Resources\Images\dashboard_viewworktime.png" />
 	  <None Remove="Resources\Images\login_arrow_icon.png" />
 	  <None Remove="Resources\Images\login_image.png" />
 	  <None Remove="Resources\Images\login_logo.png" />
@@ -85,6 +86,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Dashboard_UpdateEmployee.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Dashboard_ViewWorktime.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Employee_Dashboard_EmployeeDetails.xaml">

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Project_C.F_.View.Dashboard_Home"
+             x:Class="Project_C.F_.View.Dashboard_ViewWorktime"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
-             x:DataType="viewmodel:Dashboard_ViewModel"
+             x:DataType="viewmodel:Dashboard_ViewWorktime_ViewModel"
              xmlns:converter="clr-namespace:Project_C.F_.Converter">
-
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
@@ -40,7 +39,7 @@
             <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
             <VerticalStackLayout HorizontalOptions="Start">
                 <Button Command="{Binding EmployeeDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
-                <Button Command="{Binding DashboardViewWorktimePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
                 <Button Command="{Binding AddEmployeePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
                 <Button Command="{Binding UpdateEmployeePagePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_updateicon.png" Text="Update Employee" Style="{StaticResource DashboardButtonStyle}"/>
             </VerticalStackLayout>
@@ -59,24 +58,16 @@
 
             <!--Content Page-->
             <VerticalStackLayout Padding="30" Grid.Row="1">
-                <Grid Padding="15">
-                    <Image Source = "dashboard_image.png"/>
-                    <Label Text = "WELCOME BACK TO PROJECT CF" FontSize="48" TextColor="White" FontAttributes="Bold" VerticalOptions="End"/>
+                <Label Text="Add Employee Sheet." Style="{StaticResource Header}"/>
+                <Label Text="Fill up the following details to add employee to the system." Style="{StaticResource Subtitle}"/>
+                <Grid ColumnDefinitions="2*,*,*" RowDefinitions="*,*" BackgroundColor="Black" Padding="1" ColumnSpacing="1" Margin="50">
+                    <Label Text="Employee Names" Grid.Column="0" Grid.Row="0" BackgroundColor="Grey" HorizontalTextAlignment="Center" Padding="0,10"/>
+                    <Label Text="Position" Grid.Column="1" Grid.Row="0" BackgroundColor="Grey" HorizontalTextAlignment="Center" Padding="0,10"/>
+                    <Label Text="Status" Grid.Column="2" Grid.Row="0" BackgroundColor="Grey" HorizontalTextAlignment="Center" Padding="0,10"/>
+                    <ScrollView Grid.Row="1" BackgroundColor="Grey">
+                        
+                    </ScrollView>
                 </Grid>
-                <Label Text = "Hello! Welcome back! We're thrilled to have you onboard. Together let's embark on a journey of growth, collaboration, and success." />
-                <BoxView HeightRequest="1" Color="Black" Margin="0,10,0,15"/>
-                <Label Text="ANNOUNCEMENTS" FontSize="48" TextColor="Black" FontAttributes="Bold" />
-                <HorizontalStackLayout>
-                    <VerticalStackLayout Margin="45,0">
-                        <Label Text = "What's New?" />
-                        <Border Stroke="Black" WidthRequest="600" Padding="30">
-                            <VerticalStackLayout>
-                                <Label Text="Human Resources - 8:30 AM" Margin="0,0,0,15"/>
-                                <Label Text = "Attention all HR Employees! We are excited to announce a valuable workshop on 'Effective Employee Engagement Strategies' this Thursday at 3 PM in the conference room. Join us to explore innovative ways to foster a positive and motivated work culture. See you there!" />
-                            </VerticalStackLayout>
-                        </Border >
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
             </VerticalStackLayout >
         </Grid>
     </Grid>

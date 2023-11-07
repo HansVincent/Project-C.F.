@@ -77,6 +77,7 @@ namespace Project_C.F_.ViewModel
             Shell.Current.Navigation.PopToRootAsync();
         }
         public ICommand LogoutIconCommand => new Command(LogoutIcon);
+
         private void AddEmployeePage()
         {
             Shell.Current.GoToAsync($"{nameof(Dashboard_AddEmployee)}?id={EmployeeID}",false);
@@ -97,5 +98,10 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Dashboard_UpdateEmployee)}?id={EmployeeID}", false);
         }
         public ICommand UpdateEmployeePagePageCommand => new Command(UpdateEmployeePage);
+        private void DashboardViewWorktimePage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Dashboard_ViewWorktime)}?id={EmployeeID}", false);
+        }
+        public ICommand DashboardViewWorktimePageCommand => new Command(DashboardViewWorktimePage);
     }
 }
