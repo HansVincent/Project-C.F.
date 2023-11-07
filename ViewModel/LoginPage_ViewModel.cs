@@ -69,7 +69,7 @@ namespace Project_C.F_.ViewModel
                 EmployeeID = EmployeeIDEntry;
                 foreach (var employee in employee_Services.GetEmployees())
                 {
-                    if (employee.JobPosition == "Human Resource" && employee.EmployeeID == EmployeeID)
+                    if (employee.JobPosition == "Employee" && employee.EmployeeID == EmployeeID)
                     {
                         IsEmployee = true;
                     }
