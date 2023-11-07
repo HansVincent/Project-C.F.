@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project_C.F_.View.Employee_Dashboard_Home"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
-             x:DataType="viewmodel:Employee_Dashboard_Home_ViewModel"
+             x:DataType="viewmodel:Dashboard_ViewModel"
              xmlns:converter="clr-namespace:Project_C.F_.Converter">
     
     <Shell.BackButtonBehavior>
@@ -39,7 +39,8 @@
         <Image Source="dashboard_logo.png" Aspect="Center"/>
         <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
         <VerticalStackLayout HorizontalOptions="Start">
-             <Button Command="{Binding EmployeeOnlyDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+            <Button Command="{Binding EmployeeOnlyDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+            <Button Command="{Binding EmployeeDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="View Worktime" Style="{StaticResource DashboardButtonStyle}"/>
         </VerticalStackLayout>
     </VerticalStackLayout>
 

@@ -7,7 +7,7 @@ public partial class Employee_Dashboard_Home : ContentPage
 	public Employee_Dashboard_Home()
 	{
 		InitializeComponent();
-		BindingContext = new Employee_Dashboard_Home_ViewModel();
+		BindingContext = new Dashboard_ViewModel();
         Shell.Current.Title = "Dashboard Announcements";
     }
 }

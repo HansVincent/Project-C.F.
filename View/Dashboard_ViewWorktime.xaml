@@ -56,7 +56,7 @@
                 <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
                     <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Margin="10,0"/>
                     <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold"/>
-                    <ImageButton Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                    <ImageButton Command="{Binding HomeIconCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                     <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                 </HorizontalStackLayout>
             </Grid>
