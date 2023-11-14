@@ -88,6 +88,11 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_EmployeeDetails)}?id={EmployeeID}", false);
         }
         public ICommand EmployeeOnlyDetailsPageCommand => new Command(EmployeeOnlyDetailsPage);
+        private void EmployeeWorktimePage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Worktime)}?id={EmployeeID}", false);
+        }
+        public ICommand EmployeeWorktimePageCommand => new Command(EmployeeWorktimePage);
         private void EmployeeDetailsPage()
         {
             Shell.Current.GoToAsync($"{nameof(Dashboard_EmployeeDetails)}?id={EmployeeID}",false);

@@ -26,7 +26,13 @@ namespace Project_C.F_.Model
         private string homeAddress;
         private string provincialAddress;
         private double salaryGrade;
-        ObservableCollection<Employee_Worktimes> Worktimes;
+        private ObservableCollection<Employee_Worktimes> worktimes;
+
+        public ObservableCollection<Employee_Worktimes> Worktimes
+        {
+            get { return worktimes; }
+            set { worktimes = value; OnPropertyChanged(); OnPropertyChanged(nameof(worktimes)); }
+        }
 
         public string EmployeeID 
         { 
