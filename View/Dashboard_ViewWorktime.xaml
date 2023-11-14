@@ -63,7 +63,7 @@
 
             <!--Content Page-->
             <VerticalStackLayout Padding="30" Grid.Row="1">
-                <Label Text="Add Employee Worktime." Style="{StaticResource Header}"/>
+                <Label Text="Employee Worktime." Style="{StaticResource Header}"/>
                 <Label Text="Fill up the following details to add employee to the system." Style="{StaticResource Subtitle}"/>
                 <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="75">
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>

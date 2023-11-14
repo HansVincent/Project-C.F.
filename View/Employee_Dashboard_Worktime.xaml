@@ -106,6 +106,10 @@
 
             <!--Content Page-->
             <VerticalStackLayout Padding="30" Grid.Row="1">
+                <Label Text="Workload." Style="{StaticResource Header}"/>
+                <Label Text="{Binding DateToday, StringFormat='Date: {0:MM/dd/yy}'}"/>
+                <Label Text="{Binding TimeNow, StringFormat='Current Time: {0:h:mm tt}'}"/>
+                
                 
             </VerticalStackLayout>
         </Grid>
