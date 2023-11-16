@@ -4,7 +4,8 @@
              x:Class="Project_C.F_.View.Employee_Dashboard_Worktime"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
              x:DataType="viewmodel:Employee_Dashboard_Worktime_ViewModel"
-             xmlns:converter="clr-namespace:Project_C.F_.Converter">
+             xmlns:converter="clr-namespace:Project_C.F_.Converter"
+             xmlns:model="clr-namespace:Project_C.F_.Model">
     
     <Shell.BackButtonBehavior>
     <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
@@ -99,7 +100,7 @@
                 <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
                     <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Margin="10,0"/>
                     <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold"/>
-                    <ImageButton Command="{Binding HomeIconCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                    <ImageButton Command="{Binding EmployeeOnlyHomePageCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                     <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                 </HorizontalStackLayout>
             </Grid>
@@ -107,10 +108,32 @@
             <!--Content Page-->
             <VerticalStackLayout Padding="30" Grid.Row="1">
                 <Label Text="Workload." Style="{StaticResource Header}"/>
+                <Label Text="{Binding CurrentEmployee.FullName, StringFormat='Name: {0}'}"/>
                 <Label Text="{Binding DateToday, StringFormat='Date: {0:MM/dd/yy}'}"/>
                 <Label Text="{Binding TimeNow, StringFormat='Current Time: {0:h:mm tt}'}"/>
-                
-                
+                <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="75">
+                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
+                    <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
+                    <Label Text="TIME IN" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}"/>
+                    <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
+                    <Label Text="TIME OUT" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}"/>
+                    <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2"/>
+                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
+
+                    <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
+                        <CollectionView ItemsSource="{Binding EmployeeWorktimes}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:Employee_Worktimes">
+                                    <Grid ColumnDefinitions="*,*">
+                                        <Label Grid.Column="0" Text="{Binding TimeIn}" Style="{StaticResource GridLabel}"/>
+                                        <Label Grid.Column="1" Text="{Binding TimeOut}" Style="{StaticResource GridLabel}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="1" VerticalOptions="End"/>
+                </Grid>
             </VerticalStackLayout>
         </Grid>
     </Grid>

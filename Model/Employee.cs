@@ -26,7 +26,7 @@ namespace Project_C.F_.Model
         private string homeAddress;
         private string provincialAddress;
         private double salaryGrade;
-        private ObservableCollection<Employee_Worktimes> worktimes;
+        private ObservableCollection<Employee_Worktimes> worktimes = new();
 
         public ObservableCollection<Employee_Worktimes> Worktimes
         {

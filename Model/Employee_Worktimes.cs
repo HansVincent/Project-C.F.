@@ -9,7 +9,18 @@ namespace Project_C.F_.Model
 {
     public partial class Employee_Worktimes : MainViewModel
     {
-        DateTime TimeIn;
-        DateTime TimeOnly;
+        private DateTime _TimeIn;
+        private DateTime _TimeOut;
+
+        public DateTime TimeIn
+        {
+            get { return _TimeIn; }
+            set { _TimeIn = value; OnPropertyChanged(); OnPropertyChanged(nameof(_TimeIn)); }
+        }
+        public DateTime TimeOut
+        {
+            get { return _TimeOut; }
+            set { _TimeOut = value; OnPropertyChanged(); OnPropertyChanged(nameof(_TimeOut)); }
+        }
     }
 }

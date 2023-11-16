@@ -56,7 +56,7 @@
                 <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
                     <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Margin="10,0"/>
                     <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold"/>
-                    <ImageButton Command="{Binding HomeIconCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                    <ImageButton Command="{Binding }" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                     <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                 </HorizontalStackLayout>
             </Grid>
@@ -65,6 +65,7 @@
             <VerticalStackLayout Padding="30" Grid.Row="1">
                 <Label Text="Employee Worktime." Style="{StaticResource Header}"/>
                 <Label Text="Fill up the following details to add employee to the system." Style="{StaticResource Subtitle}"/>
+                
                 <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="75">
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
                     <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
@@ -75,8 +76,9 @@
                     <Label Text="Status" Grid.Column="2" Grid.Row="0" Style="{StaticResource GridLabel}"/>
                     <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2"/>
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
+                    
                     <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
-                        <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">
+                        <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}" SelectionChangedCommand="{Binding ViewEmployeeWorktimeCommand}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="model:Employee">
                                     <Grid ColumnDefinitions="*,*,*">

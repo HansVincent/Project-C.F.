@@ -1,11 +1,13 @@
 ﻿using Project_C.F_.Model;
 using Project_C.F_.Services;
+using Project_C.F_.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Project_C.F_.ViewModel
 {
@@ -34,5 +36,11 @@ namespace Project_C.F_.ViewModel
         {
             EmployeeList = employee_Services.GetEmployees();
         }
+
+        private void ViewEmployeeWorktime()
+        {
+            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Worktime)}?id={EmployeeID},highlightedemployeeid={highlightedEmployeee}");
+        }
+        public ICommand ViewEmployeeWorktimeCommand => new Command(ViewEmployeeWorktime);
     }
 }

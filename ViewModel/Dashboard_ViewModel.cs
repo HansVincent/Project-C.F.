@@ -34,7 +34,8 @@ namespace Project_C.F_.ViewModel
                 IsAdmin = true;
                 CurrentEmployee = new Employee()
                 {
-                    FullName = "Administrator"
+                    FullName = "Administrator",
+                    JobPosition = "Human Resource"
                 };
             }
             else
@@ -83,16 +84,6 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Dashboard_AddEmployee)}?id={EmployeeID}",false);
         }
         public ICommand AddEmployeePageCommand => new Command(AddEmployeePage);
-        private void EmployeeOnlyDetailsPage()
-        {
-            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_EmployeeDetails)}?id={EmployeeID}", false);
-        }
-        public ICommand EmployeeOnlyDetailsPageCommand => new Command(EmployeeOnlyDetailsPage);
-        private void EmployeeWorktimePage()
-        {
-            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Worktime)}?id={EmployeeID}", false);
-        }
-        public ICommand EmployeeWorktimePageCommand => new Command(EmployeeWorktimePage);
         private void EmployeeDetailsPage()
         {
             Shell.Current.GoToAsync($"{nameof(Dashboard_EmployeeDetails)}?id={EmployeeID}",false);
@@ -108,5 +99,23 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Dashboard_ViewWorktime)}?id={EmployeeID}", false);
         }
         public ICommand DashboardViewWorktimePageCommand => new Command(DashboardViewWorktimePage);
+
+        //Employee Commands
+        private void EmployeeOnlyHomePage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Home)}?id={EmployeeID}", false);
+        }
+        public ICommand EmployeeOnlyHomePageCommand => new Command(EmployeeOnlyHomePage);
+
+        private void EmployeeOnlyDetailsPage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_EmployeeDetails)}?id={EmployeeID}", false);
+        }
+        public ICommand EmployeeOnlyDetailsPageCommand => new Command(EmployeeOnlyDetailsPage);
+        private void EmployeeWorktimePage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Worktime)}?id={EmployeeID}", false);
+        }
+        public ICommand EmployeeWorktimePageCommand => new Command(EmployeeWorktimePage);
     }
 }

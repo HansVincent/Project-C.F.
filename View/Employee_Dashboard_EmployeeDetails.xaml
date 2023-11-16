@@ -98,7 +98,7 @@
                 <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
                     <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Margin="10,0"/>
                     <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold"/>
-                    <ImageButton Command="{Binding HomeIconCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                    <ImageButton Command="{Binding EmployeeOnlyHomePageCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                     <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                 </HorizontalStackLayout>
             </Grid>
@@ -110,22 +110,9 @@
                 <BoxView HeightRequest="1" Color="Black" Margin="25"/>
                 <Grid ColumnDefinitions="Auto,Auto,Auto">
 
-                    <!--<VerticalStackLayout Grid.Column="0">
-                        <Label Text="Employee List:" FontAttributes="Bold" FontSize="35"/>
-                        <ScrollView>
-                            <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="model:Employee">
-                                        <Label Text="{Binding FullName, StringFormat='- {0}'}" FontAttributes="Bold"/>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </ScrollView>
-                    </VerticalStackLayout>-->
-
                     <VerticalStackLayout Spacing="5" Grid.Column="1" Padding="10,15" BackgroundColor="LightGrey">
                         <Border WidthRequest="125" HeightRequest="125">
-                            <Image Source="{Binding HighlightedEmployeee.Image, Converter={StaticResource ByteToImageConverter}}" Aspect="AspectFit"/>
+                            <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Aspect="AspectFit"/>
                         </Border>
                     </VerticalStackLayout>
 
