@@ -121,7 +121,7 @@
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
 
                     <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
-                        <CollectionView ItemsSource="{Binding EmployeeWorktimes}">
+                        <CollectionView ItemsSource="{Binding CurrentEmployee.Worktimes}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="model:Employee_Worktimes">
                                     <Grid ColumnDefinitions="*,*">

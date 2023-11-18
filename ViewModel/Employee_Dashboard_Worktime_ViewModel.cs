@@ -10,17 +10,10 @@ namespace Project_C.F_.ViewModel
 {
     public partial class Employee_Dashboard_Worktime_ViewModel : Dashboard_ViewModel
     {
-        private ObservableCollection<Employee_Worktimes> _EmployeeWorktimes;
-        public ObservableCollection<Employee_Worktimes> EmployeeWorktimes
-        {
-            get { return _EmployeeWorktimes; }
-            set { _EmployeeWorktimes = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeWorktimes)); }
-        }
         public Employee_Dashboard_Worktime_ViewModel()
         {
             DateToday = DateOnly.FromDateTime(DateTime.Today);
             TimeNow = TimeOnly.FromDateTime(DateTime.Now);
-            EmployeeWorktimes = CurrentEmployee.Worktimes;
         }
 
         private DateOnly dateToday;
