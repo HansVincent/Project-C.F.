@@ -117,6 +117,11 @@
                         <Label Text="Employee List:" FontAttributes="Bold" FontSize="35"/>
                         <ScrollView>
                             <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">
+                                <CollectionView.EmptyView>
+                                    <ContentView>
+                                        <Label Text="There are no employees in the database..."/>
+                                    </ContentView>
+                                </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Employee">
                                         <Label Text="{Binding FullName, StringFormat='- {0}'}" FontAttributes="Bold"/>

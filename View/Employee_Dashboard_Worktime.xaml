@@ -122,6 +122,11 @@
 
                     <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
                         <CollectionView ItemsSource="{Binding CurrentEmployee.Worktimes}">
+                            <CollectionView.EmptyView>
+                                <ContentView>
+                                    <Label Text="Employee has no Worktimes yet..."/>
+                                </ContentView>
+                            </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="model:Employee_Worktimes">
                                     <Grid ColumnDefinitions="*,*">
