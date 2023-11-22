@@ -108,7 +108,7 @@
                 <Label Text="Profile." Style="{StaticResource Header}"/>
                 <Label Text="Human Resource | Project C.F" Style="{StaticResource Subtitle}"/>
                 <BoxView HeightRequest="1" Color="Black" Margin="25"/>
-                <Grid ColumnDefinitions="Auto,Auto,Auto">
+                <Grid ColumnDefinitions="Auto,Auto,Auto" HorizontalOptions="Center">
 
                     <VerticalStackLayout Spacing="5" Grid.Column="1" Padding="10,15" BackgroundColor="LightGrey">
                         <Border WidthRequest="125" HeightRequest="125">

@@ -111,25 +111,37 @@
                 <Label Text="{Binding CurrentEmployee.FullName, StringFormat='Name: {0}'}"/>
                 <Label Text="{Binding DateToday, StringFormat='Date: {0:MM/dd/yy}'}"/>
                 <Label Text="{Binding TimeNow, StringFormat='Current Time: {0:h:mm tt}'}"/>
-                <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="75">
+                <BoxView HeightRequest="1" Margin="25" Color="Black"/>
+                <HorizontalStackLayout Spacing="15" Padding="0,5">
+                    <Label Text="Date Selection: " VerticalOptions="Center"/>
+                    <DatePicker DateSelected=""/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15">
+                    <Label Text="Time In: " VerticalOptions="Center" Margin="0,0,15,0" Padding="5,0"/>
+                    <TimePicker />
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15">
+                    <Label Text="Time Out: " VerticalOptions="Center" Margin="0,0,5,0" Padding="5,0"/>
+                    <TimePicker />
+                </HorizontalStackLayout>
+                <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50">
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
                     <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
-                    <Label Text="TIME IN" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
-                    <Label Text="TIME OUT" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}"/>
+                    <Label Text="TIME IN" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
+                    <Label Text="TIME OUT" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
                     <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2"/>
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
-
                     <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
                         <CollectionView ItemsSource="{Binding CurrentEmployee.Worktimes}">
                             <CollectionView.EmptyView>
                                 <ContentView>
-                                    <Label Text="Employee has no Worktimes yet..."/>
+                                    <Label Text="Employee has no Worktimes yet..." HorizontalTextAlignment="Center" Margin="0,175" FontSize="Header"/>
                                 </ContentView>
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="model:Employee_Worktimes">
                                     <Grid ColumnDefinitions="*,*">
+                                        <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
                                         <Label Grid.Column="0" Text="{Binding TimeIn}" Style="{StaticResource GridLabel}"/>
                                         <Label Grid.Column="1" Text="{Binding TimeOut}" Style="{StaticResource GridLabel}"/>
                                     </Grid>
