@@ -18,6 +18,7 @@ namespace Project_C.F_
             Routing.RegisterRoute(nameof(Employee_Dashboard_Home), typeof(Employee_Dashboard_Home));
             Routing.RegisterRoute(nameof(Employee_Dashboard_EmployeeDetails), typeof(Employee_Dashboard_EmployeeDetails));
             Routing.RegisterRoute(nameof(Employee_Dashboard_Worktime), typeof(Employee_Dashboard_Worktime));
+            Routing.RegisterRoute(nameof(Dashboard_ViewEmployeeWorktime), typeof(Dashboard_ViewEmployeeWorktime));
         }
     }
 }

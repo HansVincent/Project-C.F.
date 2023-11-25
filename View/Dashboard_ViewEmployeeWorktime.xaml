@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Project_C.F_.View.Dashboard_ViewWorktime"
+             x:Class="Project_C.F_.View.Dashboard_ViewEmployeeWorktime"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
-             x:DataType="viewmodel:Dashboard_ViewWorktime_ViewModel"
+             x:DataType="viewmodel:Dashboard_ViewEmployeeWorktime_ViewModel"
              xmlns:converter="clr-namespace:Project_C.F_.Converter"
              xmlns:model="clr-namespace:Project_C.F_.Model">
+    
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
@@ -63,37 +64,51 @@
 
             <!--Content Page-->
             <VerticalStackLayout Padding="30" Grid.Row="1">
-                <Label Text="Employee Worktime." Style="{StaticResource Header}"/>
-                <Label Text="Fill up the following details to add employee to the system." Style="{StaticResource Subtitle}"/>
-                <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="75">
-                    <Label Text="Employee Names" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}"/>
-                    <Label Text="Position" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}"/>
-                    <Label Text="Status" Grid.Column="2" Grid.Row="0" Style="{StaticResource GridLabel}"/>
+                <Label Text="Workload." Style="{StaticResource Header}"/>
+                <Label Text="{Binding HighlightedEmployee.FullName, StringFormat='Name: {0}'}"/>
+                <Label Text="{Binding DateToday, StringFormat='Date: {0:MM/dd/yy}'}"/>
+                <Label Text="{Binding TimeNow, StringFormat='Current Time: {0:h:mm tt}'}"/>
+                <BoxView HeightRequest="1" Margin="25" Color="Black"/>
+
+                <HorizontalStackLayout Spacing="15" Padding="0,5">
+                    <Label Text="Date Selection: " VerticalOptions="Center"/>
+                    <DatePicker Date="{Binding DateSimulation}"/>
+                    <Button Text="Simulate" Command="{Binding SimulateCommand}" BackgroundColor="LightGrey" TextColor="Black" BorderColor="Black"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15">
+                    <Label Text="Time In: " VerticalOptions="Center" Margin="0,0,15,0" Padding="5,0"/>
+                    <TimePicker Time="{Binding TimeInSimulation}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="15">
+                    <Label Text="Time Out: " VerticalOptions="Center" Margin="0,0,5,0" Padding="5,0"/>
+                    <TimePicker Time="{Binding TimeOutSimulation}"/>
+                </HorizontalStackLayout>
+                <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50">
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
-                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="1" VerticalOptions="End"/>
                     <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
+                    <Label Text="TIME IN" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
+                    <Label Text="TIME OUT" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
                     <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2"/>
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
+                    <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
                     <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
-                        <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployee}" SelectionChangedCommand="{Binding ViewEmployeeWorktimeCommand}">
+                        <CollectionView ItemsSource="{Binding HighlightedEmployee.Worktimes}">
                             <CollectionView.EmptyView>
                                 <ContentView>
-                                    <Label Text="There are no employees in the database..." HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <Label Text="Employee has no Worktimes yet..." HorizontalTextAlignment="Center" Margin="0,175" FontSize="Header"/>
                                 </ContentView>
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="model:Employee">
-                                    <Grid ColumnDefinitions="*,*,*">
-                                        <Label Grid.Column="0" Text="{Binding FullName}" Style="{StaticResource GridLabel}"/>
-                                        <Label Grid.Column="1" Text="{Binding JobPosition}" Style="{StaticResource GridLabel}"/>
-                                        <Label Grid.Column="2" Text="{Binding ActivtiyStatus}" Style="{StaticResource GridLabel}"/>
+                                <DataTemplate x:DataType="model:Employee_Worktimes">
+                                    <Grid ColumnDefinitions="*,*">
+                                        <Label Grid.Column="0" Text="{Binding TimeIn}" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center"/>
+                                        <Label Grid.Column="1" Text="{Binding TimeOut}" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center"/>
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </ScrollView>
+                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="1" VerticalOptions="End"/>
                 </Grid>
             </VerticalStackLayout >
         </Grid>

@@ -26,11 +26,11 @@ namespace Project_C.F_.ViewModel
             get { return employeeList; }
             set { employeeList = value; OnPropertyChanged(); OnPropertyChanged(nameof(employeeList)); }
         }
-        private Employee highlightedEmployeee;
-        public Employee HighlightedEmployeee
+        private Employee highlightedEmployee;
+        public Employee HighlightedEmployee
         {
-            get { return highlightedEmployeee; }
-            set { highlightedEmployeee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployeee)); }
+            get { return highlightedEmployee; }
+            set { highlightedEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployee)); }
         }
         private void GetEmployee()
         {
@@ -39,7 +39,8 @@ namespace Project_C.F_.ViewModel
 
         private void ViewEmployeeWorktime()
         {
-            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Worktime)}?id={EmployeeID},highlightedemployeeid={highlightedEmployeee}");
+            string HighlightedEmployeeEmployeeID = HighlightedEmployee.EmployeeID;
+            Shell.Current.GoToAsync($"{nameof(Dashboard_ViewEmployeeWorktime)}?id={EmployeeID}&highlightedemployeeid={HighlightedEmployeeEmployeeID}");
         }
         public ICommand ViewEmployeeWorktimeCommand => new Command(ViewEmployeeWorktime);
     }

@@ -2,7 +2,6 @@
 using Project_C.F_.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +9,10 @@ using System.Windows.Input;
 
 namespace Project_C.F_.ViewModel
 {
-    public partial class Employee_Dashboard_Worktime_ViewModel : Dashboard_ViewModel
+    [QueryProperty(nameof(HighlightedEmployeeEmployeeID), "highlightedemployeeid")]
+    public partial class Dashboard_ViewEmployeeWorktime_ViewModel : Dashboard_ViewModel
     {
-        public Employee_Dashboard_Worktime_ViewModel()
+        public Dashboard_ViewEmployeeWorktime_ViewModel()
         {
             employee_Services = new Employee_Services();
             DateToday = DateOnly.FromDateTime(DateTime.Today);
@@ -21,8 +21,34 @@ namespace Project_C.F_.ViewModel
             TimeInSimulated = DateTime.Now;
             TimeOutSimulated = DateTime.Now;
         }
-
         private readonly Employee_Services employee_Services;
+
+        private string _HighlightedEmployeeEmployeeID;
+        public string HighlightedEmployeeEmployeeID
+        {
+            get { return _HighlightedEmployeeEmployeeID; }
+            set
+            {
+                _HighlightedEmployeeEmployeeID = value; OnPropertyChanged(); OnPropertyChanged(nameof(_HighlightedEmployeeEmployeeID)); InitializeCurrentEmployee();
+            }
+        }
+        private void InitializeCurrentEmployee()
+        {
+            foreach (var employee in employee_Services.GetEmployees())
+            {
+                if (HighlightedEmployeeEmployeeID == employee.EmployeeID)
+                {
+                    HighlightedEmployee = employee;
+                }
+            }
+            
+        }
+        private Employee highlightedEmployee;
+        public Employee HighlightedEmployee
+        {
+            get { return highlightedEmployee; }
+            set { highlightedEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployee)); }
+        }
 
         private DateOnly dateToday;
         public DateOnly DateToday
@@ -40,13 +66,13 @@ namespace Project_C.F_.ViewModel
         public DateTime DateSimulation
         {
             get { return _DateSimulation; }
-            set { _DateSimulation = value; OnPropertyChanged(); OnPropertyChanged(nameof(_DateSimulation));  }
+            set { _DateSimulation = value; OnPropertyChanged(); OnPropertyChanged(nameof(_DateSimulation)); }
         }
         private TimeSpan _TimeInSimulation;
         public TimeSpan TimeInSimulation
         {
             get { return _TimeInSimulation; }
-            set { _TimeInSimulation = value; OnPropertyChanged(); OnPropertyChanged(nameof(_TimeInSimulation));  }
+            set { _TimeInSimulation = value; OnPropertyChanged(); OnPropertyChanged(nameof(_TimeInSimulation)); }
         }
         private TimeSpan _TimeOutSimulation;
         public TimeSpan TimeOutSimulation
@@ -74,9 +100,9 @@ namespace Project_C.F_.ViewModel
             SetDates();
             SimulationWorkTimes.TimeIn = TimeInSimulated;
             SimulationWorkTimes.TimeOut = TimeOutSimulated;
-            CurrentEmployee.Worktimes.Add(SimulationWorkTimes);
+            HighlightedEmployee.Worktimes.Add(SimulationWorkTimes);
             Shell.Current.DisplayAlert("Simulate Worktime", "Worktime Simulation Successful", "Okay");
-            employee_Services.UpdateEmployeeCollection(CurrentEmployee);
+            employee_Services.UpdateEmployeeCollection(HighlightedEmployee);
             SimulationWorkTimes = new Employee_Worktimes();
         }
         public ICommand SimulateCommand => new Command(Simulate);

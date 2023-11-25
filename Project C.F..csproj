@@ -88,6 +88,9 @@
 	  <MauiXaml Update="View\Dashboard_UpdateEmployee.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Dashboard_ViewEmployeeWorktime.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Dashboard_ViewWorktime.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
