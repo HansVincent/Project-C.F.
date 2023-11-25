@@ -14,6 +14,55 @@
         <ResourceDictionary>
             <converter:ByteToImageConverter x:Key="ByteToImageConverter"/>
         </ResourceDictionary>
+        <Style x:Key="Header" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Header"/>
+        </Style>
+        <Style x:Key="Subtitle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Subtitle"/>
+        </Style>
+        <Style x:Key="EntryLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Default"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="Entry" TargetType="Entry">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="PlaceholderColor" Value="DarkSlateGray"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Picker" TargetType="Picker">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="DatePicker" TargetType="DatePicker">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="BackgroundColor" Value="DarkGray"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <Style TargetType="ScrollView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                    Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
         <Style x:Key="GridLabel" TargetType="Label">
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="Padding" Value="0,10"/>
@@ -65,7 +114,8 @@
             <VerticalStackLayout Padding="30" Grid.Row="1">
                 <Label Text="Employee Worktime." Style="{StaticResource Header}"/>
                 <Label Text="Fill up the following details to add employee to the system." Style="{StaticResource Subtitle}"/>
-                <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="75">
+                <BoxView HeightRequest="1" Margin="25" Color="Black"/>
+                <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50">
                     <Label Text="Employee Names" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}"/>
                     <Label Text="Position" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}"/>
                     <Label Text="Status" Grid.Column="2" Grid.Row="0" Style="{StaticResource GridLabel}"/>

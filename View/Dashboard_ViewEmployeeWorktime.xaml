@@ -15,6 +15,55 @@
         <ResourceDictionary>
             <converter:ByteToImageConverter x:Key="ByteToImageConverter"/>
         </ResourceDictionary>
+        <Style x:Key="Header" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Header"/>
+        </Style>
+        <Style x:Key="Subtitle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Subtitle"/>
+        </Style>
+        <Style x:Key="EntryLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Default"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="Entry" TargetType="Entry">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="PlaceholderColor" Value="DarkSlateGray"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Picker" TargetType="Picker">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="DatePicker" TargetType="DatePicker">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="BackgroundColor" Value="DarkGray"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <Style TargetType="ScrollView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                            Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
         <Style x:Key="GridLabel" TargetType="Label">
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="Padding" Value="0,10"/>
@@ -63,54 +112,57 @@
             </Grid>
 
             <!--Content Page-->
-            <VerticalStackLayout Padding="30" Grid.Row="1">
-                <Label Text="Workload." Style="{StaticResource Header}"/>
-                <Label Text="{Binding HighlightedEmployee.FullName, StringFormat='Name: {0}'}"/>
-                <Label Text="{Binding DateToday, StringFormat='Date: {0:MM/dd/yy}'}"/>
-                <Label Text="{Binding TimeNow, StringFormat='Current Time: {0:h:mm tt}'}"/>
-                <BoxView HeightRequest="1" Margin="25" Color="Black"/>
+            <Grid ColumnDefinitions="*,*,*,*,*" Grid.Row="1" RowDefinitions="*,*,*,*,*,*">
+                <ImageButton Command="{Binding DashboardViewWorktimePageCommand}" Source="dashboard_viewmeployeeworktime_goback.png" Grid.Row="0" Grid.Column="5" WidthRequest="1" HeightRequest="1" Aspect="Center"/>
+                <VerticalStackLayout Padding="30" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" Grid.RowSpan="2">
+                    <Label Text="Workload." Style="{StaticResource Header}"/>
+                    <Label Text="{Binding HighlightedEmployee.FullName, StringFormat='Name: {0}'}"/>
+                    <Label Text="{Binding DateToday, StringFormat='Date: {0:MM/dd/yy}'}"/>
+                    <Label Text="{Binding TimeNow, StringFormat='Current Time: {0:h:mm tt}'}"/>
+                    <BoxView HeightRequest="1" Margin="25" Color="Black"/>
 
-                <HorizontalStackLayout Spacing="15" Padding="0,5">
-                    <Label Text="Date Selection: " VerticalOptions="Center"/>
-                    <DatePicker Date="{Binding DateSimulation}"/>
-                    <Button Text="Simulate" Command="{Binding SimulateCommand}" BackgroundColor="LightGrey" TextColor="Black" BorderColor="Black"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="15">
-                    <Label Text="Time In: " VerticalOptions="Center" Margin="0,0,15,0" Padding="5,0"/>
-                    <TimePicker Time="{Binding TimeInSimulation}"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="15">
-                    <Label Text="Time Out: " VerticalOptions="Center" Margin="0,0,5,0" Padding="5,0"/>
-                    <TimePicker Time="{Binding TimeOutSimulation}"/>
-                </HorizontalStackLayout>
-                <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50">
-                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
-                    <Label Text="TIME IN" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
-                    <Label Text="TIME OUT" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2"/>
-                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
-                    <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
-                        <CollectionView ItemsSource="{Binding HighlightedEmployee.Worktimes}">
-                            <CollectionView.EmptyView>
-                                <ContentView>
-                                    <Label Text="Employee has no Worktimes yet..." HorizontalTextAlignment="Center" Margin="0,175" FontSize="Header"/>
-                                </ContentView>
-                            </CollectionView.EmptyView>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="model:Employee_Worktimes">
-                                    <Grid ColumnDefinitions="*,*">
-                                        <Label Grid.Column="0" Text="{Binding TimeIn}" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center"/>
-                                        <Label Grid.Column="1" Text="{Binding TimeOut}" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </ScrollView>
-                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="1" VerticalOptions="End"/>
-                </Grid>
-            </VerticalStackLayout >
+                    <HorizontalStackLayout Spacing="15" Padding="0,5">
+                        <Label Text="Date Selection: " VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding DateSimulation}"/>
+                        <Button Text="Simulate" Command="{Binding SimulateCommand}" BackgroundColor="LightGrey" TextColor="Black" BorderColor="Black"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <Label Text="Time In: " VerticalOptions="Center" Margin="0,0,15,0" Padding="5,0"/>
+                        <TimePicker Time="{Binding TimeInSimulation}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <Label Text="Time Out: " VerticalOptions="Center" Margin="0,0,5,0" Padding="5,0"/>
+                        <TimePicker Time="{Binding TimeOutSimulation}"/>
+                    </HorizontalStackLayout>
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50">
+                        <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
+                        <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
+                        <Label Text="TIME IN" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
+                        <Label Text="TIME OUT" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
+                        <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2"/>
+                        <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
+                        <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
+                        <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
+                            <CollectionView ItemsSource="{Binding HighlightedEmployee.Worktimes}">
+                                <CollectionView.EmptyView>
+                                    <ContentView>
+                                        <Label Text="Employee has no Worktimes yet..." HorizontalTextAlignment="Center" Margin="0,175" FontSize="Header"/>
+                                    </ContentView>
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Employee_Worktimes">
+                                        <Grid ColumnDefinitions="*,*">
+                                            <Label Grid.Column="0" Text="{Binding TimeIn}" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center"/>
+                                            <Label Grid.Column="1" Text="{Binding TimeOut}" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </ScrollView>
+                        <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="1" VerticalOptions="End"/>
+                    </Grid>
+                </VerticalStackLayout >
+            </Grid>
         </Grid>
     </Grid>
 </ContentPage>
