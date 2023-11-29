@@ -62,14 +62,14 @@ namespace Project_C.F_.ViewModel
                 ContactNumber = HighlightedEmployeee.ContactNumber,
                 Gender = HighlightedEmployeee.Gender,
                 Image = HighlightedEmployeee.Image,
-                HoursWorked = HighlightedEmployeee.HoursWorked,
                 ActivtiyStatus = HighlightedEmployeee.ActivtiyStatus,
                 JobPosition = HighlightedEmployeee.JobPosition,
                 DateJoined = HighlightedEmployeee.DateJoined,
                 BirthDate = HighlightedEmployeee.BirthDate,
                 Country = HighlightedEmployeee.Country,
                 HomeAddress = HighlightedEmployeee.HomeAddress,
-                ProvincialAddress = HighlightedEmployeee.ProvincialAddress
+                ProvincialAddress = HighlightedEmployeee.ProvincialAddress,
+                Worktimes = HighlightedEmployeee.Worktimes
             };
             EnableEdit = true;
             SetUpdates();
@@ -153,6 +153,14 @@ namespace Project_C.F_.ViewModel
         public ICommand SetEnableCommand => new Command(SetEnable);
         private void UpdateEmployee()
         {
+            if(editableEmployee.JobPosition == "Human Resource")
+            {
+                editableEmployee.SalaryGrade = 10.00;
+            }
+            else if(editableEmployee.JobPosition == "Employee")
+            {
+                editableEmployee.SalaryGrade = 5.00;    
+            }
             employee_Services.UpdateEmployeeCollection(editableEmployee);
             Shell.Current.DisplayAlert("Update Employee", "Employee Update Successful", "Okay");
             HighlightedEmployeee = new Employee();

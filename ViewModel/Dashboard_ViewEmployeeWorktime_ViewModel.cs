@@ -15,12 +15,19 @@ namespace Project_C.F_.ViewModel
         public Dashboard_ViewEmployeeWorktime_ViewModel()
         {
             employee_Services = new Employee_Services();
+            optimalTimeIn = DateTime.Today.AddHours(7);
+            optimalTimeOut = DateTime.Today.AddHours(21);
             DateToday = DateOnly.FromDateTime(DateTime.Today);
+            timeCompare = TimeOnly.MinValue;
             TimeNow = TimeOnly.FromDateTime(DateTime.Now);
             DateSimulation = DateToday.ToDateTime(TimeOnly.MinValue);
             TimeInSimulated = DateTime.Now;
             TimeOutSimulated = DateTime.Now;
         }
+        private DateTime optimalTimeIn;
+        private DateTime optimalTimeOut;
+        private TimeOnly timeCompare;
+        private DateTime dateException;
         private readonly Employee_Services employee_Services;
 
         private string _HighlightedEmployeeEmployeeID;
@@ -98,6 +105,35 @@ namespace Project_C.F_.ViewModel
         private void Simulate()
         {
             SetDates();
+            TimeSpan theduration;
+            if (TimeOutSimulated.Hour == timeCompare.Hour)
+            {
+                dateException = TimeOutSimulated;
+                dateException = dateException.AddDays(1);
+                theduration = dateException - TimeInSimulated;
+            }
+            else
+            {
+                theduration = TimeOutSimulated - TimeInSimulated;
+            }    
+            SimulationWorkTimes.HoursWorked = SimulationWorkTimes.HoursWorked.Add(theduration);
+            if(optimalTimeIn < TimeInSimulated)
+            {
+                theduration = TimeInSimulated - optimalTimeIn;
+                SimulationWorkTimes.Lates = SimulationWorkTimes.Lates.Add(theduration);
+            }
+            if(optimalTimeOut < TimeOutSimulated && TimeOutSimulated.Hour != timeCompare.Hour)
+            {
+                theduration = TimeOutSimulated - optimalTimeOut;
+                SimulationWorkTimes.Overtimes = SimulationWorkTimes.Overtimes.Add(theduration);
+            }
+            else if(TimeOutSimulated.Hour == timeCompare.Hour)
+            {
+                dateException = TimeOutSimulated;
+                dateException = dateException.AddDays(1);
+                theduration = dateException - optimalTimeOut;
+                SimulationWorkTimes.Overtimes = SimulationWorkTimes.Overtimes.Add(theduration);
+            }
             SimulationWorkTimes.TimeIn = TimeInSimulated;
             SimulationWorkTimes.TimeOut = TimeOutSimulated;
             HighlightedEmployee.Worktimes.Add(SimulationWorkTimes);

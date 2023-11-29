@@ -72,6 +72,8 @@ namespace Project_C.F_.ViewModel
         private void Simulate()
         {
             SetDates();
+            TimeSpan theduration = TimeOutSimulated - TimeInSimulated;
+            SimulationWorkTimes.HoursWorked = SimulationWorkTimes.HoursWorked.Add(theduration);
             SimulationWorkTimes.TimeIn = TimeInSimulated;
             SimulationWorkTimes.TimeOut = TimeOutSimulated;
             CurrentEmployee.Worktimes.Add(SimulationWorkTimes);

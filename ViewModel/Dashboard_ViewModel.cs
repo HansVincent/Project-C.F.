@@ -100,6 +100,12 @@ namespace Project_C.F_.ViewModel
         }
         public ICommand DashboardViewWorktimePageCommand => new Command(DashboardViewWorktimePage);
 
+        private void DashboardViewPayslipsPage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Dashboard_ViewEmployeePayslips)}?id={EmployeeID}", false);
+        }
+        public ICommand DashboardViewPayslipsPageCommand => new Command(DashboardViewPayslipsPage);
+
         //Employee Commands
         private void EmployeeOnlyHomePage()
         {

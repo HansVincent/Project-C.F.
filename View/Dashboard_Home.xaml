@@ -43,6 +43,7 @@
                 <Button Command="{Binding DashboardViewWorktimePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="View Worktime" Style="{StaticResource DashboardButtonStyle}"/>
                 <Button Command="{Binding AddEmployeePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
                 <Button Command="{Binding UpdateEmployeePagePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_updateicon.png" Text="Update Employee" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding DashboardViewPayslipsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_updateicon.png" Text="View Payslips" Style="{StaticResource DashboardButtonStyle}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
 

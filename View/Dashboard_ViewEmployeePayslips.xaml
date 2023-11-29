@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Project_C.F_.View.Dashboard_EmployeeDetails"
+             x:Class="Project_C.F_.View.Dashboard_ViewEmployeePayslips"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
-             x:DataType="viewmodel:Dashboard_EmployeeDetails_ViewModel"
+             x:DataType="viewmodel:Dashboard_ViewEmployeePayslips_ViewModel"
              xmlns:converter="clr-namespace:Project_C.F_.Converter"
              xmlns:model="clr-namespace:Project_C.F_.Model">
     <Shell.BackButtonBehavior>
@@ -88,11 +88,11 @@
             <Image Source="dashboard_logo.png" Aspect="Center"/>
             <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
             <VerticalStackLayout HorizontalOptions="Start">
-                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
-                <Button Command="{Binding DashboardViewWorktimePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="View Worktime" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding EmployeeDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
                 <Button Command="{Binding AddEmployeePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
-                <Button Command="{Binding UpdateEmployeePagePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_updateicon.png" Text="Update Employee" Style="{StaticResource DashboardButtonStyle}"/>
-                <Button Command="{Binding DashboardViewPayslipsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_updateicon.png" Text="View Payslips" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding DashboardViewWorktimePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="View Worktime" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding UpdateEmployeePagePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Update Employee" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="View Payslips" Style="{StaticResource DashboardButtonStyle}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
 
@@ -112,62 +112,36 @@
                 <Label Text="Profile." Style="{StaticResource Header}"/>
                 <Label Text="Human Resource | Project C.F" Style="{StaticResource Subtitle}"/>
                 <BoxView HeightRequest="1" Color="Black" Margin="25"/>
-                <Grid ColumnDefinitions="Auto,Auto,Auto">
-                    
-                    <VerticalStackLayout Grid.Column="0" Margin="0,0,15,0">
+                <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="350">
+
+                    <VerticalStackLayout Grid.Column="0">
                         <Label Text="Employee List:" FontAttributes="Bold" FontSize="35"/>
                         <ScrollView>
-                            <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployeee}">
-                                <CollectionView.EmptyView>
-                                    <ContentView>
-                                        <Label Text="There are no employees in the database..."/>
-                                    </ContentView>
-                                </CollectionView.EmptyView>
+                            <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployee}" SelectionChangedCommand="{Binding ViewEmployeePayslipsCommand}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="model:Employee">
-                                        <Label Text="{Binding FullName, StringFormat='- {0}'}" FontAttributes="Bold"/>
+                                        <Label Text="{Binding FullName, StringFormat='- {0}'}" FontAttributes="Bold" FontSize="16"/>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
+
                         </ScrollView>
                     </VerticalStackLayout>
 
-                    <VerticalStackLayout Spacing="5" Grid.Column="1" Padding="10,15" BackgroundColor="LightGrey">
-                        <Border WidthRequest="125" HeightRequest="125">
-                            <Image Source="{Binding HighlightedEmployeee.Image, Converter={StaticResource ByteToImageConverter}}" Aspect="AspectFit"/>
-                        </Border>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout Grid.Column="2">
+                    <VerticalStackLayout Grid.Column="1">
                         <Border Stroke="black" BackgroundColor="White" Padding="30">
-                            <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="30">
-                                <VerticalStackLayout Spacing="5" Grid.Column="0">
-                                    <Label Text="Employee ID:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.EmployeeID}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Full Name:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.FullName}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Email:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.Email}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Contact Number:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.ContactNumber}" Style="{StaticResource Entry}" MaxLength="11" IsReadOnly="True"/>
-                                    <Label Text="Gender:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.Gender}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Job Position:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.JobPosition}" Style="{StaticResource Entry}" IsReadOnly="True"/> 
-                                </VerticalStackLayout>
-                                <VerticalStackLayout Spacing="5" Grid.Column="1">
-                                    <Label Text="Birthdate:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightEmployeeBirthday}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Date Joined:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightEmployeeDateJoined}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Country:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.Country}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Home Address:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.HomeAddress}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                    <Label Text="Provincial Address:" Style="{StaticResource EntryLabel}"/>
-                                    <Entry Text="{Binding HighlightedEmployeee.ProvincialAddress}" Style="{StaticResource Entry}" IsReadOnly="True"/>
-                                </VerticalStackLayout>
-                            </Grid>
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Financial Breakdown" FontAttributes="Bold" FontSize="46" FontFamily="Arial Bold" Margin="0,10,0,0"/>
+                                <Label Text="Factors" FontAttributes="Bold" FontSize="32" Margin="0,10,0,0"/>
+                                <Label Text="Salary Grade" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Taxes" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Pag-Ibig" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="PhilHealth" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="SSS" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Lates" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Overtimes" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Allowance" FontSize="16"  Margin="0,10,0,0"/>
+                            </VerticalStackLayout>
                         </Border>
                     </VerticalStackLayout>
                 </Grid>

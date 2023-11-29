@@ -15,6 +15,7 @@ namespace Project_C.F_.ViewModel
             AddEmployeeImage = "addemployee_addimage.png";
         }
 
+
         //Add Employee
         private Employee _NewEmployee;
         public Employee NewEmployee
@@ -143,6 +144,14 @@ namespace Project_C.F_.ViewModel
         }
         private void AddEmployee()
         {
+            if(NewEmployee.JobPosition == "Human Resource")
+            {
+                NewEmployee.SalaryGrade = 10.00;
+            }
+            else if(NewEmployee.JobPosition == "Employee")
+            {
+                NewEmployee.SalaryGrade = 5.00;
+            }
             if (ValidateEntries())
             {
                 employee_Services.AddEmployee(NewEmployee);

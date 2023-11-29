@@ -17,7 +17,6 @@ namespace Project_C.F_.Model
         private string contactNumber;
         private string gender;
         private Byte[] image;
-        private DateTime hoursWorked;
         private string activtiyStatus = "Inactive";
         private string jobPosition;
         private DateTime dateJoined = DateTime.Today;
@@ -68,11 +67,6 @@ namespace Project_C.F_.Model
         {
             get { return image; }
             set { image = value; OnPropertyChanged(); OnPropertyChanged(nameof(image)); }
-        }
-        public DateTime HoursWorked
-        {
-            get { return hoursWorked; }
-            set { hoursWorked = value; OnPropertyChanged(); OnPropertyChanged(nameof(hoursWorked)); }
         }
         public string ActivtiyStatus
         {

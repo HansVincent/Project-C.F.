@@ -11,7 +11,7 @@ namespace Project_C.F_.Services
 {
     class Employee_Services
     {
-        string filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Employee.txt");
+        string filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Employee.json");
 
         public void AddEmployee(Employee employee)
         {
