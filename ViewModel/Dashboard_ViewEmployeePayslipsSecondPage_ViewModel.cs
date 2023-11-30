@@ -18,12 +18,14 @@ namespace Project_C.F_.ViewModel
             totalOvertime = TimeSpan.Zero;
             totalLate = TimeSpan.Zero;
             totalHoursWorked = TimeSpan.Zero;
-            taxes = HighlightedEmployee.SalaryGrade;
         }
         private readonly Employee_Services employee_Services;
         private TimeSpan totalOvertime;
         private TimeSpan totalLate;
         private TimeSpan totalHoursWorked;
+        private String displayTotalOvertime;
+        private String displayTotalLate;
+        private String displayTotalHoursWorked;
         private double overtimeBonus;
         private double lateDeductions;
         private double temporarySalary;
@@ -34,6 +36,21 @@ namespace Project_C.F_.ViewModel
         private double pagibig;
         private double philHealth;
         private double sss;
+        public string DisplayTotalOvertime
+        {
+            get { return displayTotalOvertime; }
+            set { displayTotalOvertime = value; OnPropertyChanged(); OnPropertyChanged(nameof(displayTotalOvertime)); }
+        }
+        public string DisplayTotalLate
+        {
+            get { return displayTotalLate; }
+            set { displayTotalLate = value; OnPropertyChanged(); OnPropertyChanged(nameof(displayTotalLate)); }
+        }
+        public string DisplayTotalHoursWorked
+        {
+            get { return displayTotalHoursWorked; }
+            set { displayTotalHoursWorked = value; OnPropertyChanged(); OnPropertyChanged(nameof(displayTotalHoursWorked)); }
+        }
         public double OvertimeBonus
         {
             get { return overtimeBonus; }
@@ -64,6 +81,11 @@ namespace Project_C.F_.ViewModel
         {
             get { return totalLate; }
             set { totalLate = value; OnPropertyChanged(); OnPropertyChanged(nameof(totalLate)); }
+        }
+        public TimeSpan TotalHoursWorked
+        {
+            get { return totalHoursWorked; }
+            set { totalHoursWorked = value; OnPropertyChanged(); OnPropertyChanged(nameof(totalHoursWorked)); }
         }
         public double TotalEarnings
         {
@@ -109,7 +131,7 @@ namespace Project_C.F_.ViewModel
         public Employee HighlightedEmployee
         {
             get { return highlightedEmployee; }
-            set { highlightedEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployee)); }
+            set { highlightedEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployee)); Total(); Calculate(); SetDisplayValues(); }
         }
         private void InitializeCurrentEmployee()
         {
@@ -121,56 +143,36 @@ namespace Project_C.F_.ViewModel
                 }
             }
         }
-        private Employee editableEmployee;
-        public Employee EditableEmployee
-        {
-            get { return editableEmployee; }
-            set { editableEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(editableEmployee)); }
-        }
-
-        private void SetEmployee()
-        {
-            EditableEmployee = new Employee
-            {
-                EmployeeID = HighlightedEmployee.EmployeeID,
-                FullName = HighlightedEmployee.FullName,
-                Email = HighlightedEmployee.Email,
-                Password = HighlightedEmployee.Password,
-                ContactNumber = HighlightedEmployee.ContactNumber,
-                Gender = HighlightedEmployee.Gender,
-                Image = HighlightedEmployee.Image,
-                ActivtiyStatus = HighlightedEmployee.ActivtiyStatus,
-                JobPosition = HighlightedEmployee.JobPosition,
-                DateJoined = HighlightedEmployee.DateJoined,
-                BirthDate = HighlightedEmployee.BirthDate,
-                Country = HighlightedEmployee.Country,
-                HomeAddress = HighlightedEmployee.HomeAddress,
-                ProvincialAddress = HighlightedEmployee.ProvincialAddress,
-                Worktimes = HighlightedEmployee.Worktimes
-            };
-        }
         private void Total()
         {
             foreach (Employee_Worktimes worktimes in HighlightedEmployee.Worktimes)
             {
-                totalOvertime += worktimes.Overtimes.TimeOfDay;
-                totalLate += worktimes.Lates.TimeOfDay;
-                totalHoursWorked += worktimes.HoursWorked.TimeOfDay;
+                TotalOvertime += worktimes.Overtimes.TimeOfDay;
+                TotalLate += worktimes.Lates.TimeOfDay;
+                TotalHoursWorked += worktimes.HoursWorked.TimeOfDay;
             }
         }
 
         private void Calculate()
         {
-            totalHoursWorked -= totalOvertime;
-            temporarySalary = HighlightedEmployee.SalaryGrade * totalHoursWorked.TotalHours;
-            overtimeBonus = (HighlightedEmployee.SalaryGrade + 2.0) * totalOvertime.TotalHours;
-            lateDeductions = (HighlightedEmployee.SalaryGrade + 5.0) * totalLate.TotalHours;
-            taxes = temporarySalary * 0.0116;
-            pagibig = temporarySalary * 0.03;
-            philHealth = temporarySalary * 0.04;
-            sss = temporarySalary * 0.045;
-            totalEarnings = temporarySalary + overtimeBonus;
-            totalDeductions = lateDeductions + taxes + pagibig + philHealth + sss;
+            TotalHoursWorked -= totalOvertime;
+            TemporarySalary = HighlightedEmployee.SalaryGrade * totalHoursWorked.TotalHours;
+            OvertimeBonus = (HighlightedEmployee.SalaryGrade + 2.0) * totalOvertime.TotalHours;
+            LateDeductions = (HighlightedEmployee.SalaryGrade + 5.0) * totalLate.TotalHours;
+            Taxes = temporarySalary * 0.0116;
+            PagIbig = temporarySalary * 0.03;
+            PhilHealth = temporarySalary * 0.04;
+            SSS = temporarySalary * 0.045;
+            TotalEarnings = temporarySalary + overtimeBonus;
+            TotalDeductions = lateDeductions + taxes + pagibig + philHealth + sss;
+            FinalSalary = TotalEarnings - TotalDeductions;
+        }
+
+        private void SetDisplayValues()
+        {
+            DisplayTotalOvertime = TotalOvertime.TotalHours.ToString();
+            DisplayTotalLate = TotalLate.TotalHours.ToString();
+            DisplayTotalHoursWorked = TotalHoursWorked.TotalHours.ToString();
         }
     }
 }
