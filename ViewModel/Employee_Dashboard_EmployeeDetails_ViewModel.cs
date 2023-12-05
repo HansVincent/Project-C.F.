@@ -21,6 +21,7 @@ namespace Project_C.F_.ViewModel
             HighlightEmployeeDateJoined = CurrentEmployee.DateJoined.ToString("MM/dd/yyyy");
         }
 
+
         private string highlightEmployeeBirthday;
         public string HighlightEmployeeBirthday
         {
