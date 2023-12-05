@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Project_C.F_.View.Employee_Dashboard_Worktime"
+             x:Class="Project_C.F_.View.Employee_Dashboard_PayslipFirstPage"
              xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
-             x:DataType="viewmodel:Employee_Dashboard_Worktime_ViewModel"
+             x:DataType="viewmodel:Employee_Dashboard_PayslipFirstPage_ViewModel"
              xmlns:converter="clr-namespace:Project_C.F_.Converter"
              xmlns:model="clr-namespace:Project_C.F_.Model">
-    
     <Shell.BackButtonBehavior>
-    <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
     <ContentPage.Resources>
@@ -57,7 +56,7 @@
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
-                                    Value="LightSkyBlue" />
+                                        Value="LightSkyBlue" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -89,9 +88,11 @@
             <Image Source="dashboard_logo.png" Aspect="Center"/>
             <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
             <VerticalStackLayout HorizontalOptions="Start">
-                <Button Command="{Binding EmployeeOnlyDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
-                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="View Worktime" Style="{StaticResource DashboardButtonStyle}"/>
-                <Button Command="{Binding EmployeePayslipPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Payslip" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding EmployeeDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding AddEmployeePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Add Employee" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding DashboardViewWorktimePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="View Worktime" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding UpdateEmployeePagePageCommand}" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="Update Employee" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="View Payslips" Style="{StaticResource DashboardButtonStyle}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
 
@@ -101,58 +102,48 @@
                 <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
                     <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Margin="10,0"/>
                     <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold"/>
-                    <ImageButton Command="{Binding EmployeeOnlyHomePageCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                    <ImageButton Command="{Binding HomeIconCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                     <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
                 </HorizontalStackLayout>
             </Grid>
 
             <!--Content Page-->
             <VerticalStackLayout Padding="30" Grid.Row="1">
-                <Label Text="Workload." Style="{StaticResource Header}"/>
-                <Label Text="{Binding CurrentEmployee.FullName, StringFormat='Name: {0}'}"/>
-                <Label Text="{Binding DateToday, StringFormat='Date: {0:MM/dd/yy}'}"/>
-                <Label Text="{Binding TimeNow, StringFormat='Current Time: {0:h:mm tt}'}"/>
-                <BoxView HeightRequest="1" Margin="25" Color="Black"/>
-                
-                <HorizontalStackLayout Spacing="15" Padding="0,5">
-                    <Label Text="Date Selection: " VerticalOptions="Center"/>
-                    <DatePicker Date="{Binding DateSimulation}"/>
-                    <Button Text="Simulate" Command="{Binding SimulateCommand}" BackgroundColor="LightGrey" TextColor="Black" BorderColor="Black"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="15">
-                    <Label Text="Time In: " VerticalOptions="Center" Margin="0,0,15,0" Padding="5,0"/>
-                    <TimePicker Time="{Binding TimeInSimulation}"/>
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="15">
-                    <Label Text="Time Out: " VerticalOptions="Center" Margin="0,0,5,0" Padding="5,0"/>
-                    <TimePicker Time="{Binding TimeOutSimulation}"/>
-                </HorizontalStackLayout>
-                <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50">
-                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
-                    <Label Text="TIME IN" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
-                    <Label Text="TIME OUT" Grid.Column="1" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2"/>
-                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
-                    <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
-                    <ScrollView Grid.ColumnSpan="5" Grid.Row="2" HeightRequest="500">
-                        <CollectionView ItemsSource="{Binding CurrentEmployee.Worktimes}">
-                            <CollectionView.EmptyView>
-                                <ContentView>
-                                    <Label Text="Employee has no Worktimes yet..." HorizontalTextAlignment="Center" Margin="0,175" FontSize="Header"/>
-                                </ContentView>
-                            </CollectionView.EmptyView>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="model:Employee_Worktimes">
-                                    <Grid ColumnDefinitions="*,*">
-                                        <Label Grid.Column="0" Text="{Binding TimeIn}" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center"/>
-                                        <Label Grid.Column="1" Text="{Binding TimeOut}" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </ScrollView>
-                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="1" VerticalOptions="End"/>
+                <Label Text="Profile." Style="{StaticResource Header}"/>
+                <Label Text="Human Resource | Project C.F" Style="{StaticResource Subtitle}"/>
+                <BoxView HeightRequest="1" Color="Black" Margin="25"/>
+                <Grid ColumnDefinitions="Auto,Auto" ColumnSpacing="350">
+
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="Employee List:" FontAttributes="Bold" FontSize="35"/>
+                        <ScrollView>
+                            <CollectionView ItemsSource="{Binding EmployeeList}" SelectionMode="Single" SelectedItem="{Binding HighlightedEmployee}" SelectionChangedCommand="{Binding ViewEmployeePayslipsCommand}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:Employee">
+                                        <Label Text="{Binding FullName, StringFormat='- {0}'}" FontAttributes="Bold" FontSize="16"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                        </ScrollView>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1">
+                        <Border Stroke="black" BackgroundColor="White" Padding="30">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Financial Breakdown" FontAttributes="Bold" FontSize="46" FontFamily="Arial Bold" Margin="0,10,0,0"/>
+                                <Label Text="Factors" FontAttributes="Bold" FontSize="32" Margin="0,10,0,0"/>
+                                <Label Text="Salary Grade" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Taxes" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Pag-Ibig" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="PhilHealth" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="SSS" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Lates" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Overtimes" FontSize="16"  Margin="0,10,0,0"/>
+                                <Label Text="Allowance" FontSize="16"  Margin="0,10,0,0"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
                 </Grid>
             </VerticalStackLayout>
         </Grid>

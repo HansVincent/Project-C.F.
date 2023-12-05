@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project_C.F_.View.Employee_Dashboard_Payslip"
+             xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
+             x:DataType="viewmodel:Employee_Dashboard_Payslip_ViewModel"
+             xmlns:converter="clr-namespace:Project_C.F_.Converter"
+             xmlns:model="clr-namespace:Project_C.F_.Model">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ByteToImageConverter x:Key="ByteToImageConverter"/>
+        </ResourceDictionary>
+        <Style x:Key="Header" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Header"/>
+        </Style>
+        <Style x:Key="Subtitle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Subtitle"/>
+        </Style>
+        <Style x:Key="EntryLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Default"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style x:Key="Entry" TargetType="Entry">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="PlaceholderColor" Value="DarkSlateGray"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Picker" TargetType="Picker">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="DatePicker" TargetType="DatePicker">
+            <Setter Property="WidthRequest" Value="350"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="20"/>
+            <Setter Property="BackgroundColor" Value="DarkGray"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+        <Style TargetType="ScrollView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                            Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        <Style x:Key="GridLabel" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0,10"/>
+        </Style>
+        <!--DashboardStyling-->
+        <Style x:Key="DashboardButtonStyle" TargetType="Button">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+            <Setter Property="BorderColor" Value="LightGrey"/>
+            <Setter Property="HeightRequest" Value="15"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style x:Key="DashboardStyle" TargetType="VerticalStackLayout">
+            <Setter Property="BackgroundColor" Value="LightGrey"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Padding" Value="15,30"/>
+        </Style>
+        <Style x:Key="DashboardTabStyle" TargetType="HorizontalStackLayout">
+            <Setter Property="HorizontalOptions" Value="End"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid ColumnDefinitions="Auto,*">
+        <!--DASHBOARD-->
+        <VerticalStackLayout Style="{StaticResource DashboardStyle}" Grid.Column="0" HorizontalOptions="Start">
+            <Image Source="dashboard_logo.png" Aspect="Center"/>
+            <Label Text="HR MENU" FontAttributes="Bold" HorizontalOptions="Center" Margin="20" FontSize="15"/>
+            <VerticalStackLayout HorizontalOptions="Start">
+                <Button Command="{Binding EmployeeOnlyDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button Command="{Binding EmployeeWorktimePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="View Worktime" Style="{StaticResource DashboardButtonStyle}"/>
+                <Button BackgroundColor="Grey" HorizontalOptions="Start" ImageSource="addemployee_addemployeeimage.png" Text="View Payslip" Style="{StaticResource DashboardButtonStyle}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+
+        <Grid RowDefinitions="50,*" Grid.Column="1">
+            <!--Tab-->
+            <Grid BackgroundColor="LightGrey" Grid.Row="0" Padding="25,0">
+                <HorizontalStackLayout Style="{StaticResource DashboardTabStyle}">
+                    <Image Source="{Binding CurrentEmployee.Image, Converter={StaticResource ByteToImageConverter}}" Margin="10,0"/>
+                    <Label Text="{Binding CurrentEmployee.FullName}" HorizontalTextAlignment="End" VerticalOptions="Center" FontAttributes="Bold"/>
+                    <ImageButton Command="{Binding HomeIconCommand}" Source="dashboard_homeicon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                    <ImageButton Command="{Binding LogoutIconCommand}" Source="dashboard_logouticon.png" Aspect="Center" BackgroundColor="LightGrey"/>
+                </HorizontalStackLayout>
+            </Grid>
+
+            <!--Content Page-->
+            <Grid ColumnDefinitions="*,*,*,*,*" Grid.Row="1" RowDefinitions="*,*,*,*,*,*">
+                <VerticalStackLayout Padding="30" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" Grid.RowSpan="2">
+                    <Label Text="Payslip" Style="{StaticResource Header}"/>
+                    <Label Text="{Binding CurrentEmployee.FullName, StringFormat='Full Name: {0}'}" Margin="0,5,0,0" FontSize="18"/>
+                    <Label Text="{Binding CurrentEmployee.JobPosition, StringFormat='Title: {0}'}" Margin="0,5,0,0" FontSize="18"/>
+                    <Label Text="{Binding CurrentEmployee.SalaryGrade, StringFormat='Salary Grade: {0}'}" Margin="0,5,0,0" FontSize="18"/>
+                    <Label Text="Payslip For The Month" FontSize="25" FontAttributes="Bold" Margin="0,15,0,0"/>
+                    <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
+                    <ScrollView>
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50">
+                            <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
+                            <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
+                            <Label Text="Earnings" Grid.Column="0" Grid.Row="0" FontAttributes="Bold" FontSize="20"  HorizontalTextAlignment="Center" Margin="30"/>
+                            <Label Text="Deductions" Grid.Column="1" Grid.Row="0" FontAttributes="Bold" FontSize="20" HorizontalTextAlignment="Center" Margin="30"/>
+                            <BoxView Color="Black" WidthRequest="3" Grid.Column="2" HorizontalOptions="End" Grid.Row="0" Grid.RowSpan="2"/>
+                            <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="End"/>
+                            <BoxView Color="Black" WidthRequest="3" Grid.Column="1" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Start">
+                                <Label Text="Salary:" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="Overtime Bonus:" FontSize="18" Margin="10,20,0,0"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="End">
+                                <Label Text="{Binding TemporarySalary}" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="{Binding OvertimeBonus}" FontSize="18" Margin="10,20,0,0"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="0" VerticalOptions="End">
+                                <Label Text="Total Earnings:" FontSize="18" Margin="10,5,0,20"/>
+                                <BoxView HeightRequest="3"  Color="Black"/>
+                                <Label Text="Total Salary: " FontSize="18" Margin="10,5,0,20"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="0" VerticalOptions="End" HorizontalOptions="End">
+                                <Label Text="{Binding TotalEarnings}" FontSize="18" Margin="10,5,0,20"/>
+                                <Label Text="{Binding FinalSalary}" FontSize="18" Margin="10,0,0,20"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+                                <Label Text="Taxes:" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="Pag-Ibig:" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="PhilHealth:" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="SSS:" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="Late Deduction:" FontSize="18" Margin="10,20,0,0"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="End">
+                                <Label Text="{Binding Taxes}" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="{Binding PagIbig}" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="{Binding PhilHealth}" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="{Binding SSS}" FontSize="18" Margin="10,20,0,0"/>
+                                <Label Text="{Binding LateDeductions}" FontSize="18" Margin="10,20,0,0"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="1" VerticalOptions="End">
+                                <Label Text="Total Deductions:" FontSize="18" Margin="10,5,0,20"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Row="1" Grid.Column="1" VerticalOptions="End" HorizontalOptions="End">
+                                <Label Text="{Binding TotalDeductions}" FontSize="18" Margin="10,5,0,20"/>
+                            </VerticalStackLayout>
+                            <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="1" VerticalOptions="End"/>
+                        </Grid>
+                    </ScrollView>
+                </VerticalStackLayout >
+                <VerticalStackLayout Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="2" Padding="91">
+                    <Label Text="Taxes = 1.16%" Margin="0,5,0,0" FontSize="18"/>
+                    <Label Text="PAG-IBIG = 3.0%" Margin="0,5,0,0" FontSize="18"/>
+                    <Label Text="PhilHealth = 4.0%" Margin="0,5,0,0" FontSize="18"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="2" Padding="89">
+                    <Label Text="SSS = 4.5%" Margin="40,5,0,0" FontSize="18"/>
+                    <Label Text="{Binding DisplayTotalOvertime, StringFormat='Overtime: {0}'}" Margin="40,5,0,0" FontSize="18"/>
+                    <Label Text="{Binding DisplayTotalLate, StringFormat='Late: {0}'}" Margin="40,5,0,0" FontSize="18"/>
+                    <Label Text="{Binding DisplayTotalHoursWorked, StringFormat='Total Hours Worked: {0}'}" Margin="40,5,0,0" FontSize="18"/>
+                </VerticalStackLayout>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

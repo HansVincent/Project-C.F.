@@ -123,5 +123,10 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Worktime)}?id={EmployeeID}", false);
         }
         public ICommand EmployeeWorktimePageCommand => new Command(EmployeeWorktimePage);
+        private void EmployeeOnlyPayslipPage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_PayslipFirstPage)}?id={EmployeeID}", false);
+        }
+        public ICommand EmployeePayslipPageCommand => new Command(EmployeeOnlyPayslipPage);
     }
 }

@@ -107,6 +107,12 @@
 	  <MauiXaml Update="View\Employee_Dashboard_Home.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Employee_Dashboard_Payslip.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Employee_Dashboard_PayslipFirstPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Employee_Dashboard_Worktime.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

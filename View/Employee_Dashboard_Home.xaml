@@ -41,6 +41,7 @@
         <VerticalStackLayout HorizontalOptions="Start">
             <Button Command="{Binding EmployeeOnlyDetailsPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Details" Style="{StaticResource DashboardButtonStyle}"/>
             <Button Command="{Binding EmployeeWorktimePageCommand}" HorizontalOptions="Start" ImageSource="dashboard_viewworktime.png" Text="View Worktime" Style="{StaticResource DashboardButtonStyle}"/>
+            <Button Command="{Binding EmployeePayslipPageCommand}" HorizontalOptions="Start" ImageSource="dashboard_employeedetails.png" Text="Employee Payslip" Style="{StaticResource DashboardButtonStyle}"/>
         </VerticalStackLayout>
     </VerticalStackLayout>
 
