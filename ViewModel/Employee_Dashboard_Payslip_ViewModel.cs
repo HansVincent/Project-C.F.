@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 namespace Project_C.F_.ViewModel
 {
-    [QueryProperty(nameof(HighlightedEmployeeEmployeeID), "highlightedemployeeid")]
+    [QueryProperty(nameof(HighlightedEmployee), "id")]
     public partial class Employee_Dashboard_Payslip_ViewModel : Dashboard_ViewModel
     {
         public Employee_Dashboard_Payslip_ViewModel()
@@ -18,6 +18,7 @@ namespace Project_C.F_.ViewModel
             totalOvertime = TimeSpan.Zero;
             totalLate = TimeSpan.Zero;
             totalHoursWorked = TimeSpan.Zero;
+            SetEmployee();
         }
         private readonly Employee_Services employee_Services;
         private TimeSpan totalOvertime;
@@ -117,15 +118,6 @@ namespace Project_C.F_.ViewModel
             get { return sss; }
             set { sss = value; OnPropertyChanged(); OnPropertyChanged(nameof(sss)); }
         }
-        private string _HighlightedEmployeeEmployeeID;
-        public string HighlightedEmployeeEmployeeID
-        {
-            get { return _HighlightedEmployeeEmployeeID; }
-            set
-            {
-                _HighlightedEmployeeEmployeeID = value; OnPropertyChanged(); OnPropertyChanged(nameof(_HighlightedEmployeeEmployeeID)); InitializeCurrentEmployee();
-            }
-        }
 
         private Employee highlightedEmployee;
         public Employee HighlightedEmployee
@@ -133,13 +125,32 @@ namespace Project_C.F_.ViewModel
             get { return highlightedEmployee; }
             set { highlightedEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployee)); Total(); Calculate(); SetDisplayValues(); }
         }
-        private void InitializeCurrentEmployee()
+
+        private void SetEmployee()
         {
+            string employeeID = CurrentEmployee.EmployeeID;
             foreach (var employee in employee_Services.GetEmployees())
             {
-                if (HighlightedEmployeeEmployeeID == employee.EmployeeID)
+                if (employeeID == employee.EmployeeID)
                 {
-                    HighlightedEmployee = employee;
+                    HighlightedEmployee = new Employee
+                    {
+                        EmployeeID = employee.EmployeeID,
+                        FullName = employee.FullName,
+                        Email = employee.Email,
+                        Password = employee.Password,
+                        ContactNumber = employee.ContactNumber,
+                        Gender = employee.Gender,
+                        Image = employee.Image,
+                        ActivtiyStatus = employee.ActivtiyStatus,
+                        JobPosition = employee.JobPosition,
+                        DateJoined = employee.DateJoined,
+                        BirthDate = employee.BirthDate,
+                        Country = employee.Country,
+                        HomeAddress = employee.HomeAddress,
+                        ProvincialAddress = employee.ProvincialAddress,
+                        Worktimes = employee.Worktimes
+                    };
                 }
             }
         }

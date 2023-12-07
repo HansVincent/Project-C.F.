@@ -10,4 +10,10 @@ public partial class Employee_Dashboard_EmployeeDetails : ContentPage
 		BindingContext = new Employee_Dashboard_EmployeeDetails_ViewModel();
 		Shell.Current.Title = "Employee Details";
 	}
+	public Employee_Dashboard_EmployeeDetails(string fullName)
+	{
+		InitializeComponent();
+		BindingContext = new Employee_Dashboard_EmployeeDetails_ViewModel();
+		Shell.Current.Title = "Employee Details";
+	}
 }

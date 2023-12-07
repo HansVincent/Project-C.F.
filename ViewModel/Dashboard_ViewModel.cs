@@ -125,7 +125,7 @@ namespace Project_C.F_.ViewModel
         public ICommand EmployeeWorktimePageCommand => new Command(EmployeeWorktimePage);
         private void EmployeeOnlyPayslipPage()
         {
-            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_PayslipFirstPage)}?id={EmployeeID}", false);
+            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Payslip)}?id={EmployeeID}", false);
         }
         public ICommand EmployeePayslipPageCommand => new Command(EmployeeOnlyPayslipPage);
     }
