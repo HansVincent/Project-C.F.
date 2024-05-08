@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 namespace Project_C.F_.ViewModel
 {
-    [QueryProperty(nameof(HighlightedEmployee), "id")]
     public partial class Employee_Dashboard_Payslip_ViewModel : Dashboard_ViewModel
     {
         public Employee_Dashboard_Payslip_ViewModel()
@@ -18,12 +17,27 @@ namespace Project_C.F_.ViewModel
             totalOvertime = TimeSpan.Zero;
             totalLate = TimeSpan.Zero;
             totalHoursWorked = TimeSpan.Zero;
-            SetEmployee();
+            MonthPicker =
+            [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
         }
         private readonly Employee_Services employee_Services;
         private TimeSpan totalOvertime;
         private TimeSpan totalLate;
         private TimeSpan totalHoursWorked;
+        private TimeSpan totalUndertime;
         private String displayTotalOvertime;
         private String displayTotalLate;
         private String displayTotalHoursWorked;
@@ -37,6 +51,7 @@ namespace Project_C.F_.ViewModel
         private double pagibig;
         private double philHealth;
         private double sss;
+        private double underTimes;
         public string DisplayTotalOvertime
         {
             get { return displayTotalOvertime; }
@@ -126,64 +141,100 @@ namespace Project_C.F_.ViewModel
             set { highlightedEmployee = value; OnPropertyChanged(); OnPropertyChanged(nameof(highlightedEmployee)); Total(); Calculate(); SetDisplayValues(); }
         }
 
-        private void SetEmployee()
+        private DateTime chosenMonth;
+        public DateTime ChosenMonth
         {
-            string employeeID = CurrentEmployee.EmployeeID;
-            foreach (var employee in employee_Services.GetEmployees())
+            get
             {
-                if (employeeID == employee.EmployeeID)
+                return chosenMonth;
+            }
+            set
+            {
+                chosenMonth = value; OnPropertyChanged(); OnPropertyChanged(nameof(chosenMonth)); Total(); Calculate(); SetDisplayValues();
+            }
+        }
+
+        private ObservableCollection<string> monthPicker;
+        public ObservableCollection<string> MonthPicker
+        {
+            get { return monthPicker; }
+            set { monthPicker = value; OnPropertyChanged(); OnPropertyChanged(nameof(monthPicker)); }
+        }
+        
+        public TimeSpan TotalUndertime
+        {
+            get { return totalUndertime; }
+            set { totalUndertime = value; OnPropertyChanged(); OnPropertyChanged(nameof(totalUndertime)); }
+        }
+
+        public double UnderTimes
+        { get { return underTimes; } set {  underTimes = value; OnPropertyChanged(); OnPropertyChanged(nameof(underTimes)); } }
+        private void Total()
+        {
+            foreach (Employee_Worktimes worktimes in CurrentEmployee.Worktimes)
+            {
+                if (worktimes.Month.Month == ChosenMonth.Month && worktimes.Year.Year == ChosenMonth.Year)
                 {
-                    HighlightedEmployee = new Employee
-                    {
-                        EmployeeID = employee.EmployeeID,
-                        FullName = employee.FullName,
-                        Email = employee.Email,
-                        Password = employee.Password,
-                        ContactNumber = employee.ContactNumber,
-                        Gender = employee.Gender,
-                        Image = employee.Image,
-                        ActivtiyStatus = employee.ActivtiyStatus,
-                        JobPosition = employee.JobPosition,
-                        DateJoined = employee.DateJoined,
-                        BirthDate = employee.BirthDate,
-                        Country = employee.Country,
-                        HomeAddress = employee.HomeAddress,
-                        ProvincialAddress = employee.ProvincialAddress,
-                        Worktimes = employee.Worktimes
-                    };
+                    TotalOvertime += worktimes.Overtimes.TimeOfDay;
+                    TotalLate += worktimes.Lates.TimeOfDay;
+                    TotalHoursWorked += worktimes.HoursWorked.TimeOfDay;
+                    TotalUndertime += worktimes.Undertimes.TimeOfDay;
                 }
             }
         }
-        private void Total()
-        {
-            foreach (Employee_Worktimes worktimes in HighlightedEmployee.Worktimes)
-            {
-                TotalOvertime += worktimes.Overtimes.TimeOfDay;
-                TotalLate += worktimes.Lates.TimeOfDay;
-                TotalHoursWorked += worktimes.HoursWorked.TimeOfDay;
-            }
-        }
-
         private void Calculate()
         {
-            TotalHoursWorked -= totalOvertime;
-            TemporarySalary = HighlightedEmployee.SalaryGrade * totalHoursWorked.TotalHours;
-            OvertimeBonus = (HighlightedEmployee.SalaryGrade + 2.0) * totalOvertime.TotalHours;
-            LateDeductions = (HighlightedEmployee.SalaryGrade + 5.0) * totalLate.TotalHours;
-            Taxes = temporarySalary * 0.0116;
-            PagIbig = temporarySalary * 0.03;
-            PhilHealth = temporarySalary * 0.04;
-            SSS = temporarySalary * 0.045;
-            TotalEarnings = temporarySalary + overtimeBonus;
-            TotalDeductions = lateDeductions + taxes + pagibig + philHealth + sss;
+            TotalHoursWorked -= TotalOvertime;
+            TemporarySalary = CurrentEmployee.SalaryGrade * TotalHoursWorked.TotalHours;
+            OvertimeBonus = (CurrentEmployee.SalaryGrade + 2.0) * TotalOvertime.TotalHours;
+            LateDeductions = (CurrentEmployee.SalaryGrade + 5.0) * TotalLate.TotalHours;
+            UnderTimes = (CurrentEmployee.SalaryGrade + 5.0) * TotalUndertime.TotalHours;
+            Taxes = TemporarySalary * 0.0116;
+            PagIbig = TemporarySalary * 0.03;
+            PhilHealth = TemporarySalary * 0.04;
+            SSS = TemporarySalary * 0.045;
+            TotalEarnings = ((TemporarySalary + OvertimeBonus) - UnderTimes) - LateDeductions;
+            TotalDeductions = Taxes + PagIbig + PhilHealth + SSS;
             FinalSalary = TotalEarnings - TotalDeductions;
         }
-
         private void SetDisplayValues()
         {
             DisplayTotalOvertime = TotalOvertime.TotalHours.ToString();
             DisplayTotalLate = TotalLate.TotalHours.ToString();
             DisplayTotalHoursWorked = TotalHoursWorked.TotalHours.ToString();
         }
+        private void ResetValues()
+        {
+            TemporarySalary = 0;
+            OvertimeBonus = 0;
+            LateDeductions = 0;
+            UnderTimes = 0;
+            TotalOvertime = TimeSpan.Zero;
+            TotalLate = TimeSpan.Zero;
+            TotalUndertime = TimeSpan.Zero;
+            Taxes = 0;
+            PagIbig = 0;
+            PhilHealth = 0;
+            SSS = 0;
+            TotalHoursWorked = TimeSpan.Zero;
+            TotalEarnings = 0;
+            TotalDeductions = 0;
+            FinalSalary = 0;
+        }
+        private int selectedMonth = DateTime.Now.Month - 1;
+        public int SelectedMonth
+        {
+            get { return selectedMonth; }
+            set { selectedMonth = value; OnPropertyChanged(); OnPropertyChanged(nameof(selectedMonth)); PickerMonth_SelectedIndexChanged(); }
+        }
+        private void PickerMonth_SelectedIndexChanged()
+        {
+            ChosenMonth = new DateTime(DateTime.Now.Year, SelectedMonth + 1, DateTime.DaysInMonth(DateTime.Now.Year, selectedMonth + 1));
+            ResetValues();
+            Total();
+            Calculate();
+            SetDisplayValues();
+        }
+        public void OnAppearing() => CurrentEmployee = Employee_Services.InitializeCurrentEmployee();
     }
 }

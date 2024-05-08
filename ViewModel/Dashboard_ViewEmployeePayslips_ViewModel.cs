@@ -29,7 +29,7 @@ namespace Project_C.F_.ViewModel
         }
         private void GetEmployee()
         {
-            EmployeeList = employee_Services.GetEmployees();
+            EmployeeList = Employee_Services.GetEmployees();
         }
         private Employee highlightedEmployee;
         public Employee HighlightedEmployee

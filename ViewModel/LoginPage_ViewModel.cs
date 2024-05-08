@@ -44,7 +44,7 @@ namespace Project_C.F_.ViewModel
         private bool IDExisting()
         {
             bool existing = false;
-            foreach(var employee in employee_Services.GetEmployees())
+            foreach(var employee in Employee_Services.GetEmployees())
             {
                 if (EmployeeIDEntry == employee.EmployeeID && EmployeePassword == employee.Password)
                 {
@@ -67,7 +67,7 @@ namespace Project_C.F_.ViewModel
             {
                 Shell.Current.DisplayAlert("Login Sucess", "Logging into your account...", "Okay");
                 EmployeeID = EmployeeIDEntry;
-                foreach (var employee in employee_Services.GetEmployees())
+                foreach (var employee in Employee_Services.GetEmployees())
                 {
                     if (employee.JobPosition == "Employee" && employee.EmployeeID == EmployeeID)
                     {

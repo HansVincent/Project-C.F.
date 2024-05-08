@@ -60,7 +60,7 @@ namespace Project_C.F_.ViewModel
         }
         private bool ExistingID()
         {
-            foreach (var employee in employee_Services.GetEmployees())
+            foreach (var employee in Employee_Services.GetEmployees())
             {
                 if (NewEmployee.EmployeeID == employee.EmployeeID)
                 {

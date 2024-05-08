@@ -40,7 +40,7 @@ namespace Project_C.F_.ViewModel
             }
             else
             {
-                foreach (var employee in employee_Services.GetEmployees())
+                foreach (var employee in Employee_Services.GetEmployees())
                 {
                     if (EmployeeID == employee.EmployeeID)
                     {
@@ -54,7 +54,7 @@ namespace Project_C.F_.ViewModel
             if(!IsAdmin) 
             {
                 CurrentEmployee.ActivtiyStatus = "Active";
-                employee_Services.UpdateEmployeeCollection(CurrentEmployee);
+                Employee_Services.UpdateEmployeeCollection(CurrentEmployee);
             }
         }
         private Employee _CurrentEmployee;
@@ -73,7 +73,7 @@ namespace Project_C.F_.ViewModel
             if(!IsAdmin)
             {
                 CurrentEmployee.ActivtiyStatus = "Inactive";
-                employee_Services.UpdateEmployeeCollection(CurrentEmployee);
+                Employee_Services.UpdateEmployeeCollection(CurrentEmployee);
             }
             Shell.Current.Navigation.PopToRootAsync();
         }
@@ -105,6 +105,11 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Dashboard_ViewEmployeePayslips)}?id={EmployeeID}", false);
         }
         public ICommand DashboardViewPayslipsPageCommand => new Command(DashboardViewPayslipsPage);
+        private void DashboardViewMessagesPage()
+        {
+            Shell.Current.GoToAsync($"{nameof(Dashboard_ViewMessages)}?id={EmployeeID}", false);
+        }
+        public ICommand DashboardViewMessagesPageCommand => new Command(DashboardViewMessagesPage);
 
         //Employee Commands
         private void EmployeeOnlyHomePage()
@@ -128,5 +133,6 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Payslip)}?id={EmployeeID}", false);
         }
         public ICommand EmployeePayslipPageCommand => new Command(EmployeeOnlyPayslipPage);
+
     }
 }

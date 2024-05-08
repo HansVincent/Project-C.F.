@@ -41,7 +41,7 @@ namespace Project_C.F_.ViewModel
         }
         private void InitializeCurrentEmployee()
         {
-            foreach (var employee in employee_Services.GetEmployees())
+            foreach (var employee in Employee_Services.GetEmployees())
             {
                 if (HighlightedEmployeeEmployeeID == employee.EmployeeID)
                 {
@@ -138,7 +138,7 @@ namespace Project_C.F_.ViewModel
             SimulationWorkTimes.TimeOut = TimeOutSimulated;
             HighlightedEmployee.Worktimes.Add(SimulationWorkTimes);
             Shell.Current.DisplayAlert("Simulate Worktime", "Worktime Simulation Successful", "Okay");
-            employee_Services.UpdateEmployeeCollection(HighlightedEmployee);
+            Employee_Services.UpdateEmployeeCollection(HighlightedEmployee);
             SimulationWorkTimes = new Employee_Worktimes();
         }
         public ICommand SimulateCommand => new Command(Simulate);

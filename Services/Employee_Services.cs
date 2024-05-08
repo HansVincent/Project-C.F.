@@ -1,33 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Project_C.F_.Model;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Project_C.F_.Model;
+
 
 namespace Project_C.F_.Services
 {
     class Employee_Services
     {
-        string filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Employee.json");
-
-        public void AddEmployee(Employee employee)
+        public static ObservableCollection<Employee> GetEmployees()
         {
-            ObservableCollection<Employee> EmployeeCollection = GetEmployees();
-            if (employee != null)
+            string filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Employee.json");
+            if (!File.Exists(filePath))
             {
-                EmployeeCollection.Add(employee);
-                var EmployeeList = JsonSerializer.Serialize<ObservableCollection<Employee>>(EmployeeCollection);
-                File.WriteAllText(filePath, EmployeeList);
+                return [];
             }
+            string FileUsers = File.ReadAllText(filePath);
+            var EmployeeList = JsonSerializer.Deserialize<ObservableCollection<Employee>>(FileUsers);
+            return EmployeeList;
         }
 
-        public void UpdateEmployeeCollection(Employee employee)
+        public static void UpdateEmployeeCollection(Employee employee)
         {
-            ObservableCollection<Employee> EmployeeCollection = GetEmployees();
-            for(int loop = 0; loop < EmployeeCollection.Count; loop++)
+            string filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Employee.json");
+            ObservableCollection<Employee> EmployeeCollection = Employee_Services.GetEmployees();
+            for (int loop = 0; loop < EmployeeCollection.Count; loop++)
             {
                 if (employee.EmployeeID == EmployeeCollection[loop].EmployeeID)
                 {
@@ -38,18 +34,40 @@ namespace Project_C.F_.Services
                 }
             }
         }
-
-        public ObservableCollection<Employee> GetEmployees()
+        public static ObservableCollection<Employee> GetHumanResources()
         {
-            if (!File.Exists(filePath))
+            ObservableCollection<Employee> EmployeeCollection = [];
+            foreach (var employee in Employee_Services.GetEmployees())
             {
-                return new ObservableCollection<Employee>();
+                if (employee.JobPosition == "Human Resource")
+                {
+                    EmployeeCollection.Add(employee);
+                }
             }
-
-            string FileUsers = File.ReadAllText(filePath);
-            var EmployeeList = JsonSerializer.Deserialize<ObservableCollection<Employee>>(FileUsers);
-
-            return EmployeeList;
+            return EmployeeCollection;
+        }
+        string filePath = Path.Combine(FileSystem.Current.AppDataDirectory, "Employee.json");
+        public void AddEmployee(Employee employee)
+        {
+            ObservableCollection<Employee> EmployeeCollection = GetEmployees();
+            if (employee != null)
+            {
+                EmployeeCollection.Add(employee);
+                var EmployeeList = JsonSerializer.Serialize<ObservableCollection<Employee>>(EmployeeCollection);
+                File.WriteAllText(filePath, EmployeeList);
+            }
+        }
+        public static Employee InitializeCurrentEmployee()
+        {
+            string employeeID = Preferences.Get("employeeID", "Unknown");
+            foreach (var employee in Employee_Services.GetEmployees())
+            {
+                if (employeeID == employee.EmployeeID)
+                {
+                    return employee;
+                }
+            }
+            return new();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Project_C.F_.Model
         private Byte[] image;
         private string activtiyStatus = "Inactive";
         private string jobPosition;
+        private TimeSpan hoursWorked = TimeSpan.Zero;
         private DateTime dateJoined = DateTime.Today;
         private DateTime birthDate = DateTime.Today;
         private string country;
@@ -33,12 +34,18 @@ namespace Project_C.F_.Model
             set { worktimes = value; OnPropertyChanged(); OnPropertyChanged(nameof(worktimes)); }
         }
 
-        public string EmployeeID 
-        { 
-            get { return _EmployeeID; } 
-            set { _EmployeeID = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeID)); } 
-        } 
-        public string FullName 
+        public TimeSpan HoursWorked
+        {
+            get { return hoursWorked; }
+            set { hoursWorked = value; OnPropertyChanged(); OnPropertyChanged(nameof(hoursWorked)); }
+        }
+
+        public string EmployeeID
+        {
+            get { return _EmployeeID; }
+            set { _EmployeeID = value; OnPropertyChanged(); OnPropertyChanged(nameof(_EmployeeID)); }
+        }
+        public string FullName
         {
             get { return fullName; }
             set { fullName = value; OnPropertyChanged(); OnPropertyChanged(nameof(fullName)); }
@@ -107,7 +114,7 @@ namespace Project_C.F_.Model
         public double SalaryGrade
         {
             get { return salaryGrade; }
-            set {  salaryGrade = value; OnPropertyChanged(); OnPropertyChanged(nameof(salaryGrade));}
+            set { salaryGrade = value; OnPropertyChanged(); OnPropertyChanged(nameof(salaryGrade)); }
         }
     }
 }

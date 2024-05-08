@@ -29,7 +29,7 @@ namespace Project_C.F_.ViewModel
         }
         private void GetEmployee()
         {
-            EmployeeList = employee_Services.GetEmployees();
+            EmployeeList = Employee_Services.GetEmployees();
             EnableEdit = false;
         }
         private Employee highlightedEmployeee;
@@ -161,7 +161,7 @@ namespace Project_C.F_.ViewModel
             {
                 editableEmployee.SalaryGrade = 5.00;    
             }
-            employee_Services.UpdateEmployeeCollection(editableEmployee);
+            Employee_Services.UpdateEmployeeCollection(editableEmployee);
             Shell.Current.DisplayAlert("Update Employee", "Employee Update Successful", "Okay");
             HighlightedEmployeee = new Employee();
             SetEmployee();
