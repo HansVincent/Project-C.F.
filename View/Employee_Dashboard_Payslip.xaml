@@ -120,7 +120,7 @@
                     <Label Text="Payslip For The Month" FontSize="25" FontAttributes="Bold" Margin="0,15,0,0"/>
                     <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
                     <ScrollView>
-                        <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50">
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50" HeightRequest="100" WidthRequest="100">
                             <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
                             <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
                             <Label Text="Earnings" Grid.Column="0" Grid.Row="0" FontAttributes="Bold" FontSize="20"  HorizontalTextAlignment="Center" Margin="30"/>

@@ -18,7 +18,7 @@
     </ContentPage.Resources>
 
 
-    <Grid RowDefinitions="75,75,75,75,auto,*" WidthRequest="350" Padding="0" RowSpacing="5">
+    <Grid RowDefinitions="75,75,75,75,auto,*" WidthRequest="600" Margin="10" Padding="0" RowSpacing="5">
         <Label Grid.Row="0" Margin="10" FontAttributes="Bold" FontSize="Large" Text="VIEW MESSAGE" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center" />
         <Border Grid.Row="1" StrokeShape="RoundRectangle 10" BackgroundColor="White">
             <Label Text="{Binding SelectedMessage.Sender.FullName, StringFormat='FROM: {0}'}" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="15,0"/>
@@ -27,13 +27,13 @@
             <Label Text="{Binding SelectedMessage.Receiver.FullName, StringFormat='TO: {0}'}" FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="15,0"/>
         </Border>
         <Border Grid.Row="3" StrokeShape="RoundRectangle 10" BackgroundColor="White">
-            <Entry Placeholder="Subject" Text="{Binding SelectedMessage.Subject}" FontAttributes="Bold" FontSize="20" HeightRequest="75" IsReadOnly="True" Margin="15,0"/>
+            <Entry Placeholder="Subject" Text="{Binding SelectedMessage.Subject}" FontAttributes="Bold" FontSize="20" WidthRequest="599" HeightRequest="74" IsReadOnly="True" />
         </Border>
         <Border Grid.Row="4" StrokeShape="RoundRectangle 10"  BackgroundColor="White" HorizontalOptions="EndAndExpand" WidthRequest="100" HeightRequest="25">
             <Label Text="{Binding SelectedMessage.Tag, Converter={StaticResource TagText}}" TextColor="{Binding SelectedMessage.Tag, Converter={StaticResource TagColor}}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
         </Border>
         <Border Grid.Row="5" StrokeShape="RoundRectangle 10" BackgroundColor="White">
-            <Editor Placeholder="Compose email" Text="{Binding SelectedMessage.MessageText}" WidthRequest="310" FontSize="15" IsReadOnly="True" Margin="15,2"/>
+            <Editor Placeholder="Compose email" Text="{Binding SelectedMessage.MessageText}" WidthRequest="599" FontSize="15" IsReadOnly="True" />
         </Border>
     </Grid>
 </ContentPage>

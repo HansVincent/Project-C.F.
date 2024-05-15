@@ -66,6 +66,7 @@ namespace Project_C.F_.ViewModel
             else if(IDExisting())
             {
                 Shell.Current.DisplayAlert("Login Sucess", "Logging into your account...", "Okay");
+                Preferences.Default.Set("employeeID", EmployeeIDEntry);
                 EmployeeID = EmployeeIDEntry;
                 foreach (var employee in Employee_Services.GetEmployees())
                 {

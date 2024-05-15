@@ -2,11 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Project_C.F_.View.Dashboard_WriteMessage"
+             xmlns:converter="clr-namespace:Project_C.F_.Converter"
+             xmlns:viewmodel="clr-namespace:Project_C.F_.ViewModel"
+             xmlns:model="clr-namespace:Project_C.F_.Model"
+             x:DataType="viewmodel:Dashboard_WriteMessage_ViewModel"
              Title="Dashboard_WriteMessage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <FlexLayout Direction="Column" AlignItems="Center">
+        <HorizontalStackLayout FlexLayout.Order="0" WidthRequest="600">
+            <Label Text="COMPOSE MESSAGE" FontAttributes="Bold" FontSize="Large" TextColor="Black" Margin="70,10,10,10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="300"/>
+            <ImageButton Command="{Binding SendMessageCommand}" Margin="50,10,-25,10" Source="write_message.png" WidthRequest="50" HeightRequest="20"/>
+        </HorizontalStackLayout>
+        <Frame FlexLayout.Order="1" CornerRadius="10" WidthRequest="600" HeightRequest="75" Margin="18,1">
+            <HorizontalStackLayout BackgroundColor="White" VerticalOptions="Center">
+                <Label Text="{Binding CurrentEmployee.FullName, StringFormat='FROM: {0}'}" FontAttributes="Bold" FontSize="20" TextColor="Black"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame FlexLayout.Order="2" CornerRadius="10" WidthRequest="600" HeightRequest="85" Margin="18,1">
+            <HorizontalStackLayout BackgroundColor="White" VerticalOptions="Center">
+                <Label Text="TO: " FontAttributes="Bold" FontSize="20" VerticalOptions="Center" Margin="0,23,10,0"/>
+                <Picker Title="Human Resources" SelectedItem="{Binding NewMessage.Receiver}" ItemsSource="{Binding ContactList}" ItemDisplayBinding="{Binding FullName}" HeightRequest="75" FontSize="20" FontAttributes="Bold" WidthRequest="300" Margin="0,2,0,0"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame FlexLayout.Order="3" CornerRadius="10" WidthRequest="600" HeightRequest="75" Margin="18,1">
+            <HorizontalStackLayout BackgroundColor="White">
+                <Entry Placeholder="Subject" Text="{Binding NewMessage.Subject}" FontAttributes="Bold" FontSize="20" HeightRequest="75" WidthRequest="600"/>
+            </HorizontalStackLayout>
+        </Frame>
+        <Frame FlexLayout.Order="4" CornerRadius="10" WidthRequest="600" HeightRequest="450" Margin="18,1">
+            <HorizontalStackLayout BackgroundColor="White">
+                <Editor Placeholder="Compose email" Text="{Binding NewMessage.MessageText}" WidthRequest="600" FontSize="15"/>
+            </HorizontalStackLayout>
+        </Frame>
+    </FlexLayout>
 </ContentPage>

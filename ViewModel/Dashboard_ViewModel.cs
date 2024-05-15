@@ -8,11 +8,13 @@ using Project_C.F_.View;
 using System.Windows.Input;
 using Project_C.F_.Model;
 using Project_C.F_.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Project_C.F_.ViewModel
 {
     [QueryProperty(nameof(EmployeeID), "id")]
-    public partial class Dashboard_ViewModel: MainViewModel
+    public partial class Dashboard_ViewModel: MainPage_ViewModel
     {
         private bool IsAdmin = false;
         private string _EmployeeID;
@@ -105,11 +107,8 @@ namespace Project_C.F_.ViewModel
             Shell.Current.GoToAsync($"{nameof(Dashboard_ViewEmployeePayslips)}?id={EmployeeID}", false);
         }
         public ICommand DashboardViewPayslipsPageCommand => new Command(DashboardViewPayslipsPage);
-        private void DashboardViewMessagesPage()
-        {
-            Shell.Current.GoToAsync($"{nameof(Dashboard_ViewMessages)}?id={EmployeeID}", false);
-        }
-        public ICommand DashboardViewMessagesPageCommand => new Command(DashboardViewMessagesPage);
+        [RelayCommand]
+        private async Task GoToMessaging() => await Shell.Current.GoToAsync(nameof(Dashboard_ViewMessages), false);
 
         //Employee Commands
         private void EmployeeOnlyHomePage()
@@ -130,7 +129,7 @@ namespace Project_C.F_.ViewModel
         public ICommand EmployeeWorktimePageCommand => new Command(EmployeeWorktimePage);
         private void EmployeeOnlyPayslipPage()
         {
-            Shell.Current.GoToAsync($"{nameof(Employee_Dashboard_Payslip)}?id={EmployeeID}", false);
+            Shell.Current.GoToAsync(nameof(Employee_Dashboard_Payslip), false);
         }
         public ICommand EmployeePayslipPageCommand => new Command(EmployeeOnlyPayslipPage);
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+using Project_C.F_.View;
+using Project_C.F_.ViewModel;
 
 namespace Project_C.F_
 {
@@ -15,6 +17,8 @@ namespace Project_C.F_
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder.Services.AddTransient<Dashboard_ViewMessages>();
+            builder.Services.AddTransient<Dashboard_ViewMessages_ViewModel>();
 #if WINDOWS
             builder.ConfigureLifecycleEvents(events =>
             {

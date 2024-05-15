@@ -16,7 +16,7 @@ namespace Project_C.F_.ViewModel
         {
             employee_Services = new Employee_Services();
             optimalTimeIn = DateTime.Today.AddHours(7);
-            optimalTimeOut = DateTime.Today.AddHours(21);
+            optimalTimeOut = DateTime.Today.AddHours(16);
             DateToday = DateOnly.FromDateTime(DateTime.Today);
             timeCompare = TimeOnly.MinValue;
             TimeNow = TimeOnly.FromDateTime(DateTime.Now);

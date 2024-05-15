@@ -8,6 +8,12 @@ namespace Project_C.F_.ViewModel
 {
     public partial class Dashboard_WriteMessage_ViewModel : ObservableObject
     {
+        public Dashboard_WriteMessage_ViewModel()
+        {
+            NewMessage = new Message();
+            CurrentEmployee = Employee_Services.InitializeCurrentEmployee();
+            ContactList = Employee_Services.GetHumanResources();
+        }
         [ObservableProperty]
         private ObservableCollection<Employee> contactList;
         [ObservableProperty]
@@ -60,12 +66,6 @@ namespace Project_C.F_.ViewModel
             {
                 Shell.Current.DisplayAlert("Entries not filled", "Fill in all entries to send message", "Okay");
             }
-        }
-        public void OnAppearing()
-        {
-            NewMessage = new Message();
-            CurrentEmployee = Employee_Services.InitializeCurrentEmployee();
-            ContactList = Employee_Services.GetHumanResources();
         }
     }
 }

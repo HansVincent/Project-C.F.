@@ -66,6 +66,7 @@
 	  <None Remove="Resources\Images\mainpage_lifeinsurance.png" />
 	  <None Remove="Resources\Images\mainpage_paidleave.png" />
 	  <None Remove="Resources\Images\mainpage_paidtraining.png" />
+	  <None Remove="Resources\Images\send_message.png" />
 	  <None Remove="Resources\Images\updateemployee_editoff.png" />
 	  <None Remove="Resources\Images\updateemployee_editon.png" />
 	  <None Remove="Resources\Images\updateemployee_visibilityoff.png" />

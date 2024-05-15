@@ -135,7 +135,7 @@
                         <Label Text="Time Out: " VerticalOptions="Center" Margin="0,0,5,0" Padding="5,0"/>
                         <TimePicker Time="{Binding TimeOutSimulation}"/>
                     </HorizontalStackLayout>
-                    <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey" Margin="50,15,50,50">
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="*,500" BackgroundColor="Grey">
                         <BoxView HeightRequest="3" Grid.ColumnSpan="5" Color="Black" Grid.Row="0" VerticalOptions="Start"/>
                         <BoxView Color="Black" WidthRequest="3" Grid.Column="0" HorizontalOptions="Start" Grid.Row="0" Grid.RowSpan="2"/>
                         <Label Text="TIME IN" Grid.Column="0" Grid.Row="0" Style="{StaticResource GridLabel}" HorizontalTextAlignment="Center" Margin="30"/>
